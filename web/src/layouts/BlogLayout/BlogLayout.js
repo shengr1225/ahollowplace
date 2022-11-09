@@ -7,7 +7,7 @@ import { ReactComponent as MenuIcon } from 'feather-icons/dist/icons/menu.svg'
 import { ReactComponent as CloseIcon } from 'feather-icons/dist/icons/x.svg'
 
 const BlogLayout = ({ children }) => {
-  const { logIn, logOut, isAuthenticated, currentUser } = useAuth()
+  const { logOut, isAuthenticated, currentUser } = useAuth()
 
   const links = [
     <div className="inline-block" key={1}>
