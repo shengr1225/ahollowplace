@@ -5,7 +5,6 @@
 1. 剧本管理后台
 
      CMS generated with [Scaffold] RW Scaffold (https://redwoodjs.com/docs/how-to/sending-emails#scaffold)
-
      Authentication managed by [dbAuth] (https://redwoodjs.com/docs/authentication)
 
 2. 剧本浏览
