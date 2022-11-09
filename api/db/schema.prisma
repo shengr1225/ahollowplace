@@ -4,8 +4,9 @@ datasource db {
 }
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = "native"
+  provider        = "prisma-client-js"
+  binaryTargets   = "native"
+  previewFeatures = ["interactiveTransactions"]
 }
 
 model Post {
@@ -24,11 +25,140 @@ model Contact {
 }
 
 model User {
-  id                  Int @id @default(autoincrement())
+  id                  Int         @id @default(autoincrement())
   name                String?
-  email               String @unique
+  email               String      @unique
   hashedPassword      String
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
+  bookings            Booking[]
+  JubenDrive          JubenDrive? @relation(fields: [jubenDriveId], references: [id])
+  jubenDriveId        Int?
+  //头像
+  thumbnail           String?
+  //简介
+  desc                String?
+  //玩家标签：【“凶手位”，“能文能武，"我是戏精”，“因为爱”，“逻辑诡才”，“跑起来怼起来”，“谢君红尘一瞥”，“櫻花紛飛時”，“北京爱上西雅图”，“浮生一梦”，“时间匆匆，你就是我的夜空”，“月下沙利叶“】
+  label               String?
+  ability             Int?        @default(10)
+  tuili               Float?
+  yanji               Float?
+  xiezuo              Float?
+  gaoxiao             Float?
+  qinggan             Float?
+  //你的情感羁绊：【“亲情”，“隔代情”，“暗恋”，“怀念”，“宠物”，“爱情”，“兄妹情”，”兄弟情“，“守护者”，“孤独”，“细腻弱势被动”，”被保护“，“被救赎”，“不离不弃”，“拯救”，“被牵挂”】
+  knot                String?
+  mvpJubens           Juben[]
+  roles               String      @default("player")
+  currentExp          Int?        @default(0)
 }
+
+model Juben {
+  id             Int          @id @default(autoincrement())
+  // 剧本名
+  name           String
+  // 剧本评分
+  score          Float?
+  // 剧本封面
+  image          String
+  // 剧本故事介绍
+  desc           String
+  // 剧本主类型
+  section        String
+  // 剧本类型
+  sections       String
+  // 剧本几男几女
+  players        String
+  // 是否可以反串
+  canSwitchSex   Boolean      @default(false)
+  // 剧本市场
+  duration       Int          @default(6)
+  // 价格
+  price          Int          @default(49)
+  bookingRecords Booking[]
+  drives         JubenDrive[]
+  timeSlots      TimeSlot[]
+  mvps           User[]
+  // 剧本图片
+  photos         String?
+}
+
+model Booking {
+  id           Int         @id @default(autoincrement())
+  // 预订的开本日期
+  date         DateTime
+  // 预订人数
+  total        Int?
+  male         Int?
+  female       Int?
+  // 预订留言
+  note         String?
+  // Pending 等待付款, Carpooling 拼车中, Lock 已锁车, Completed 已完成, Cancel 已取消
+  status       String      @default("Carpooling")
+  juben        Juben       @relation(fields: [jubenId], references: [id])
+  jubenId      Int
+  timeSlot     TimeSlot    @relation(fields: [timeSlotId], references: [id])
+  timeSlotId   Int
+  users        User[]
+  JubenDrive   JubenDrive? @relation(fields: [jubenDriveId], references: [id])
+  jubenDriveId Int?
+}
+
+model TimeSlot {
+  id            Int          @id @default(autoincrement())
+  // 开始时间
+  start         String
+  // 结束时间
+  end           String
+  // 持续时间（小时）
+  last          Int
+  // 仅在周末开放
+  onlyInWeekend Boolean      @default(false)
+  bookings      Booking[]
+  jubenDrives   JubenDrive[]
+  jubens        Juben[]
+}
+
+model JubenDrive {
+  id         Int       @id @default(autoincrement())
+  // 发车时间
+  date       DateTime
+  // 男生
+  male       Int
+  // 女生
+  female     Int
+  // 玩家人数
+  total      Int
+  // 剧本
+  juben      Juben     @relation(fields: [jubenId], references: [id])
+  // 时间节点
+  timeSlot   TimeSlot  @relation(fields: [timeSlotId], references: [id])
+  // 玩家
+  users      User[]
+  // 预约
+  bookings   Booking[]
+  // 状态
+  status     String    @default("Carpooling")
+  jubenId    Int
+  timeSlotId Int
+}
+
+// enum JubenSectionType {
+//   //日式
+//   JAPANESE
+//   //民国
+//   RECENTCHINA
+//   //现代
+//   MODERN
+//   //古风
+//   ANTIQUITY
+//   //恐怖
+//   HORROR
+//   //情感
+//   EMOTIONAL
+//   //欢乐
+//   JOY
+//   //推理
+//   RATIOCINATION
+// }

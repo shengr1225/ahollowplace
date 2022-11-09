@@ -7,7 +7,12 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/core": "1.5.1"
+    "@redwoodjs/core": "^3.0.1",
+    "autoprefixer": "^10.4.7",
+    "babel-plugin-macros": "^3.1.0",
+    "postcss-cli": "^9.1.0",
+    "tailwindcss": "^3.1.2",
+    "twin.macro": "^2.8.2"
   },
   "eslintConfig": {
     "extends": "@redwoodjs/eslint-config"
@@ -19,5 +24,15 @@
   "prisma": {
     "seed": "yarn rw exec seed"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "@graphql-yoga/node": "^2.13.13",
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6",
+    "moment": "^2.29.4",
+    "prisma": "^4.3.1",
+    "react-icons": "^4.4.0",
+    "sassy-datepicker": "^0.8.0",
+    "styled-components": "^5.3.5"
+  }
 }
