@@ -244,16 +244,14 @@ const StyleHeader = (props) => {
   )
 
   const UserProfileLink = (props) => {
-    console.log('current user: ')
-    console.log(props.currentUser)
     return (
       <div className="text-center">
-        {/* <Link to={routes.userProfile({ id: props.currentUser?.id })} key="5">
+        <Link to={routes.userProfile({ id: props.currentUser?.id })} key="5">
           <div
             className="bg-center w-12 h-12 rounded-full mx-auto"
             style={thumbnailBg}
           ></div>
-        </Link> */}
+        </Link>
         <button
           onClick={logOut}
           className={`border-transparent border-b-2 transition duration-300 ${linkColor}`}
@@ -283,7 +281,7 @@ const StyleHeader = (props) => {
             {props.showSearching ? searchSection : linksDesktop}
           </div>
           <div className="inline-block text-gray-200 self-center" key="2">
-            {isAuthenticated ? (
+            {isAuthenticated && currentUser ? (
               <UserProfileLink currentUser={currentUser} />
             ) : (
               loginLink
@@ -337,7 +335,7 @@ const StyleHeader = (props) => {
           >
             <div className="flex flex-col items-center">{linksMobile}</div>
             <div className="flex flex-col items-center text-gray-200">
-              {isAuthenticated ? (
+              {isAuthenticated && currentUser ? (
                 <UserProfileLink currentUser={currentUser} />
               ) : (
                 loginLink
