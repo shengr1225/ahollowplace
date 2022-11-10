@@ -11,7 +11,6 @@ import { Router, Route, Private, Set } from '@redwoodjs/router'
 
 import BookingsLayout from 'src/layouts/BookingsLayout'
 import JubensLayout from 'src/layouts/JubensLayout'
-import PostsLayout from 'src/layouts/PostsLayout'
 import TimeSlotsLayout from 'src/layouts/TimeSlotsLayout'
 import UsersLayout from 'src/layouts/UsersLayout'
 

@@ -243,22 +243,26 @@ const StyleHeader = (props) => {
     </Link>
   )
 
-  const UserProfileLink = (props) => (
-    <div className="text-center">
-      <Link to={routes.userProfile({ id: props.currentUser?.id })} key="5">
-        <div
-          className="bg-center w-12 h-12 rounded-full mx-auto"
-          style={thumbnailBg}
-        ></div>
-      </Link>
-      <button
-        onClick={logOut}
-        className={`border-transparent border-b-2 transition duration-300 ${linkColor}`}
-      >
-        登出
-      </button>
-    </div>
-  )
+  const UserProfileLink = (props) => {
+    console.log('current user: ')
+    console.log(props.currentUser)
+    return (
+      <div className="text-center">
+        {/* <Link to={routes.userProfile({ id: props.currentUser?.id })} key="5">
+          <div
+            className="bg-center w-12 h-12 rounded-full mx-auto"
+            style={thumbnailBg}
+          ></div>
+        </Link> */}
+        <button
+          onClick={logOut}
+          className={`border-transparent border-b-2 transition duration-300 ${linkColor}`}
+        >
+          登出
+        </button>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -279,11 +283,11 @@ const StyleHeader = (props) => {
             {props.showSearching ? searchSection : linksDesktop}
           </div>
           <div className="inline-block text-gray-200 self-center" key="2">
-            {isAuthenticated
-              ? {
-                  /* <UserProfileLink currentUser={currentUser} /> */
-                }
-              : loginLink}
+            {isAuthenticated ? (
+              <UserProfileLink currentUser={currentUser} />
+            ) : (
+              loginLink
+            )}
           </div>
         </nav>
 
@@ -333,11 +337,11 @@ const StyleHeader = (props) => {
           >
             <div className="flex flex-col items-center">{linksMobile}</div>
             <div className="flex flex-col items-center text-gray-200">
-              {isAuthenticated
-                ? {
-                    /* <UserProfileLink currentUser={currentUser} /> */
-                  }
-                : loginLink}
+              {isAuthenticated ? (
+                <UserProfileLink currentUser={currentUser} />
+              ) : (
+                loginLink
+              )}
             </div>
           </motion.div>
           <button

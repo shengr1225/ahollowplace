@@ -59,7 +59,7 @@ const JubenSelectionPopup = (props) => (
 )
 
 const DateSelectionPopup = (props) => (
-  <button
+  <div
     style={windowCustomStyle}
     className={
       'rounded-xl bg-white drop-shadow-md transition-all ease-out duration-150 p-4 ' +
@@ -70,7 +70,7 @@ const DateSelectionPopup = (props) => (
     }}
   >
     <DatePicker onChange={props.onDateChange} minDate={new Date()} />
-  </button>
+  </div>
 )
 
 const DesktopSearchBar = () => {
