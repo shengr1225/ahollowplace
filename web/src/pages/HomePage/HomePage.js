@@ -9,7 +9,7 @@ const HomePage = () => {
   Modal.setAppElement('#redwood-app')
   return (
     <>
-      <MetaTags title="Home" description="Home page" />
+      <MetaTags title="首页" description="查看剧本或者开始搜索" />
       <div className="p-8">
         <Hero />
         <JubensHighlightCell />

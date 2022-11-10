@@ -12,7 +12,7 @@ import 'react-image-lightbox/style.css'
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
-    <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
+    <RedwoodProvider titleTemplate="%PageTitle %AppTitle">
       <AuthProvider type="dbAuth">
         <RedwoodApolloProvider>
           <Routes />
