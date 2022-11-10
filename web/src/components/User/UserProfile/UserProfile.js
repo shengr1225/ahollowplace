@@ -235,7 +235,7 @@ const UserProfile = (props) => {
       variables: {
         id: props.user?.id,
         input: {
-          thumbnail: thumbnail,
+          thumbnail: response.filesUploaded[0].url,
         },
       },
     })

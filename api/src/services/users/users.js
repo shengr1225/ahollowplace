@@ -34,7 +34,7 @@ export const updateUser = async ({ id, input }) => {
         xiezuo: input.xiezuo,
         gaoxiao: input.gaoxiao,
         qinggan: input.qinggan,
-        knot: input.know,
+        knot: input.knot,
         currentExp: input.currentExp,
       },
       where: { id },
