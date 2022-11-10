@@ -191,10 +191,8 @@ const DesktopSearchBar = () => {
   }
 
   return (
-    <div >
-      <div
-        className='hidden md:flex h-full md:h-auto divide-x relative rounded-full shadow-sm bg-gray-200 hover:bg-gray-100 transition-all duration-150 justify-between'
-      >
+    <div>
+      <div className="pl-4 hidden md:flex h-full md:h-auto divide-x relative rounded-full shadow-sm bg-gray-200 hover:bg-gray-100 transition-all duration-150 justify-between">
         <SearchInput
           label="juben"
           name="剧本"

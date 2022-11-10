@@ -13,6 +13,7 @@ import SearchInput from 'src/components/UI/SearchInput'
 import useAnimatedNavToggler from 'src/helpers/useAnimatedNavToggler'
 import logo from 'src/images/logo.png'
 import { dateOnly } from 'src/utility/dateUtil'
+import { trigger } from 'src/utility/event'
 import { thumbnailSize } from 'src/utility/helper'
 
 import SearchWindow from '../UI/SearchWindow/SearchWindow'
@@ -36,7 +37,7 @@ const StyleHeader = (props) => {
     trigger('jubenSearchTextChange', { text: event.target.value })
   }
 
-  const { logIn, logOut, isAuthenticated, currentUser } = useAuth()
+  const { logOut, isAuthenticated, currentUser } = useAuth()
 
   const thumbnailBg = {
     backgroundImage: 'url(' + thumbnailSize(currentUser?.thumbnail) + ')',
@@ -263,7 +264,7 @@ const StyleHeader = (props) => {
     <>
       <header
         className={
-          'pt-8 max-w-none w-full flex justify-between max-w-screen-xl mx-auto' ||
+          'pt-8 w-full flex justify-between max-w-screen-xl mx-auto' ||
           'header-light'
         }
       >
@@ -278,11 +279,11 @@ const StyleHeader = (props) => {
             {props.showSearching ? searchSection : linksDesktop}
           </div>
           <div className="inline-block text-gray-200 self-center" key="2">
-            {isAuthenticated ? (
-              <UserProfileLink currentUser={currentUser} />
-            ) : (
-              loginLink
-            )}
+            {isAuthenticated
+              ? {
+                  /* <UserProfileLink currentUser={currentUser} /> */
+                }
+              : loginLink}
           </div>
         </nav>
 
@@ -332,11 +333,11 @@ const StyleHeader = (props) => {
           >
             <div className="flex flex-col items-center">{linksMobile}</div>
             <div className="flex flex-col items-center text-gray-200">
-              {isAuthenticated ? (
-                <UserProfileLink currentUser={currentUser} />
-              ) : (
-                loginLink
-              )}
+              {isAuthenticated
+                ? {
+                    /* <UserProfileLink currentUser={currentUser} /> */
+                  }
+                : loginLink}
             </div>
           </motion.div>
           <button
