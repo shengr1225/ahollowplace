@@ -11,7 +11,8 @@ export const QUERY = gql`
       score
       players
       price
-      drives{
+      available
+      drives {
         id
         date
         status
