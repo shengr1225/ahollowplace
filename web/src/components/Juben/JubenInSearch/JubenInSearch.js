@@ -127,55 +127,66 @@ const JubenInSearch = ({ juben }) => {
         </div>
       </div>
       <div className="flex px-4 overflow-x-scroll">
-        {juben?.drives?.filter((d)=>{
-          return d.status === "Locked"
-        }).map((drive) => {
-          return (
-            <BookingButton
-              key={drive.id}
-              date={drive.date}
-              timeSlotId={drive.timeSlot?.id}
-              start={drive.timeSlot?.start}
-              end={drive.timeSlot?.end}
-              male={drive.male}
-              female={drive.female}
-              players={juben.players}
-              onClick={onChangeSelectedBooking}
-            />
-          )
-        })}
-        {juben.timeSlots?.map((timeSlot) => {
-          const inBooking = (timeSlot, date) => {
+        {juben.available &&
+          juben?.drives
+            ?.filter((d) => {
+              return d.status === 'Locked'
+            })
+            .map((drive) => {
+              return (
+                <BookingButton
+                  key={drive.id}
+                  date={drive.date}
+                  timeSlotId={drive.timeSlot?.id}
+                  start={drive.timeSlot?.start}
+                  end={drive.timeSlot?.end}
+                  male={drive.male}
+                  female={drive.female}
+                  players={juben.players}
+                  onClick={onChangeSelectedBooking}
+                />
+              )
+            })}
+        {juben.available &&
+          juben.timeSlots?.map((timeSlot) => {
+            const inBooking = (timeSlot, date) => {
+              return (
+                juben?.drives?.filter((drive) => {
+                  return (
+                    drive.status === 'Locked' &&
+                    new Date(drive.date).getTime() ==
+                      new Date(date).getTime() &&
+                    timeSlotConflit(drive.timeSlot, timeSlot)
+                  )
+                }).length > 0
+              )
+            }
+            if (inBooking(timeSlot, getUrlParam().date)) {
+              return <></>
+            }
             return (
-              juben?.drives?.filter((drive) => {
-                return (
-                  drive.status === "Locked" && new Date(drive.date).getTime() ==
-                    new Date(date).getTime() &&
-                  timeSlotConflit(drive.timeSlot, timeSlot)
-                )
-              }).length > 0
+              <BookingButton
+                key={timeSlot.id}
+                date={dateOnly(getUrlParam().date)}
+                timeSlotId={timeSlot.id}
+                start={timeSlot.start}
+                end={timeSlot.end}
+                male={0}
+                female={0}
+                players={juben.players}
+                onClick={onChangeSelectedBooking}
+              />
             )
-          }
-          if (inBooking(timeSlot, getUrlParam().date)) {
-            return <></>
-          }
-          return (
-            <BookingButton
-              key={timeSlot.id}
-              date={dateOnly(getUrlParam().date)}
-              timeSlotId={timeSlot.id}
-              start={timeSlot.start}
-              end={timeSlot.end}
-              male={0}
-              female={0}
-              players={juben.players}
-              onClick={onChangeSelectedBooking}
-            />
-          )
-        })}
+          })}
+        {!juben.available && (
+          <div className="flex-row flex-grow text-center mt-5 py-2 px-3 underline underline-offset-2 text-gray-800">
+            新本内测中，敬请期待
+          </div>
+        )}
         <button
-          className="flex-grow px-3 bg-primary-100 hover:bg-primary-300 transition duration-300 rounded-md mt-5 text-sm text-white cursor-pointer"
+          className="flex-grow px-3 bg-primary-100 hover:bg-primary-300 transition duration-300 rounded-md mt-5 text-sm text-white cursor-pointer disabled:focus:outline-none disabled:active:outline-none disabled:opacity-25 disabled:cursor-not-allowed"
           onClick={onBook}
+          disabled={!juben.available}
         >
           预订({selectedPeople?.split('|')[0]}男{selectedPeople?.split('|')[1]}
           女)

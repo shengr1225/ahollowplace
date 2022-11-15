@@ -12,6 +12,7 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import SearchInput from 'src/components/UI/SearchInput'
 import useAnimatedNavToggler from 'src/helpers/useAnimatedNavToggler'
 import logo from 'src/images/logo.png'
+import profile from 'src/images/profile.png'
 import { dateOnly } from 'src/utility/dateUtil'
 import { trigger } from 'src/utility/event'
 import { thumbnailSize } from 'src/utility/helper'
@@ -40,8 +41,11 @@ const StyleHeader = (props) => {
   const { logOut, isAuthenticated, currentUser } = useAuth()
 
   const thumbnailBg = {
-    backgroundImage: 'url(' + thumbnailSize(currentUser?.thumbnail) + ')',
+    backgroundImage:
+      'url(' + (thumbnailSize(currentUser?.thumbnail) || profile) + ')',
+    backgroundRepeat: 'no-repeat',
     backgroundSize: '100%',
+    backgroundPosition: 'center',
   }
 
   const [isDateOpen, setIsDateOpen] = useState(false)
@@ -254,7 +258,7 @@ const StyleHeader = (props) => {
         </Link>
         <button
           onClick={logOut}
-          className={`border-transparent border-b-2 transition duration-300 ${linkColor}`}
+          className={`border-transparent border-b-2 mt-1 transition duration-300 ${linkColor}`}
         >
           登出
         </button>

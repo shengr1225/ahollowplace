@@ -1,10 +1,12 @@
-import { motion, useScroll } from 'framer-motion'
+import { useScroll } from 'framer-motion'
+import { InfinitySpin } from 'react-loader-spinner'
 
 import { Link, routes } from '@redwoodjs/router'
 
 // import { ReactComponent as SvgDotPatternIcon } from 'src/images/dot-pattern.svg'
 
 import JubenSection from '../JubenSection/JubenSection'
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 export const QUERY = gql`
   query FindJubenHighlights {
@@ -22,7 +24,11 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div>
+    <InfinitySpin width="200" color="#4fa94d" />
+  </div>
+)
 
 export const Empty = () => {
   return (
@@ -42,8 +48,6 @@ export const Failure = ({ error }) => (
 export const Success = ({ jubens }) => {
   const sectionList = ['scary', 'fun', 'emotion', 'mechanism']
   const { scrollYProgress } = useScroll()
-
-  console.log('ddd' + scrollYProgress)
 
   return (
     <div className="relative">

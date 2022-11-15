@@ -248,6 +248,7 @@ const UserProfile = (props) => {
         transformations: {
           crop: true,
           rotate: true,
+          circle: true,
         },
         fromSources: ['local_file_system', 'instagram', 'facebook'],
         displayMode: 'overlay',

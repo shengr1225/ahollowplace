@@ -82,6 +82,8 @@ model Juben {
   mvps           User[]
   // 剧本图片
   photos         String?
+  // 剧本是否可预定
+  available      Boolean      @default(true)
 }
 
 model Booking {

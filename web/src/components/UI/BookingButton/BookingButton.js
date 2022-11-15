@@ -4,8 +4,18 @@ const PeopleInfo = ({ male, female, needed }) => {
   const peopleJoined = male + female
   const preMale = parseInt(needed.split('|')[0])
   const preFemale = parseInt(needed.split('|')[1])
-  const maleNeeded = (preFemale - female < 0) ? (preMale - male + preFemale - female) : (preMale - male < 0 ? 0 : preMale - male)
-  const femaleNeeded = (preMale - male < 0) ? (preFemale - female + preMale - male) : (preFemale - female < 0 ? 0 : preFemale - female)
+  const maleNeeded =
+    preFemale - female < 0
+      ? preMale - male + preFemale - female
+      : preMale - male < 0
+      ? 0
+      : preMale - male
+  const femaleNeeded =
+    preMale - male < 0
+      ? preFemale - female + preMale - male
+      : preFemale - female < 0
+      ? 0
+      : preFemale - female
   const totalNeeded = parseInt(maleNeeded) + parseInt(femaleNeeded)
   var info = ''
   if (totalNeeded) {
@@ -35,7 +45,9 @@ const BookingButton = (props) => {
       className={
         'flex-row mr-3 py-2 px-3 bg-white rounded-md mt-5 text-sm text-gray-800 cursor-pointer hover:bg-indigo-100 active:bg-indigo-100 active:ring-1 focus:bg-indigo-100 focus:ring-1 disabled:focus:outline-none disabled:active:outline-none disabled:opacity-25 disabled:cursor-not-allowed'
       }
-      disabled={isFull(props.male, props.female, props.players)}
+      disabled={
+        props.notAvailable || isFull(props.male, props.female, props.players)
+      }
       onClick={props.onClick?.bind(this, {
         date: props.date,
         timeSlotId: props.timeSlotId,

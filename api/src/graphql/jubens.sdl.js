@@ -15,6 +15,7 @@ export const schema = gql`
     timeSlots: [TimeSlot]!
     mvps: [User]!
     photos: String
+    available: Boolean!
   }
 
   type Query {
@@ -42,6 +43,7 @@ export const schema = gql`
     duration: Int!
     price: Int!
     photos: String
+    available: Boolean!
   }
 
   input UpdateJubenInput {
@@ -57,6 +59,7 @@ export const schema = gql`
     price: Int
     mvps: [UserInput]
     photos: String
+    available: Boolean
   }
 
   input UserInput {

@@ -18431,6 +18431,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mui@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "mui@npm:0.0.1"
+  checksum: c02657207ba0fdec9aea9f8754deb3d4ab213588c24a19755bcd3878dce35d3fb6bf56787f746934a52b2b2afd1c466b57683f1ed034da8f482a381472cb7952
+  languageName: node
+  linkType: hard
+
 "multicast-dns@npm:^7.2.4":
   version: 7.2.4
   resolution: "multicast-dns@npm:7.2.4"
@@ -21227,6 +21234,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-loader-spinner@npm:^5.3.4":
+  version: 5.3.4
+  resolution: "react-loader-spinner@npm:5.3.4"
+  dependencies:
+    react-is: ^18.2.0
+    styled-components: ^5.3.5
+    styled-tools: ^1.7.2
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 929b4004d1f0ee770af7276804366bdcceb3c14610783f78b4c5d2c3e8053c0a18da58e048b49584aec2145cbafb3460c43929f4a824316a54736b44ac9dbe95
+  languageName: node
+  linkType: hard
+
 "react-modal@npm:^3.11.1, react-modal@npm:^3.15.1":
   version: 3.16.1
   resolution: "react-modal@npm:3.16.1"
@@ -22032,9 +22053,12 @@ __metadata:
     graphql: ^16.6.0
     graphql-tag: ^2.12.6
     moment: ^2.29.4
+    mui: ^0.0.1
     postcss-cli: ^9.1.0
     prisma: ^4.3.1
     react-icons: ^4.4.0
+    react-is: ^18.2.0
+    react-loader-spinner: ^5.3.4
     sassy-datepicker: ^0.8.0
     styled-components: ^5.3.5
     tailwindcss: ^3.1.2
@@ -23418,6 +23442,13 @@ __metadata:
     react-dom: ">= 16.8.0"
     react-is: ">= 16.8.0"
   checksum: 14c0c1fa2944a753fcdaef10478c340046076163ad419eb7a4a37602e953cf63df3603961abdce7b4e780c2cc828cdf1c7a5f7d96fb07fabc24f23997980d69a
+  languageName: node
+  linkType: hard
+
+"styled-tools@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "styled-tools@npm:1.7.2"
+  checksum: 486a6ecbefec4cb46d9ca533ef8b5767a7e811e9af6c0047337a7fe41732fbb50a614942d7c28f28b6c6e38490f602b7929dce45cf417c9eb755702324b0c891
   languageName: node
   linkType: hard
 
