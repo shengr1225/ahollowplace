@@ -332,7 +332,7 @@ const JubenForm = (props) => {
 
         <CheckboxField
           name="available"
-          defaultValue={props.juben?.available}
+          defaultChecked={props.juben?.available}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
         ></CheckboxField>

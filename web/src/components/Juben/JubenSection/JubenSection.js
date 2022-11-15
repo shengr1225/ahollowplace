@@ -21,6 +21,10 @@ const sectionInfo = {
     title: '机制阵营本',
     desc: '偷拐抢骗，游刃有余中成为人生赢家',
   },
+  mystery: {
+    title: '变格世界',
+    desc: '天马行空，畅游在幻想世界中',
+  },
 }
 
 const JubenSection = ({ section, jubens }) => {
