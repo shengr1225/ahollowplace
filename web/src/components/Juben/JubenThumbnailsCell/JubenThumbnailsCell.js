@@ -1,4 +1,7 @@
+import { MagnifyingGlass } from 'react-loader-spinner'
+
 import JubenThumbnail from '../JubenThumbnail/JubenThumbnail'
+
 export const QUERY = gql`
   query FindJubenThumbnails {
     jubens {
@@ -12,7 +15,15 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div>
+    <MagnifyingGlass
+      width="100"
+      ariaLabel="loading"
+      wrapperClass="mx-auto mt-5"
+    />
+  </div>
+)
 
 export const Empty = () => <div>Empty</div>
 

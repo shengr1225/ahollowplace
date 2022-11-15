@@ -1,3 +1,5 @@
+import { MagnifyingGlass } from 'react-loader-spinner'
+
 import { trigger } from 'src/utility/event'
 import { thumbnailSize } from 'src/utility/helper'
 
@@ -12,7 +14,15 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <div>
+    <MagnifyingGlass
+      width="200"
+      ariaLabel="loading"
+      wrapperClass="mx-auto mt-5"
+    />
+  </div>
+)
 
 export const Empty = () => <div>Empty</div>
 
