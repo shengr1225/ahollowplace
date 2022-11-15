@@ -325,6 +325,21 @@ const JubenForm = (props) => {
         <FieldError name="price" className="rw-field-error" />
 
         <Label
+          name="available"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        ></Label>
+
+        <CheckboxField
+          name="available"
+          defaultValue={props.juben?.available}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        ></CheckboxField>
+
+        <FieldError name="available" className="rw-field-error" />
+
+        <Label
           name="mvps"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

@@ -38,6 +38,7 @@ export const updateJuben = ({ id, input }) => {
         connect: input.mvps,
       },
       photos: input.photos,
+      available: input.available,
     },
     where: { id },
   })

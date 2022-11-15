@@ -1,6 +1,6 @@
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { navigate, routes } from '@redwoodjs/router'
+
 import JubenForm from 'src/components/Juben/JubenForm'
 
 const CREATE_JUBEN_MUTATION = gql`
