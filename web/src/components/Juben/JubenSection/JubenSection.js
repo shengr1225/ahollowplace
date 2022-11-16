@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { motion } from "framer-motion-3d"
 
 import { JubenSectionAnimation } from 'src/helpers/Animation'
 
@@ -31,7 +32,6 @@ const JubenSection = ({ section, jubens }) => {
   const HeadingTitle = () => (
     <motion.h2
       variants={JubenSectionAnimation[section]}
-      transition={JubenSectionAnimation[section].transition}
       className="text-4xl sm:text-5xl font-black tracking-wide text-center"
     >
       {sectionInfo[section].title}
@@ -40,7 +40,6 @@ const JubenSection = ({ section, jubens }) => {
   const HeadingDescription = () => (
     <motion.p
       variants={JubenSectionAnimation[section]}
-      transition={JubenSectionAnimation[section].transition}
       className="mt-4 font-medium text-gray-600 text-center max-w-sm"
     >
       {sectionInfo[section].desc}

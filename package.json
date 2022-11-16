@@ -27,6 +27,8 @@
   "packageManager": "yarn@3.2.1",
   "dependencies": {
     "@graphql-yoga/node": "^2.13.13",
+    "@react-three/fiber": "^8.9.1",
+    "framer-motion-3d": "^7.6.7",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "moment": "^2.29.4",
@@ -37,6 +39,7 @@
     "react-loader-spinner": "^5.3.4",
     "react-spinner-loader": "^1.1.1",
     "sassy-datepicker": "^0.8.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "three": "^0.146.0"
   }
 }

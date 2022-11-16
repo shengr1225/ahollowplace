@@ -41,4 +41,5 @@ export const JubenSectionAnimation = {
       },
     },
   },
+  mystery: {},
 }
