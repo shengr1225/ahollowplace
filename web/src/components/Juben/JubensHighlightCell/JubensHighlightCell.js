@@ -49,7 +49,7 @@ export const Failure = ({ error }) => (
 )
 
 export const Success = ({ jubens }) => {
-  const sectionList = ['scary', 'fun', 'emotion', 'mechanism']
+  const sectionList = ['scary', 'fun', 'emotion', 'mechanism', 'mystery']
   const { scrollYProgress } = useScroll()
 
   return (
