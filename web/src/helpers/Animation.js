@@ -1,36 +1,37 @@
 export const JubenSectionAnimation = {
   viewport: { once: true, amount: 0.6 },
   scary: {
-    offscreen: { opacity: 0 },
-    offscreenReversed: { opacity: 0 },
-    onscreen: { opacity: 1, transition: { type: 'spring', duration: 10 } },
+    start: { opacity: 0 },
+    start2: { opacity: 0 },
+    end: { opacity: 1, transition: { type: 'spring', duration: 10 } },
+    hover: { scale: 5, transition: { type: 'spring', duration: 2 } },
   },
   fun: {
-    offscreen: { x: -100, opacity: 0 },
-    offscreenReversed: { x: 50, opacity: 0 },
-    onscreen: {
+    start: { x: -100, opacity: 0 },
+    start2: { x: 50, opacity: 0 },
+    end: {
       x: 0,
       opacity: 1,
       transition: { type: 'spring', bounce: 0.4, duration: 0.5 },
     },
   },
   emotion: {
-    offscreen: { x: -100, opacity: 0 },
-    offscreenReversed: { x: 50, opacity: 0 },
-    onscreen: { x: 0, opacity: 1, transition: { type: 'spring', duration: 3 } },
+    start: { x: -100, opacity: 0 },
+    start2: { x: 50, opacity: 0 },
+    end: { x: 0, opacity: 1, transition: { type: 'spring', duration: 3 } },
   },
   mechanism: {
-    offscreen: {
+    start: {
       y: 300,
       rotate: -10,
       opacity: 0,
     },
-    offscreenReversed: {
+    start2: {
       y: 300,
       rotate: 10,
       opacity: 0,
     },
-    onscreen: {
+    end: {
       y: 0,
       rotate: 0,
       opacity: 1,
@@ -41,5 +42,19 @@ export const JubenSectionAnimation = {
       },
     },
   },
-  mystery: {},
+  mystery: {
+    start: {
+      filter: 'blur(5px)',
+      rotate: 5,
+    },
+    start2: {
+      filter: 'blur(5px)',
+      rotate: -5,
+    },
+    end: {
+      filter: 'blur(0px)',
+      rotate: 0,
+      transition: { type: 'tween', duration: 3 },
+    },
+  },
 }

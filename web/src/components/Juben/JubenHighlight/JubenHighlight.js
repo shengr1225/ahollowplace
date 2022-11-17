@@ -35,9 +35,9 @@ const JubenHighlight = ({ juben, reversed }) => {
 
   return (
     <motion.div
-      initial={reversed ? 'offscreenReversed' : 'offscreen'}
+      initial={reversed ? 'start2' : 'start'}
       variants={JubenSectionAnimation[juben.section]}
-      whileInView={'onscreen'}
+      whileInView={'end'}
       viewport={JubenSectionAnimation.viewport}
       className={
         'mt-24 md:flex justify-center items-center ' +

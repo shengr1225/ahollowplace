@@ -48,9 +48,9 @@ const JubenSection = ({ section, jubens }) => {
     <div className="flex flex-col items-center mt-16">
       <motion.div
         viewport={JubenSectionAnimation.viewport}
-        transition={{ staggerChildren: 0.5 }}
-        initial={'offscreen'}
-        whileInView={'onscreen'}
+        transition={{ staggerChildren: 1 }}
+        initial={'start'}
+        whileInView={'end'}
       >
         <HeadingTitle />
         <HeadingDescription />
