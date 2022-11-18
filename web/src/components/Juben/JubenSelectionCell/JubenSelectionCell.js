@@ -30,11 +30,7 @@ export const Success = ({ jubens, selectJubenId }) => {
           return juben.available
         })
         .map((j) => (
-          <option
-            key={j.id}
-            selected={jubens.some((juben) => juben.id == selectJubenId)}
-            value={j.id}
-          >
+          <option key={j.id} selected={j.id == selectJubenId} value={j.id}>
             {j.name}
           </option>
         ))}

@@ -427,7 +427,7 @@ const UserProfile = (props) => {
             <span className="ml-2">
               {
                 props.user?.bookings?.filter((b) => {
-                  return b.status == 'complete'
+                  return b.status == 'Complete'
                 }).length
               }{' '}
               次打本{' '}
