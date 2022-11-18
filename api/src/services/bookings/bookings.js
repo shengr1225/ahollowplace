@@ -34,8 +34,7 @@ export const createBooking = async ({ input }) => {
     if (
       !input.total ||
       (!input.male && !input.female) ||
-      input.male + input.female != input.total ||
-      input.total != input.users.length
+      input.male + input.female != input.total
     ) {
       throw new ServiceValidationError('请提供正确人数信息')
     }
@@ -90,8 +89,7 @@ export const updateBooking = async ({ id, input }) => {
     if (
       !input.total ||
       (!input.male && !input.female) ||
-      input.male + input.female != input.total ||
-      input.total != input.users.length
+      input.male + input.female != input.total
     ) {
       throw '请提供正确人数信息'
     }
