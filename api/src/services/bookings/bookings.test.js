@@ -27,16 +27,16 @@ describe('bookings', () => {
   //   const result = await createBooking({
   //     input: {
   //       date: new Date('2023-10-16T20:08:11.000Z'),
-  //       total: 5,
-  //       male: 3,
-  //       female: 2,
+  //       total: 1,
+  //       male: 0,
+  //       female: 1,
   //       users: [{ id: scenario.user.bob.id }],
   //       jubenId: scenario.booking.one.jubenId,
   //       timeSlotId: scenario.booking.one.timeSlotId,
   //     },
   //   })
   //   expect(result.date).toEqual(new Date('2023-10-16T20:08:11.000Z'))
-  //   expect(result.total).toEqual(5)
+  //   expect(result.total).toEqual(1)
   //   expect(result.status).toEqual('Carpooling')
   //   expect(result.jubenId).toEqual(scenario.booking.one.jubenId)
   //   expect(result.timeSlotId).toEqual(scenario.booking.one.timeSlotId)
@@ -49,7 +49,12 @@ describe('bookings', () => {
   //       total: 4,
   //       male: 4,
   //       female: 0,
-  //       users: [{ id: scenario.user.bob.id }],
+  //       users: [
+  //         { id: scenario.user.bob.id },
+  //         { id: scenario.user.bob.id },
+  //         { id: scenario.user.bob.id },
+  //         { id: scenario.user.bob.id },
+  //       ],
   //       jubenId: scenario.booking.one.jubenId,
   //       timeSlotId: scenario.booking.one.timeSlotId,
   //     },
@@ -61,7 +66,10 @@ describe('bookings', () => {
   //         total: 2,
   //         male: 0,
   //         female: 2,
-  //         users: [{ id: scenario.user.alice.id }],
+  //         users: [
+  //           { id: scenario.user.alice.id },
+  //           { id: scenario.user.alice.id },
+  //         ],
   //         jubenId: scenario.booking.one.jubenId,
   //         timeSlotId: scenario.booking.one.timeSlotId,
   //       },
@@ -69,47 +77,72 @@ describe('bookings', () => {
   //   }).rejects.toThrow('本剧本预定已满，请修改时间或者人数。')
   // })
 
-  // scenario('creates a booking that already booked', async (scenario) => {
-  //   await createBooking({
-  //     input: {
-  //       date: new Date('2023-10-18T20:08:11.000Z'),
-  //       total: 1,
-  //       male: 1,
-  //       female: 0,
-  //       users: [{ id: scenario.user.bob.id }],
-  //       jubenId: scenario.booking.one.jubenId,
-  //       timeSlotId: scenario.booking.one.timeSlotId,
-  //     },
-  //   })
+  // scenario('creates a booking but juben not available', async (scenario) => {
   //   expect(async () => {
   //     await createBooking({
   //       input: {
-  //         date: new Date('2023-10-19T20:08:11.000Z'),
-  //         total: 1,
-  //         male: 1,
-  //         female: 0,
-  //         users: [{ id: scenario.user.bob.id }],
-  //         jubenId: scenario.booking.one.jubenId,
-  //         timeSlotId: scenario.booking.one.timeSlotId,
-  //       },
-  //     })
-  //   }).rejects.toThrow('你已经预订了相同的剧本，如需调整请前往我的剧本。')
-  // })
-  // scenario('creates a booking that has wrong people info', async (scenario) => {
-  //   expect(async () => {
-  //     await createBooking({
-  //       input: {
-  //         date: new Date('2023-10-15T20:08:11.000Z'),
-  //         total: 5,
+  //         date: new Date('2023-10-18T20:08:11.000Z'),
+  //         total: 2,
   //         male: 0,
-  //         female: 4,
-  //         userId: scenario.booking.one.userId,
-  //         jubenId: scenario.booking.one.jubenId,
+  //         female: 2,
+  //         users: [
+  //           { id: scenario.user.alice.id },
+  //           { id: scenario.user.alice.id },
+  //         ],
+  //         jubenId: scenario.booking.two.jubenId,
   //         timeSlotId: scenario.booking.one.timeSlotId,
   //       },
   //     })
-  //   }).rejects.toThrow('请提供正确人数信息')
+  //   }).rejects.toThrow('剧本还在内测中，敬请期待。')
   // })
+
+  scenario('creates a booking that already booked', async (scenario) => {
+    await createBooking({
+      input: {
+        date: new Date('2023-10-18T20:08:11.000Z'),
+        total: 1,
+        male: 1,
+        female: 0,
+        users: [{ id: scenario.user.bob.id }],
+        jubenId: scenario.booking.one.jubenId,
+        timeSlotId: scenario.booking.one.timeSlotId,
+      },
+    })
+    expect(async () => {
+      await createBooking({
+        input: {
+          date: new Date('2023-10-19T20:08:11.000Z'),
+          total: 1,
+          male: 1,
+          female: 0,
+          users: [{ id: scenario.user.bob.id }],
+          jubenId: scenario.booking.one.jubenId,
+          timeSlotId: scenario.booking.one.timeSlotId,
+        },
+      })
+    }).rejects.toThrow('你已经预订了相同的剧本，如需调整请前往我的剧本。')
+  })
+  scenario('creates a booking that has wrong people info', async (scenario) => {
+    expect(async () => {
+      await createBooking({
+        input: {
+          date: new Date('2023-10-15T20:08:11.000Z'),
+          total: 5,
+          male: 0,
+          female: 4,
+          userId: scenario.booking.one.userId,
+          jubenId: scenario.booking.one.jubenId,
+          timeSlotId: scenario.booking.one.timeSlotId,
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+          ],
+        },
+      })
+    }).rejects.toThrow('请提供正确人数信息')
+  })
   scenario('updates a booking and then full', async (scenario) => {
     const original = await booking({ id: scenario.booking.one.id })
     const result = await updateBooking({
@@ -121,6 +154,18 @@ describe('bookings', () => {
         male: 9,
         female: 1,
         timeSlotId: scenario.booking.one.timeSlotId,
+        users: [
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+        ],
       },
     })
     expect(result.date).toEqual(new Date('2023-10-15T20:08:11Z'))
@@ -141,6 +186,19 @@ describe('bookings', () => {
           male: 10,
           female: 1,
           timeSlotId: scenario.booking.one.timeSlotId,
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.alice.id },
+          ],
         },
       })
     }).rejects.toThrow('本剧本预定人数超过限制，请修改人数。')
@@ -154,24 +212,24 @@ describe('bookings', () => {
     expect(result.total).toEqual(5)
   })
 
-  // scenario('create a booking at a past time', async (scenario) => {
-  //   expect(async () => {
-  //     await createBooking({
-  //       input: {
-  //         date: new Date('2021-10-15T20:08:11.000Z'),
-  //         total: 5,
-  //         male: 3,
-  //         female: 2,
-  //         userId: scenario.booking.one.userId,
-  //         jubenId: scenario.booking.one.jubenId,
-  //         timeSlotId: scenario.booking.one.timeSlotId,
-  //       },
-  //     })
-  //   }).rejects.toThrow('预定时间不能是过去')
-  // })
-  // scenario('deletes a booking', async (scenario) => {
-  //   const original = await deleteBooking({ id: scenario.booking.one.id })
-  //   const result = await booking({ id: original.id })
-  //   expect(result).toEqual(null)
-  // })
+  scenario('create a booking at a past time', async (scenario) => {
+    expect(async () => {
+      await createBooking({
+        input: {
+          date: new Date('2021-10-15T20:08:11.000Z'),
+          total: 5,
+          male: 3,
+          female: 2,
+          userId: scenario.booking.one.userId,
+          jubenId: scenario.booking.one.jubenId,
+          timeSlotId: scenario.booking.one.timeSlotId,
+        },
+      })
+    }).rejects.toThrow('预定时间不能是过去')
+  })
+  scenario('deletes a booking', async (scenario) => {
+    const original = await deleteBooking({ id: scenario.booking.one.id })
+    const result = await booking({ id: original.id })
+    expect(result).toEqual(null)
+  })
 })

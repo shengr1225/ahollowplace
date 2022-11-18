@@ -13,6 +13,10 @@ export const QUERY = gql`
       female
       total
       note
+      users {
+        id
+        name
+      }
       jubenId
       timeSlotId
     }
@@ -27,6 +31,9 @@ const UPDATE_BOOKING_MUTATION = gql`
       female
       total
       note
+      users {
+        id
+      }
       jubenId
       timeSlotId
     }

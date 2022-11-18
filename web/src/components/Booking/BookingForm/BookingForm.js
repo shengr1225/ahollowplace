@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Form,
   FormError,
@@ -5,10 +7,13 @@ import {
   Label,
   DateField,
   TextField,
-  NumberField,
   Submit,
+  NumberField,
 } from '@redwoodjs/forms'
 
+import JubenSelectionCell from 'src/components/Juben/JubenSelectionCell/JubenSelectionCell'
+import TimeSlotSelectionCell from 'src/components/TimeSlot/TimeSlotSelectionCell/TimeSlotSelectionCell'
+import UserSelectionCell from 'src/components/User/UserSelectionCell/UserSelectionCell'
 import { getLocalTime } from 'src/utility/dateUtil'
 
 const formatDatetime = (value) => {
@@ -20,6 +25,15 @@ const formatDatetime = (value) => {
 const BookingForm = (props) => {
   const onSubmit = (data) => {
     data.date = getLocalTime(data.date)
+    if (!data.users) {
+      delete data.users
+    } else {
+      data.users = data.users?.map((id) => {
+        return {
+          id: parseInt(id),
+        }
+      })
+    }
     props.onSave(data, props?.booking?.id)
   }
 
@@ -52,6 +66,24 @@ const BookingForm = (props) => {
         <FieldError name="date" className="rw-field-error" />
 
         <Label
+          name="total"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Total
+        </Label>
+
+        <NumberField
+          name="total"
+          defaultValue={props.booking?.total}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="total" className="rw-field-error" />
+
+        <Label
           name="male"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
@@ -59,7 +91,7 @@ const BookingForm = (props) => {
           Male
         </Label>
 
-        <TextField
+        <NumberField
           name="male"
           defaultValue={props.booking?.male}
           className="rw-input"
@@ -77,7 +109,7 @@ const BookingForm = (props) => {
           Female
         </Label>
 
-        <TextField
+        <NumberField
           name="female"
           defaultValue={props.booking?.female}
           className="rw-input"
@@ -112,13 +144,7 @@ const BookingForm = (props) => {
           Juben id
         </Label>
 
-        <NumberField
-          name="jubenId"
-          defaultValue={props.booking?.jubenId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
+        <JubenSelectionCell selectJubenId={props.booking?.jubenId} />
 
         <FieldError name="jubenId" className="rw-field-error" />
 
@@ -130,15 +156,19 @@ const BookingForm = (props) => {
           Time slot id
         </Label>
 
-        <NumberField
-          name="timeSlotId"
-          defaultValue={props.booking?.timeSlotId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
+        <TimeSlotSelectionCell selectTimeSlotId={props.booking?.timeSlotId} />
 
         <FieldError name="timeSlotId" className="rw-field-error" />
+
+        <Label
+          name="users"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        ></Label>
+
+        <UserSelectionCell data={props?.booking?.users} name="users" />
+
+        <FieldError name="users" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

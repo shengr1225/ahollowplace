@@ -31,12 +31,19 @@ export const createBooking = async ({ input }) => {
     },
   })
   validateWith(() => {
-    if (input.male + input.female != input.total) {
+    if (
+      !input.total ||
+      (!input.male && !input.female) ||
+      input.male + input.female != input.total ||
+      input.total != input.users.length
+    ) {
       throw new ServiceValidationError('请提供正确人数信息')
     }
   })
   return await db.$transaction(async (db) => {
-    if (await bookingIsMade(db, input)) {
+    if (!(await jubenIsAvailable(db, input))) {
+      throw new ServiceValidationError('剧本还在内测中，敬请期待。')
+    } else if (await bookingIsMade(db, input)) {
       throw new ServiceValidationError(
         '你已经预订了相同的剧本，如需调整请前往我的剧本。'
       )
@@ -83,15 +90,26 @@ export const updateBooking = async ({ id, input }) => {
     if (
       !input.total ||
       (!input.male && !input.female) ||
-      input.male + input.female != input.total
+      input.male + input.female != input.total ||
+      input.total != input.users.length
     ) {
-      throw '需要人数或者人数格式不正确'
+      throw '请提供正确人数信息'
     }
   })
   return await db.$transaction(async (db) => {
-    if (await bookingIsFull(db, input, id)) {
+    if (!(await jubenIsAvailable(db, input))) {
+      throw new ServiceValidationError('剧本还在内测中，敬请期待。')
+    } else if (await bookingIsFull(db, input, id)) {
       throw new ServiceValidationError('本剧本预定人数超过限制，请修改人数。')
     } else {
+      await db.booking.update({
+        where: { id },
+        data: {
+          users: {
+            set: [],
+          },
+        },
+      })
       const booking = await db.booking.update({
         data: {
           date: input.date,
@@ -120,6 +138,15 @@ export const deleteBooking = ({ id }) => {
   return db.booking.delete({
     where: { id },
   })
+}
+
+const jubenIsAvailable = async (db, input) => {
+  const juben = await db.juben.findUnique({
+    where: {
+      id: input.jubenId,
+    },
+  })
+  return juben.available
 }
 
 const bookingIsMade = async (db, input) => {

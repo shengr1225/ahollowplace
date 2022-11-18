@@ -15,7 +15,9 @@ import {
 } from '@redwoodjs/forms'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import UserSelectionCell from 'src/components/User/UserSelectionCell'
 import { normalSize, listSize } from 'src/utility/helper'
+
 const DELETE_PHOTO_OF_JUBEN = gql`
   mutation deletePhoto($id: Int!, $index: Int!) {
     deletePhotoOfJuben(id: $id, index: $index) {
@@ -45,7 +47,7 @@ const JubenForm = (props) => {
     if (!dataWithUrl.mvps) {
       delete dataWithUrl.mvps
     } else {
-      dataWithUrl.mvps = dataWithUrl.mvps?.split(',').map((id) => {
+      dataWithUrl.mvps = dataWithUrl.mvps?.map((id) => {
         return {
           id: parseInt(id),
         }
@@ -345,16 +347,7 @@ const JubenForm = (props) => {
           errorClassName="rw-label rw-label-error"
         ></Label>
 
-        <TextField
-          name="mvps"
-          defaultValue={props.juben?.mvps
-            ?.map((mvp) => {
-              return mvp.id
-            })
-            .join(',')}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        ></TextField>
+        <UserSelectionCell data={props.juben?.mvps} name="mvps" />
 
         <FieldError name="mvps" className="rw-field-error" />
 

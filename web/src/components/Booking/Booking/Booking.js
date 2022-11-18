@@ -1,8 +1,8 @@
 import humanize from 'humanize-string'
 
+import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { Link, routes, navigate } from '@redwoodjs/router'
 
 const DELETE_BOOKING_MUTATION = gql`
   mutation DeleteBookingMutation($id: Int!) {
@@ -12,25 +12,6 @@ const DELETE_BOOKING_MUTATION = gql`
   }
 `
 
-const formatEnum = (values) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values)
-    }
-  }
-}
-
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
-
 const timeTag = (datetime) => {
   return (
     datetime && (
@@ -39,10 +20,6 @@ const timeTag = (datetime) => {
       </time>
     )
   )
-}
-
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
 }
 
 const Booking = ({ booking }) => {
@@ -81,8 +58,12 @@ const Booking = ({ booking }) => {
               <td>{timeTag(booking.date)}</td>
             </tr>
             <tr>
-              <th>People</th>
-              <td>{booking.people}</td>
+              <th>Male</th>
+              <td>{booking.male}</td>
+            </tr>
+            <tr>
+              <th>Female</th>
+              <td>{booking.female}</td>
             </tr>
             <tr>
               <th>Note</th>
@@ -98,6 +79,10 @@ const Booking = ({ booking }) => {
                 From {booking.timeSlot.start} to {booking.timeSlot.end}, about{' '}
                 {booking.timeSlot.last} hours
               </td>
+            </tr>
+            <tr>
+              <th>User</th>
+              <td>{booking.users.map((u) => u.name).join(',')}</td>
             </tr>
           </tbody>
         </table>

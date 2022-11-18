@@ -51,9 +51,9 @@ describe('jubenDrives', () => {
     const result = await createBooking({
       input: {
         date: new Date('2023-10-15T20:08:11.000Z'),
-        total: 5,
-        male: 3,
-        female: 2,
+        total: 1,
+        male: 1,
+        female: 0,
         users: [{ id: scenario.user.bob.id }],
         jubenId: scenario.booking.one.jubenId,
         timeSlotId: scenario.booking.one.timeSlotId,
@@ -69,9 +69,15 @@ describe('jubenDrives', () => {
       input: {
         date: new Date('2023-10-15T20:08:11.000Z'),
         total: 5,
-        male: 3,
-        female: 2,
-        users: [{ id: scenario.user.bob.id }],
+        male: 4,
+        female: 1,
+        users: [
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.aimee.id },
+        ],
         jubenId: scenario.booking.one.jubenId,
         timeSlotId: scenario.booking.one.timeSlotId,
       },
@@ -94,7 +100,13 @@ describe('jubenDrives', () => {
         total: 5,
         male: 3,
         female: 2,
-        users: [{ id: scenario.user.alice.id }],
+        users: [
+          { id: scenario.user.alice.id },
+          { id: scenario.user.alice.id },
+          { id: scenario.user.alice.id },
+          { id: scenario.user.alice.id },
+          { id: scenario.user.alice.id },
+        ],
         jubenId: scenario.booking.one.jubenId,
         timeSlotId: scenario.booking.one.timeSlotId,
       },
@@ -119,7 +131,13 @@ describe('jubenDrives', () => {
           total: 5,
           male: 3,
           female: 2,
-          userId: scenario.user.bob.id,
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+          ],
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
         },
@@ -132,7 +150,15 @@ describe('jubenDrives', () => {
             total: 6,
             male: 3,
             female: 3,
-            userId: scenario.user.alice.id,
+            users: [
+              { id: scenario.user.alice.id },
+              { id: scenario.user.alice.id },
+              { id: scenario.user.alice.id },
+              { id: scenario.user.alice.id },
+              { id: scenario.user.alice.id },
+              { id: scenario.user.alice.id },
+            ],
+
             jubenId: scenario.booking.one.jubenId,
             timeSlotId: scenario.booking.one.timeSlotId,
           },
@@ -160,9 +186,9 @@ describe('jubenDrives', () => {
           total: 2,
           male: 1,
           female: 1,
-          users: [{ id: scenario.user.bob.id }],
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
+          users: [{ id: scenario.user.bob.id }, { id: scenario.user.bob.id }],
         },
       })
       await updateBooking({
@@ -174,7 +200,11 @@ describe('jubenDrives', () => {
           female: 1,
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
-          users: [{ id: scenario.user.bob.id }],
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+          ],
         },
       })
       const drives = await jubenDrives()
@@ -202,6 +232,13 @@ describe('jubenDrives', () => {
           userId: scenario.booking.one.userId,
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+          ],
         },
       })
       const b2 = await createBooking({
@@ -213,6 +250,13 @@ describe('jubenDrives', () => {
           userId: scenario.booking.one.userId,
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
+          users: [
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+          ],
         },
       })
       await updateBooking({
@@ -224,6 +268,13 @@ describe('jubenDrives', () => {
           total: 5,
           male: 4,
           female: 1,
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+          ],
         },
       })
 
@@ -261,6 +312,13 @@ describe('jubenDrives', () => {
           userId: scenario.booking.one.userId,
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+          ],
         },
       })
       const b2 = await createBooking({
@@ -272,6 +330,13 @@ describe('jubenDrives', () => {
           userId: scenario.booking.one.userId,
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
+          users: [
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+          ],
         },
       })
       await createBooking({
@@ -283,6 +348,13 @@ describe('jubenDrives', () => {
           userId: scenario.booking.one.userId,
           jubenId: scenario.booking.one.jubenId,
           timeSlotId: scenario.booking.one.timeSlotId,
+          users: [
+            { id: scenario.user.aimee.id },
+            { id: scenario.user.aimee.id },
+            { id: scenario.user.aimee.id },
+            { id: scenario.user.aimee.id },
+            { id: scenario.user.aimee.id },
+          ],
         },
       })
 
@@ -295,6 +367,13 @@ describe('jubenDrives', () => {
           total: 5,
           male: 4,
           female: 1,
+          users: [
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+            { id: scenario.user.bob.id },
+          ],
         },
       })
 

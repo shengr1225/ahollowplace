@@ -9,6 +9,10 @@ export const QUERY = gql`
       female
       total
       note
+      users {
+        id
+        name
+      }
       juben {
         name
       }

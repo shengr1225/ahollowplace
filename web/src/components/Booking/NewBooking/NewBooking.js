@@ -1,8 +1,10 @@
+import Moment from 'moment'
+
+import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { navigate, routes } from '@redwoodjs/router'
+
 import BookingForm from 'src/components/Booking/BookingForm'
-import Moment from 'moment'
 import { getLocalTime } from 'src/utility/dateUtil'
 
 const CREATE_BOOKING_MUTATION = gql`

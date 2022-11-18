@@ -18,6 +18,15 @@ export const standard = defineScenario({
         salt: 'String',
       },
     },
+    aimee: {
+      data: {
+        name: 'Aimee',
+        email: 'Aimee@gmail.com',
+        roles: 'String',
+        hashedPassword: 'String',
+        salt: 'String',
+      },
+    },
   },
   booking: {
     one: {
@@ -36,6 +45,7 @@ export const standard = defineScenario({
             section: 'String',
             players: '5|5',
             sections: 'String',
+            available: true,
           },
         },
         timeSlot: { create: { start: 'String', end: 'String', last: 5699203 } },
