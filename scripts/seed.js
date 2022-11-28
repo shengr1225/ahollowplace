@@ -1,53 +1,65 @@
 import { db } from 'api/src/lib/db'
 
-const POSTS = [
-  {
-    id: 1,
-    title: 'Welcome to the blog!',
-    body: "I'm baby single- origin coffee kickstarter lo - fi paleo skateboard.Tumblr hashtag austin whatever DIY plaid knausgaard fanny pack messenger bag blog next level woke.Ethical bitters fixie freegan,helvetica pitchfork 90's tbh chillwave mustache godard subway tile ramps art party. Hammock sustainable twee yr bushwick disrupt unicorn, before they sold out direct trade chicharrones etsy polaroid hoodie. Gentrify offal hoodie fingerstache.",
-  },
-  {
-    id: 2,
-    title: 'A little more about me',
-    body: "Raclette shoreditch before they sold out lyft. Ethical bicycle rights meh prism twee. Tote bag ennui vice, slow-carb taiyaki crucifix whatever you probably haven't heard of them jianbing raw denim DIY hot chicken. Chillwave blog succulents freegan synth af ramps poutine wayfarers yr seitan roof party squid. Jianbing flexitarian gentrify hexagon portland single-origin coffee raclette gluten-free. Coloring book cloud bread street art kitsch lumbersexual af distillery ethical ugh thundercats roof party poke chillwave. 90's palo santo green juice subway tile, prism viral butcher selvage etsy pitchfork sriracha tumeric bushwick.",
-  },
-  {
-    id: 3,
-    title: 'What is the meaning of life?',
-    body: 'Meh waistcoat succulents umami asymmetrical, hoodie post-ironic paleo chillwave tote bag. Trust fund kitsch waistcoat vape, cray offal gochujang food truck cloud bread enamel pin forage. Roof party chambray ugh occupy fam stumptown. Dreamcatcher tousled snackwave, typewriter lyft unicorn pabst portland blue bottle locavore squid PBR&B tattooed.',
-  },
-]
+const JUBENS = ({ userId, timeSlotId }) => {
+  return [
+    {
+      name: '漓川怪谈薄',
+      score: 4.91,
+      image: 'https://cdn.filestackcontent.com/81jNlMIYR8WIjlsltKmr',
+      desc: '常世是这篇土地的名字，也是土地中心那片诡异湖泊的名字。\n传说，这里的水土，不仅滋养了生活在这的百姓，也孕育出了无数怪谈故事中的精怪们。\n他们非人非鬼，是受到常世湖湖水影响而妖异化的产物。\n他们不像话本里传的那样天生邪恶，大多只是生活的方式与对世界的认知与人类不同而已。\n但只要他们出现，就一定离不开各种“光怪陆离”。',
+      section: 'mystery',
+      sections: '日式 架空 推理 变格',
+      players: '3|4',
+      canSwitchSex: true,
+      duration: 6,
+      price: 45,
+      timeSlots: {
+        connect: { id: timeSlotId },
+      },
+      mvps: {
+        connect: { id: userId },
+      },
+      photos:
+        'https://cdn.filestackcontent.com/betCw4ghQyOXTYTGOTxI,https://cdn.filestackcontent.com/yCtTqYffRIOplZ1Okz4G,https://cdn.filestackcontent.com/WlbQL2wwQneZkOKJCjbC,https://cdn.filestackcontent.com/1oKLA6lJReAOcvv13NUg,https://cdn.filestackcontent.com/jI4tBMRgC4RMGQVteTLQ,https://cdn.filestackcontent.com/DcnGs4OgSkCM3PbETvP4,https://cdn.filestackcontent.com/HpGaUxTScWDtnStWLAhW,https://cdn.filestackcontent.com/HrpMDvBPTsiEvyK5RF1l,https://cdn.filestackcontent.com/IAZTF6C2QN6TmzFsSHvX',
+      available: true,
+    },
+  ]
+}
 
 export default async () => {
   // create an admin user
-  await db.user.upsert({
-    where: { id: 1 },
-    create: {
-      id: 1,
-      name: 'John Doe',
-      email: 'admin@admin.com',
+  const user = await db.user.create({
+    data: {
+      name: 'Sheng Rong',
+      email: 'admin@ahollowplace.com',
       hashedPassword:
-        'ad9563042fe9f154419361eeeb775d8a12f3975a3722953fd8e326dd108d5645',
-      salt: '1c99de412b219e9abf4665293211adce',
+        'f82e0d6a9acc3599ce89d61c5695393aa92497ebf6394ff69cf445b80df41e2a',
+      salt: 'c2b8df0b3310e89412e2ee13aa222485',
+      roles: 'admin',
     },
-    update: {},
   })
 
-  for (const post of POSTS) {
-    await db.post.upsert({
-      where: { id: post.id },
-      create: { ...post },
-      update: {},
+  const timeSlot = await db.timeSlot.create({
+    data: {
+      start: '630PM',
+      end: '12AM',
+      last: 5,
+    },
+  })
+
+  for (const juben of JUBENS({ userId: user.id, timeSlotId: timeSlot.id })) {
+    await db.juben.create({
+      data: { ...juben },
     })
 
-    console.log(`  Seeded "${post.title}"`)
+    console.log(`  Seeded "${juben.name}"`)
   }
 
   console.info('')
   console.info('  Seeded admin user:')
   console.info('')
-  console.info('    Email: admin@admin.com')
-  console.info('    Password: admin')
+  console.info('    Email: admin@ahollowplace.com')
+  console.info('    Password: 12345678')
   console.info('')
   console.info(`  (Please don't use this login in a production environment)`)
   console.info('')

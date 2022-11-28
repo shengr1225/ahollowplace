@@ -1,31 +1,26 @@
-import { useState } from 'react'
-
 import {
   Form,
   FormError,
   FieldError,
   Label,
-  DateField,
+  DatetimeLocalField,
+  NumberField,
   TextField,
   Submit,
-  NumberField,
+  SelectField,
 } from '@redwoodjs/forms'
 
-import JubenSelectionCell from 'src/components/Juben/JubenSelectionCell/JubenSelectionCell'
-import TimeSlotSelectionCell from 'src/components/TimeSlot/TimeSlotSelectionCell/TimeSlotSelectionCell'
 import UserSelectionCell from 'src/components/User/UserSelectionCell/UserSelectionCell'
-import { getLocalTime } from 'src/utility/dateUtil'
 
 const formatDatetime = (value) => {
   if (value) {
-    return value.replace(/T\d{2}\:\d{2}\:\d{2}\.\d{3}\w/, '')
+    return value.replace(/:\d{2}\.\d{3}\w/, '')
   }
 }
 
-const BookingForm = (props) => {
+const JubenDriveForm = (props) => {
   const onSubmit = (data) => {
-    data.date = getLocalTime(data.date)
-    if (!data.users) {
+    if (!data.users || !data.users.length) {
       delete data.users
     } else {
       data.users = data.users?.map((id) => {
@@ -34,7 +29,16 @@ const BookingForm = (props) => {
         }
       })
     }
-    props.onSave(data, props?.booking?.id)
+    if (!data.bookings || !data.bookings.length) {
+      delete data.bookings
+    } else {
+      data.bookings = data.bookings?.map((id) => {
+        return {
+          id: parseInt(id),
+        }
+      })
+    }
+    props.onSave(data, props?.jubenDrive?.id)
   }
 
   return (
@@ -55,33 +59,15 @@ const BookingForm = (props) => {
           Date
         </Label>
 
-        <DateField
+        <DatetimeLocalField
           name="date"
-          defaultValue={formatDatetime(props.booking?.date)}
+          defaultValue={formatDatetime(props.jubenDrive?.date)}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
         <FieldError name="date" className="rw-field-error" />
-
-        <Label
-          name="total"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Total
-        </Label>
-
-        <NumberField
-          name="total"
-          defaultValue={props.booking?.total}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="total" className="rw-field-error" />
 
         <Label
           name="male"
@@ -93,7 +79,7 @@ const BookingForm = (props) => {
 
         <NumberField
           name="male"
-          defaultValue={props.booking?.male}
+          defaultValue={props.jubenDrive?.male}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
@@ -111,13 +97,31 @@ const BookingForm = (props) => {
 
         <NumberField
           name="female"
-          defaultValue={props.booking?.female}
+          defaultValue={props.jubenDrive?.female}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
 
         <FieldError name="female" className="rw-field-error" />
+
+        <Label
+          name="total"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Total
+        </Label>
+
+        <NumberField
+          name="total"
+          defaultValue={props.jubenDrive?.total}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="total" className="rw-field-error" />
 
         <Label
           name="status"
@@ -129,29 +133,13 @@ const BookingForm = (props) => {
 
         <TextField
           name="status"
-          defaultValue={props.booking?.status}
+          defaultValue={props.jubenDrive?.status}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
         />
 
         <FieldError name="status" className="rw-field-error" />
-
-        <Label
-          name="note"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Note
-        </Label>
-
-        <TextField
-          name="note"
-          defaultValue={props.booking?.note}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
-
-        <FieldError name="note" className="rw-field-error" />
 
         <Label
           name="jubenId"
@@ -161,7 +149,13 @@ const BookingForm = (props) => {
           Juben id
         </Label>
 
-        <JubenSelectionCell selectJubenId={props.booking?.jubenId} />
+        <NumberField
+          name="jubenId"
+          defaultValue={props.jubenDrive?.jubenId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="jubenId" className="rw-field-error" />
 
@@ -173,7 +167,13 @@ const BookingForm = (props) => {
           Time slot id
         </Label>
 
-        <TimeSlotSelectionCell selectTimeSlotId={props.booking?.timeSlotId} />
+        <NumberField
+          name="timeSlotId"
+          defaultValue={props.jubenDrive?.timeSlotId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="timeSlotId" className="rw-field-error" />
 
@@ -183,9 +183,29 @@ const BookingForm = (props) => {
           errorClassName="rw-label rw-label-error"
         ></Label>
 
-        <UserSelectionCell data={props?.booking?.users} name="users" />
+        <UserSelectionCell data={props.jubenDrive?.users} name="users" />
 
         <FieldError name="users" className="rw-field-error" />
+
+        <Label
+          name="bookings"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        ></Label>
+        <SelectField
+          name="bookings"
+          aria-readonly
+          multiple
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        >
+          {props.jubenDrive?.bookings?.map((b) => (
+            <option key={b.id} value={b.id}>
+              {b.male}男 {b.female}女 {b.note}
+            </option>
+          ))}
+        </SelectField>
+        <FieldError name="bookings" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
@@ -197,4 +217,4 @@ const BookingForm = (props) => {
   )
 }
 
-export default BookingForm
+export default JubenDriveForm

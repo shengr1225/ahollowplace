@@ -66,6 +66,10 @@ const Booking = ({ booking }) => {
               <td>{booking.female}</td>
             </tr>
             <tr>
+              <th>Status</th>
+              <td>{booking.status}</td>
+            </tr>
+            <tr>
               <th>Note</th>
               <td>{booking.note}</td>
             </tr>

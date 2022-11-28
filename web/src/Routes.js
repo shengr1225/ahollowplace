@@ -11,6 +11,7 @@ import { Router, Route, Private, Set } from '@redwoodjs/router'
 
 import BookingsLayout from 'src/layouts/BookingsLayout'
 import JubensLayout from 'src/layouts/JubensLayout'
+import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 import TimeSlotsLayout from 'src/layouts/TimeSlotsLayout'
 import UsersLayout from 'src/layouts/UsersLayout'
 
@@ -28,6 +29,12 @@ const Routes = () => {
       <Route path="/" page={HomePage} name="home" />
 
       <Private unauthenticated="home" roles="admin">
+        <Set wrap={ScaffoldLayout} title="JubenDrives" titleTo="jubenDrives" buttonLabel="New JubenDrive" buttonTo="newJubenDrive">
+          <Route path="/admin/jubenDrives/new" page={JubenDriveNewJubenDrivePage} name="newJubenDrive" />
+          <Route path="/admin/jubenDrives/{id:Int}/edit" page={JubenDriveEditJubenDrivePage} name="editJubenDrive" />
+          <Route path="/admin/jubenDrives/{id:Int}" page={JubenDriveJubenDrivePage} name="jubenDrive" />
+          <Route path="/admin/jubenDrives" page={JubenDriveJubenDrivesPage} name="jubenDrives" />
+        </Set>
         <Set wrap={UsersLayout}>
           <Route path="/admin/users/new" page={UserNewUserPage} name="newUser" />
           <Route path="/admin/users/{id:Int}/edit" page={UserEditUserPage} name="editUser" />
@@ -41,10 +48,10 @@ const Routes = () => {
           <Route path="/admin/jubens" page={JubenJubensPage} name="jubens" />
         </Set>
         <Set wrap={TimeSlotsLayout}>
-          <Route path="/admin/time-slots/new" page={TimeSlotNewTimeSlotPage} name="newTimeSlot" />
-          <Route path="/admin/time-slots/{id:Int}/edit" page={TimeSlotEditTimeSlotPage} name="editTimeSlot" />
-          <Route path="/admin/time-slots/{id:Int}" page={TimeSlotTimeSlotPage} name="timeSlot" />
-          <Route path="/admin/time-slots" page={TimeSlotTimeSlotsPage} name="timeSlots" />
+          <Route path="/admin/timeSlots/new" page={TimeSlotNewTimeSlotPage} name="newTimeSlot" />
+          <Route path="/admin/timeSlots/{id:Int}/edit" page={TimeSlotEditTimeSlotPage} name="editTimeSlot" />
+          <Route path="/admin/timeSlots/{id:Int}" page={TimeSlotTimeSlotPage} name="timeSlot" />
+          <Route path="/admin/timeSlots" page={TimeSlotTimeSlotsPage} name="timeSlots" />
         </Set>
         <Set wrap={BookingsLayout}>
           <Route path="/admin/bookings/new" page={BookingNewBookingPage} name="newBooking" />

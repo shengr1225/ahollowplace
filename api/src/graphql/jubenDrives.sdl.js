@@ -2,21 +2,21 @@ export const schema = gql`
   type JubenDrive {
     id: Int!
     date: DateTime!
-    bookings: [Booking]!
-    users: [User]!
-    male: Int
-    female: Int
-    total: Int
-    juben: Juben
-    status: String
-    jubenId: Int
-    timeSlotId: Int!
+    male: Int!
+    female: Int!
+    total: Int!
+    juben: Juben!
     timeSlot: TimeSlot!
+    users: [User]!
+    bookings: [Booking]!
+    status: String!
+    jubenId: Int!
+    timeSlotId: Int!
   }
 
   type Query {
-    jubenDrives: [JubenDrive!]! @skipAuth
-    jubenDrive(id: Int!): JubenDrive @skipAuth
+    jubenDrives: [JubenDrive!]! @requireAuth
+    jubenDrive(id: Int!): JubenDrive @requireAuth
   }
 
   input CreateJubenDriveInput {
@@ -24,21 +24,21 @@ export const schema = gql`
     male: Int!
     female: Int!
     total: Int!
-    status: String
+    status: String!
     jubenId: Int!
     timeSlotId: Int!
     bookings: [BookingInput!]!
-    userInput: [UserInput!]!
+    users: [UserInput!]!
   }
 
   input UpdateJubenDriveInput {
-    date: DateTime!
-    male: Int!
-    female: Int!
-    total: Int!
-    jubenId: Int!
-    timeSlotId: Int!
-    status: Int
+    date: DateTime
+    male: Int
+    female: Int
+    total: Int
+    status: String
+    jubenId: Int
+    timeSlotId: Int
     bookings: [BookingInput!]!
     users: [UserInput!]!
   }
@@ -52,9 +52,9 @@ export const schema = gql`
   }
 
   type Mutation {
-    createJubenDrive(input: CreateJubenDriveInput!): JubenDrive! @skipAuth
+    createJubenDrive(input: CreateJubenDriveInput!): JubenDrive! @requireAuth
     updateJubenDrive(id: Int!, input: UpdateJubenDriveInput!): JubenDrive!
-      @skipAuth
-    deleteJubenDrive(id: Int!): JubenDrive! @skipAuth
+      @requireAuth
+    deleteJubenDrive(id: Int!): JubenDrive! @requireAuth
   }
 `

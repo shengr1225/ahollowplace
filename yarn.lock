@@ -25530,6 +25530,7 @@ __metadata:
     feather-icons: ^4.29.0
     filestack-react: ^4.0.1
     framer-motion: ^6.3.11
+    humanize-string: 2.1.0
     moment-range: ^4.0.2
     postcss: ^8.4.14
     postcss-cli: ^9.1.0

@@ -44,6 +44,7 @@ export const schema = gql`
     price: Int!
     photos: String
     available: Boolean!
+    mvps: [UserInput]
   }
 
   input UpdateJubenInput {

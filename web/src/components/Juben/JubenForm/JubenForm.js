@@ -44,7 +44,7 @@ const JubenForm = (props) => {
 
   const onSubmit = (data) => {
     const dataWithUrl = Object.assign(data, { image, photos })
-    if (!dataWithUrl.mvps) {
+    if (!dataWithUrl.mvps || !dataWithUrl.mvps.length) {
       delete dataWithUrl.mvps
     } else {
       dataWithUrl.mvps = dataWithUrl.mvps?.map((id) => {

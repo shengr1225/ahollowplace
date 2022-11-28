@@ -1,19 +1,18 @@
 import { Link, routes } from '@redwoodjs/router'
 
-import Bookings from 'src/components/Booking/Bookings'
+import JubenDrives from 'src/components/JubenDrive/JubenDrives'
 
 export const QUERY = gql`
-  query FindBookings {
-    bookings {
+  query FindJubenDrives {
+    jubenDrives {
       id
       date
       male
       female
       total
-      note
+      status
       jubenId
       timeSlotId
-      status
     }
   }
 `
@@ -23,8 +22,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No bookings yet. '}
-      <Link to={routes.newBooking()} className="rw-link">
+      {'No jubenDrives yet. '}
+      <Link to={routes.newJubenDrive()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>
@@ -32,9 +31,9 @@ export const Empty = () => {
 }
 
 export const Failure = ({ error }) => (
-  <div className="rw-cell-error">{error.message}</div>
+  <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ bookings }) => {
-  return <Bookings bookings={bookings} />
+export const Success = ({ jubenDrives }) => {
+  return <JubenDrives jubenDrives={jubenDrives} />
 }

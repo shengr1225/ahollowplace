@@ -5,6 +5,7 @@ export const jubenDrives = () => {
     include: {
       bookings: true,
       timeSlot: true,
+      users: true,
     },
   })
 }
@@ -15,6 +16,7 @@ export const jubenDrive = ({ id }) => {
     include: {
       bookings: true,
       timeSlot: true,
+      users: true,
     },
   })
 }
@@ -52,7 +54,27 @@ export const updateDrive = async (booking, db) => {
 
 export const updateJubenDrive = ({ id, input }) => {
   return db.jubenDrive.update({
-    data: input,
+    data: {
+      date: input.date,
+      male: input.male,
+      female: input.female,
+      total: input.total,
+      status: input.status,
+      jubenId: input.jubenId,
+      timeSlotId: input.timeSlotId,
+      bookings: {
+        connect: input.bookings,
+        updateMany: {
+          data: {
+            status: input.status,
+          },
+          where: {},
+        },
+      },
+      users: {
+        connect: input.users,
+      },
+    },
     where: { id },
   })
 }
