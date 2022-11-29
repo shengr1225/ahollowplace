@@ -120,23 +120,6 @@ const BookingForm = (props) => {
         <FieldError name="female" className="rw-field-error" />
 
         <Label
-          name="status"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Status
-        </Label>
-
-        <TextField
-          name="status"
-          defaultValue={props.booking?.status}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
-
-        <FieldError name="status" className="rw-field-error" />
-
-        <Label
           name="note"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
