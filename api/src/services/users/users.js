@@ -20,7 +20,7 @@ export const createUser = ({ input }) => {
 
 export const updateUser = async ({ id, input }) => {
   return await db.$transaction(async (db) => {
-    input = await updateAbility(id, input, db)
+    // input = await updateAbility(id, input, db)
     return db.user.update({
       data: {
         name: input.name,
@@ -28,7 +28,7 @@ export const updateUser = async ({ id, input }) => {
         thumbnail: input.thumbnail,
         desc: input.desc,
         label: input.label,
-        ability: { increment: input.ability },
+        ability: input.ability,
         tuili: input.tuili,
         yanji: input.yanji,
         xiezuo: input.xiezuo,
