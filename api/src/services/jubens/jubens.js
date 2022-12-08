@@ -2,7 +2,7 @@ import * as Filestack from 'filestack-js'
 
 import { validate } from '@redwoodjs/api'
 
-import { newDate } from 'src/lib/dateUtil'
+import { newDate, getOneMonthLaterFromNow } from 'src/lib/dateUtil'
 import { db } from 'src/lib/db'
 
 export const jubens = () => {
@@ -21,7 +21,23 @@ export const createJuben = ({ input }) => {
   })
 }
 
-export const updateJuben = ({ id, input }) => {
+export const updateJuben = async ({ id, input }) => {
+  if (input.mvps && input.mvps.length) {
+    const mvps = input.mvps.map((mvp) => {
+      return mvp.id
+    })
+    await db.user.updateMany({
+      where: {
+        id: {
+          in: mvps,
+        },
+      },
+      data: {
+        isMVP: true,
+        MVPUntil: getOneMonthLaterFromNow(),
+      },
+    })
+  }
   return db.juben.update({
     data: {
       name: input.name,

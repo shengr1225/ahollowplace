@@ -6,8 +6,9 @@ import Typography from '@mui/material/Typography'
 import { client } from 'filestack-react'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import { BsFillPeopleFill } from 'react-icons/bs'
-import { FaRegAddressBook } from 'react-icons/fa'
+import { FaRegAddressBook, FaCrown } from 'react-icons/fa'
 import { GiEntangledTyphoon } from 'react-icons/gi'
+import Lightbox from 'react-image-lightbox'
 import ReactTooltip from 'react-tooltip'
 
 import { useAuth } from '@redwoodjs/auth'
@@ -18,7 +19,8 @@ import InvitePlayersWindow from 'src/components/UI/InvitePlayersWindow/InvitePla
 import RadarChart from 'src/components/UI/RadarChart'
 import UserAbilityUpdateWindow from 'src/components/UI/UserAbilityUpdateWindow/UserAbilityUpdateWindow'
 import UserProfileUpdateWindow from 'src/components/UI/UserProfileUpdateWindow.js/UserProfileUpdateWindow'
-import { dateOnly } from 'src/utility/dateUtil'
+import MVPBenefit from 'src/images/MVPBenefit.png'
+import { dateOnly, localDate } from 'src/utility/dateUtil'
 import { thumbnailSize, listSize } from 'src/utility/helper'
 
 const levelMap = [-1, 2, 5, 9, 14, 20, 27, 35, 44, 54, 65, 77, 90, 104, 119]
@@ -211,6 +213,7 @@ const UserProfile = (props) => {
   const [isAbilibtyWindowOpen, setIsAbilityWindowOpen] = useState(false)
   const [selectBooking, setSelectBooking] = useState(null)
   const [thumbnail, setThumbnail] = useState(props.user?.thumbnail)
+  const [benefitIsOpen, setBenefitIsOpen] = useState(false)
   const closeWindow = () => {
     setIsInviteWindowOpen(false)
     setIsUserProfileUpdateWindowOpen(false)
@@ -482,6 +485,30 @@ const UserProfile = (props) => {
               <></>
             )}
           </h1>
+          {props.user?.isMVP && (
+            <div className="flex">
+              <FaCrown className="text-lg text-red-500"></FaCrown>
+              <p className="text-xs text-red-500 ml-2">
+                {' '}
+                你获得了MVP，{localDate(props.user?.MVPUntil)}
+                前可享受MVP特权！
+                <button
+                  className="underline underline-offset-1"
+                  onClick={() => {
+                    setBenefitIsOpen(true)
+                  }}
+                >
+                  详情
+                </button>
+              </p>
+              {benefitIsOpen && (
+                <Lightbox
+                  mainSrc={MVPBenefit}
+                  onCloseRequest={() => setBenefitIsOpen(false)}
+                />
+              )}
+            </div>
+          )}
           {props.user?.label?.split(',').map((label) => (
             <p
               className="text-sm font-light text-gray-600"

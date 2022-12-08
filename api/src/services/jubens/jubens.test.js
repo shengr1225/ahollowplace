@@ -1,3 +1,6 @@
+import { getOneMonthLaterFromNow } from 'src/lib/dateUtil'
+import { user } from 'src/services/users/users'
+
 import { jubens, juben, createJuben, updateJuben, deleteJuben } from './jubens'
 
 // Generated boilerplate tests do not account for all circumstances
@@ -43,9 +46,17 @@ describe('jubens', () => {
     const original = await juben({ id: scenario.juben.one.id })
     const result = await updateJuben({
       id: original.id,
-      input: { name: 'String2' },
+      input: { name: 'String2', mvps: [{ id: scenario.user.bob.id }] },
     })
 
+    const u = await user({ id: scenario.user.bob.id })
+    expect(u.isMVP).toBe(true)
+    expect(new Date(u.MVPUntil).getDate()).toEqual(
+      getOneMonthLaterFromNow().getDate()
+    )
+    expect(new Date(u.MVPUntil).getMonth()).toEqual(
+      getOneMonthLaterFromNow().getMonth()
+    )
     expect(result.name).toEqual('String2')
   })
 

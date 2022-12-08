@@ -20,6 +20,8 @@ export const QUERY = gql`
       gaoxiao
       qinggan
       knot
+      isMVP
+      MVPUntil
       mvpJubens {
         id
       }

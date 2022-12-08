@@ -1,4 +1,15 @@
 export const standard = defineScenario({
+  user: {
+    bob: {
+      data: {
+        name: 'Bob',
+        email: 'Bob@gmail.com',
+        roles: 'String',
+        hashedPassword: 'String',
+        salt: 'String',
+      },
+    },
+  },
   juben: {
     one: {
       data: {

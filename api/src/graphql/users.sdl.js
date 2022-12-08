@@ -22,6 +22,8 @@ export const schema = gql`
     knot: String
     mvpJubens: [Juben]
     currentExp: Int
+    isMVP: Boolean
+    MVPUntil: DateTime
   }
 
   type Query {

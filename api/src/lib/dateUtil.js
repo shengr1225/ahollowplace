@@ -1,3 +1,4 @@
+import moment from 'moment'
 import Moment from 'moment'
 import { extendMoment } from 'moment-range'
 
@@ -10,6 +11,10 @@ export const newDate = (date) => {
   const dateObj = new Date(date)
   dateObj.setUTCHours(0, 0, 0, 0)
   return dateObj
+}
+
+export const getOneMonthLaterFromNow = () => {
+  return moment().add(1, 'M').toDate()
 }
 
 export const dateOnly = (date) => {

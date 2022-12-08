@@ -27,3 +27,4 @@ api/types/graphql.d.ts
 !.yarn/versions
 /coverage
 api/db/migrations
+.env.defaults

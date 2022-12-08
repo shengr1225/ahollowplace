@@ -5,7 +5,7 @@ datasource db {
 
 // datasource db {
 //   provider = "sqlite"
-//   url      = "file:./dev.db"
+//   url      = env("DATABASE_URL")
 // }
 
 generator client {
@@ -57,6 +57,10 @@ model User {
   mvpJubens           Juben[]
   roles               String      @default("player")
   currentExp          Int?        @default(0)
+  //是否是MVP
+  isMVP               Boolean?    @default(false)
+  //MVP到期日
+  MVPUntil            DateTime?
 }
 
 model Juben {
@@ -101,7 +105,7 @@ model Booking {
   female       Int?
   // 预订留言
   note         String?
-  // Pending 等待付款, Carpooling 拼车中, Lock 已锁车, Completed 已完成, Cancel 已取消
+  // Pending 等待付款, Carpooling 拼车中, Lock 已锁车, Complete 已完成, Cancel 已取消
   status       String      @default("Carpooling")
   juben        Juben       @relation(fields: [jubenId], references: [id])
   jubenId      Int

@@ -16,6 +16,11 @@ export const dateOnly = (date) => {
   return dateObj.format('MMM DD YYYY')
 }
 
+export const localDate = (date) => {
+  const dateObj = new Moment(date)
+  return dateObj.format('YYYY/MM/DD')
+}
+
 const showHoursIn24 = (t) => {
   return t.includes('AM')
     ? parseInt(t.replace('AM', ''))
