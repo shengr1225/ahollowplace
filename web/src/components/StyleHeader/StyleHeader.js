@@ -247,10 +247,10 @@ const StyleHeader = (props) => {
     </Link>
   )
 
-  const UserProfileLink = (props) => {
+  const UserProfileLink = () => {
     return (
       <div className="text-center">
-        <Link to={routes.userProfile({ id: props.currentUser?.id })} key="5">
+        <Link to={routes.userProfile()} key="5">
           <div
             className="bg-center w-12 h-12 rounded-full mx-auto"
             style={thumbnailBg}
