@@ -45,7 +45,7 @@ const JubenDrivesList = ({ jubenDrives }) => {
             <th>Female</th>
             <th>Total</th>
             <th>Status</th>
-            <th>Juben id</th>
+            <th>Juben</th>
             <th>Time slot id</th>
             <th>&nbsp;</th>
           </tr>
@@ -59,7 +59,7 @@ const JubenDrivesList = ({ jubenDrives }) => {
               <td>{truncate(jubenDrive.female)}</td>
               <td>{truncate(jubenDrive.total)}</td>
               <td>{truncate(jubenDrive.status)}</td>
-              <td>{truncate(jubenDrive.jubenId)}</td>
+              <td>{truncate(jubenDrive.juben.name)}</td>
               <td>{truncate(jubenDrive.timeSlotId)}</td>
               <td>
                 <nav className="rw-table-actions">

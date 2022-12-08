@@ -64,8 +64,8 @@ const JubenDrive = ({ jubenDrive }) => {
               <td>{jubenDrive.status}</td>
             </tr>
             <tr>
-              <th>Juben id</th>
-              <td>{jubenDrive.jubenId}</td>
+              <th>Juben</th>
+              <td>{jubenDrive.juben.name}</td>
             </tr>
             <tr>
               <th>Time slot id</th>

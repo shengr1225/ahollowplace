@@ -11,7 +11,9 @@ export const QUERY = gql`
       female
       total
       status
-      jubenId
+      juben {
+        name
+      }
       timeSlotId
     }
   }

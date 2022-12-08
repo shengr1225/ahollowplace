@@ -33,6 +33,7 @@
     "graphql-tag": "^2.12.6",
     "moment": "^2.29.4",
     "mui": "^0.0.1",
+    "netlify-cli": "^12.2.9",
     "prisma": "^4.3.1",
     "react-icons": "^4.4.0",
     "react-is": "^18.2.0",

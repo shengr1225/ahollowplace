@@ -6,6 +6,7 @@ export const jubenDrives = () => {
       bookings: true,
       timeSlot: true,
       users: true,
+      juben: true,
     },
   })
 }
@@ -17,6 +18,7 @@ export const jubenDrive = ({ id }) => {
       bookings: true,
       timeSlot: true,
       users: true,
+      juben: true,
     },
   })
 }
@@ -297,4 +299,6 @@ export const JubenDrives = {
     db.jubenDrive.findUnique({ where: { id: root.id } }).bookings(),
   timeSlot: (_obj, { root }) =>
     db.jubenDrive.findUnique({ where: { id: root.id } }).timeSlot(),
+  juben: (_obj, { root }) =>
+    db.jubenDrive.findUnique({ where: { id: root.id } }).juben(),
 }

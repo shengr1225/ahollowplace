@@ -15,10 +15,12 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 import TimeSlotsLayout from 'src/layouts/TimeSlotsLayout'
 import UsersLayout from 'src/layouts/UsersLayout'
 
+import UserProfilePage from './pages/UserProfilePage/UserProfilePage'
+
 const Routes = () => {
   return (
     <Router>
-      <Route path="/user-profile/{id:Int}" page={UserProfilePage} name="userProfile" />
+      <Route path="/user/{id:Int}" page={UserProfilePage} name="userProfile" />
       <Route path="/search" page={SearchPage} name="search" />
       <Route path="/login" page={LoginPage} name="login" />
       <Route path="/signup" page={SignupPage} name="signup" />
@@ -29,6 +31,7 @@ const Routes = () => {
       <Route path="/" page={HomePage} name="home" />
 
       <Private unauthenticated="home" roles="admin">
+        <Route path="/user/me" page={UserProfilePage} name="userProfile" />
         <Set wrap={ScaffoldLayout} title="JubenDrives" titleTo="jubenDrives" buttonLabel="New JubenDrive" buttonTo="newJubenDrive">
           <Route path="/admin/jubenDrives/new" page={JubenDriveNewJubenDrivePage} name="newJubenDrive" />
           <Route path="/admin/jubenDrives/{id:Int}/edit" page={JubenDriveEditJubenDrivePage} name="editJubenDrive" />
