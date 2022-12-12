@@ -34,7 +34,7 @@ export default () => {
     >
       <div className="absolute inset-0 bg-black opacity-75"></div>
       <div className="relative px-6 sm:px-8 mx-auto h-full flex flex-col">
-        <StyleHeader isHome={true}></StyleHeader>
+        <StyleHeader isHome={true} dark={true}></StyleHeader>
         <div className="px-4 flex flex-1 flex-col justify-center items-center">
           <h1 className="text-3xl text-center sm:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-100 leading-snug -mt-24 sm:mt-0">
             <span className="inline-block mt-2">

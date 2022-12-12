@@ -148,9 +148,15 @@ const StyleHeader = (props) => {
     </div>
   )
 
-  const linkColor = props.dark
-    ? 'text-gray-800 hover:text-gray-800 hover:border-gray-800'
-    : 'text-gray-100 hover:border-gray-300 hover:text-gray-300'
+  const linkColor = (mobile) => {
+    const lightTheme = 'text-gray-800 hover:text-gray-600 hover:border-gray-600'
+    const darkTheme = 'text-gray-100 hover:border-gray-300 hover:text-gray-300'
+    if (props.dark && !mobile) {
+      return darkTheme
+    } else {
+      return lightTheme
+    }
+  }
 
   const collapseBreakPointCssMap = {
     sm: {
@@ -215,21 +221,27 @@ const StyleHeader = (props) => {
 
   const linksDesktop = [
     <Link
-      className={`text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 font-semibold tracking-wide transition duration-300 pb-1 border-b-2 border-transparent cursor-pointer ${linkColor}`}
+      className={`text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 font-semibold tracking-wide transition duration-300 pb-1 border-b-2 border-transparent cursor-pointer ${linkColor(
+        false
+      )}`}
       to={routes.home()}
       key="1"
     >
       洞屋最新
     </Link>,
     <Link
-      className={`text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 font-semibold tracking-wide transition duration-300 pb-1 border-b-2 border-transparent cursor-pointer ${linkColor}`}
+      className={`text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 font-semibold tracking-wide transition duration-300 pb-1 border-b-2 border-transparent cursor-pointer ${linkColor(
+        false
+      )}`}
       to={routes.about()}
       key="2"
     >
       关于洞屋
     </Link>,
     <Link
-      className={`text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 font-semibold tracking-wide transition duration-300 pb-1 border-b-2 border-transparent cursor-pointer ${linkColor}`}
+      className={`text-lg my-2 lg:text-sm lg:mx-6 lg:my-0 font-semibold tracking-wide transition duration-300 pb-1 border-b-2 border-transparent cursor-pointer ${linkColor(
+        false
+      )}`}
       to={routes.contact()}
       key="3"
     >
@@ -247,18 +259,20 @@ const StyleHeader = (props) => {
     </Link>
   )
 
-  const UserProfileLink = () => {
+  const UserProfileLink = ({ mobile }) => {
     return (
       <div className="text-center">
         <Link to={routes.userProfile()} key="5">
           <div
-            className="bg-center w-12 h-12 rounded-full mx-auto"
+            className="bg-center w-12 h-12 rounded-full mx-auto mt-4"
             style={thumbnailBg}
           ></div>
         </Link>
         <button
           onClick={logOut}
-          className={`border-transparent border-b-2 mt-1 transition duration-300 ${linkColor}`}
+          className={`border-transparent border-b-2 mt-1 transition duration-300 ${linkColor(
+            mobile
+          )}`}
         >
           登出
         </button>
@@ -286,7 +300,7 @@ const StyleHeader = (props) => {
           </div>
           <div className="inline-block text-gray-200 self-center" key="2">
             {isAuthenticated && currentUser ? (
-              <UserProfileLink currentUser={currentUser} />
+              <UserProfileLink currentUser={currentUser} mobile={false} />
             ) : (
               loginLink
             )}
@@ -340,7 +354,7 @@ const StyleHeader = (props) => {
             <div className="flex flex-col items-center">{linksMobile}</div>
             <div className="flex flex-col items-center text-gray-200">
               {isAuthenticated && currentUser ? (
-                <UserProfileLink currentUser={currentUser} />
+                <UserProfileLink currentUser={currentUser} mobile={true} />
               ) : (
                 loginLink
               )}
@@ -349,15 +363,13 @@ const StyleHeader = (props) => {
           <button
             onClick={toggleNavbar}
             className={
-              'lg:hidden z-10 focus:outline-none focus:text-primary-500 hover:text-primary-500 transition duration-300 ' +
-              (showNavLinks
-                ? 'open'
-                : 'closed text-gray-100 hover:text-primary-500') +
-              (props.dark ? ' text-gray-800' : ' text-gray-100')
+              'lg:hidden z-10 focus:outline-none hover:text-gray-500 transition duration-300 ' +
+              (showNavLinks ? 'open' : 'closed text-gray-100') +
+              (props.dark ? ' text-gray-100' : ' text-gray-800')
             }
           >
             {showNavLinks ? (
-              <CloseIcon className="w-6 h-6" />
+              <CloseIcon className="w-6 h-6 mr-4 text-black" />
             ) : (
               <MenuIcon className="w-6 h-6" />
             )}

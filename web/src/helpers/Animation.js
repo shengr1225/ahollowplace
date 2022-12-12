@@ -8,27 +8,33 @@ export const JubenSectionAnimation = {
   },
   fun: {
     start: { x: -100, opacity: 0 },
-    start2: { x: 50, opacity: 0 },
+    start2: { y: 50, opacity: 0 },
     end: {
       x: 0,
+      y: 0,
       opacity: 1,
       transition: { type: 'spring', bounce: 0.4, duration: 0.5 },
     },
   },
   emotion: {
     start: { x: -100, opacity: 0 },
-    start2: { x: 50, opacity: 0 },
-    end: { x: 0, opacity: 1, transition: { type: 'spring', duration: 3 } },
+    start2: { y: 50, opacity: 0 },
+    end: {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', duration: 3 },
+    },
   },
   mechanism: {
     start: {
       y: 300,
-      rotate: -10,
+      rotate: -5,
       opacity: 0,
     },
     start2: {
       y: 300,
-      rotate: 10,
+      rotate: 5,
       opacity: 0,
     },
     end: {
@@ -37,7 +43,7 @@ export const JubenSectionAnimation = {
       opacity: 1,
       transition: {
         type: 'spring',
-        bounce: 0.4,
+        bounce: 0.1,
         duration: 0.8,
       },
     },
@@ -45,11 +51,11 @@ export const JubenSectionAnimation = {
   mystery: {
     start: {
       filter: 'blur(5px)',
-      rotate: 5,
+      rotate: 3,
     },
     start2: {
       filter: 'blur(5px)',
-      rotate: -5,
+      rotate: -3,
     },
     end: {
       filter: 'blur(0px)',
