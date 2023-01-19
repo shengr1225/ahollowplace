@@ -1,4 +1,4 @@
-import EditJubenDriveCell from 'src/components/JubenDrive/EditJubenDriveCell'
+import EditJubenDriveCell from 'src/cells/drive/admin/EditDriveCell'
 
 const EditJubenDrivePage = ({ id }) => {
   return <EditJubenDriveCell id={id} />

@@ -1,4 +1,4 @@
-import JubensCell from 'src/components/Juben/JubensCell'
+import JubensCell from 'src/cells/juben//admin/JubensCell'
 
 const JubensPage = () => {
   return <JubensCell />

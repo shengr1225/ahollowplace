@@ -1,4 +1,4 @@
-import JubenDrivesCell from 'src/components/JubenDrive/JubenDrivesCell'
+import JubenDrivesCell from 'src/cells/drive/admin/DrivesCell'
 
 const JubenDrivesPage = () => {
   return <JubenDrivesCell />

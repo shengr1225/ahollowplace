@@ -1,4 +1,4 @@
-import NewJuben from 'src/components/Juben/NewJuben'
+import NewJuben from 'src/components/juben/NewJuben'
 
 const NewJubenPage = () => {
   return <NewJuben />

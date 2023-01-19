@@ -1,4 +1,4 @@
-import NewJubenDrive from 'src/components/JubenDrive/NewJubenDrive'
+import NewJubenDrive from 'src/components/drive/NewDrive'
 
 const NewJubenDrivePage = () => {
   return <NewJubenDrive />

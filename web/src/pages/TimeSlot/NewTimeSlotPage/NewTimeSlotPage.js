@@ -1,4 +1,4 @@
-import NewTimeSlot from 'src/components/TimeSlot/NewTimeSlot'
+import NewTimeSlot from 'src/components/timeSlot/NewTimeSlot'
 
 const NewTimeSlotPage = () => {
   return <NewTimeSlot />

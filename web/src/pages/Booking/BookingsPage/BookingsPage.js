@@ -1,4 +1,4 @@
-import BookingsCell from 'src/components/Booking/BookingsCell'
+import BookingsCell from 'src/cells/booking/admin/BookingsCell'
 
 const BookingsPage = () => {
   return <BookingsCell />

@@ -1,4 +1,4 @@
-import EditTimeSlotCell from 'src/components/TimeSlot/EditTimeSlotCell'
+import EditTimeSlotCell from 'src/cells/timeslot/admin/EditTimeSlotCell'
 
 const EditTimeSlotPage = ({ id }) => {
   return <EditTimeSlotCell id={id} />

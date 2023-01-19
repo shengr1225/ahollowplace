@@ -15,7 +15,7 @@ import { MetaTags } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
-import StyleHeader from 'src/components/StyleHeader/StyleHeader'
+import StyleHeader from 'src/components/header/header'
 import qrcode from 'src/images/qrcode.png'
 
 const qrcodeBGStyle = {

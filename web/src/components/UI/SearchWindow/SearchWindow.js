@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
+
 import { BiSearchAlt2, BiXCircle } from 'react-icons/bi'
 import Modal from 'react-modal'
 import DatePicker from 'sassy-datepicker'
-import JubenSearchCell from '../../Juben/JubenSearchCell/JubenSearchCell'
-import JubenThumbnailsCell from '../../Juben/JubenThumbnailsCell/JubenThumbnailsCell'
-import { on, off, trigger } from 'src/utility/event'
+
 import { navigate, routes } from '@redwoodjs/router'
+
+import { on, off, trigger } from 'src/utility/event'
+
+import JubenSearchCell from '../../../cells/juben/SearchListCell/SearchListCell'
+import JubenThumbnailsCell from '../../../cells/juben/SearchThumbnailCell/SearchThumbnailCell'
 
 const onSearchJuben = (event) => {
   trigger('jubenSearchingWindow:open')
@@ -13,7 +17,6 @@ const onSearchJuben = (event) => {
 }
 
 const SearchWindow = (props) => {
-
   const [isJubenOpen, setIsJubenOpen] = useState(false)
   const [isJubenSearchingOpen, setIsJubenSearchingOpen] = useState(false)
   const [searchText, setSearchText] = useState('')
@@ -48,7 +51,7 @@ const SearchWindow = (props) => {
   const onSelectJuben = (data) => {
     setSelectedJuben(data.detail.name)
     closeJubenSearchingWindow()
-    actionButtonRef.current.innerText = "下一步"
+    actionButtonRef.current.innerText = '下一步'
   }
 
   const triggerJubenWindow = (event) => {
@@ -120,9 +123,9 @@ const SearchWindow = (props) => {
   }
 
   const onClearInput = () => {
-    jubenInputRef.current.value = ""
-    maleInputRef.current.value = ""
-    femaleInputRef.current.value = ""
+    jubenInputRef.current.value = ''
+    maleInputRef.current.value = ''
+    femaleInputRef.current.value = ''
   }
 
   const customStyles = {
@@ -137,65 +140,75 @@ const SearchWindow = (props) => {
   }
   return (
     <Modal
-        isOpen={props.isOpen}
-        onRequestClose={props.closeModal}
-        style={customStyles}
-        className="transition-all absolute border-solid"
+      isOpen={props.isOpen}
+      onRequestClose={props.closeModal}
+      style={customStyles}
+      className="transition-all absolute border-solid"
+    >
+      <div
+        className={
+          'flex-row bg-gray-100 relativeshadow-sm z-20 relative p-4 h-full'
+        }
       >
+        <BiXCircle
+          className="hover:drop-shadow-md cursor-pointer"
+          size="28"
+          onClick={props.closeModal}
+        />
+
+        <JubenInput
+          label="juben"
+          name="剧本"
+          placeholder="搜索剧本"
+          inputRef={jubenInputRef}
+          defaultValue={selectedJuben}
+          onClick={triggerJubenWindow}
+          onSearch={onSearchJuben}
+        />
+
+        <JubenSelectionPopup isOpen={isJubenOpen} />
+        <JubenSearchingPopup isOpen={isJubenSearchingOpen} name={searchText} />
+
+        <TimeInput
+          name="时间"
+          dateRef={dateInputRef}
+          defaultValue={selectedDate}
+          onDateChange={onDateChange}
+        />
+
+        <PersonInput
+          label="male|female"
+          name="人数"
+          placeholder="男|女"
+          multi="2"
+          refs={[maleInputRef, femaleInputRef]}
+        />
         <div
-          className={
-            'flex-row bg-gray-100 relativeshadow-sm z-20 relative p-4 h-full'
-          }
+          className="fixed bg-gray-lightest border-gray-300 border-t"
+          style={{ bottom: 0, left: 0, right: 0, height: '76px' }}
         >
-          <BiXCircle
-            className="hover:drop-shadow-md cursor-pointer"
-            size="28"
-            onClick={props.closeModal}
-          />
-
-          <JubenInput
-            label="juben"
-            name="剧本"
-            placeholder="搜索剧本"
-            inputRef={jubenInputRef}
-            defaultValue={selectedJuben}
-            onClick={triggerJubenWindow}
-            onSearch={onSearchJuben}
-          />
-
-          <JubenSelectionPopup isOpen={isJubenOpen} />
-          <JubenSearchingPopup isOpen={isJubenSearchingOpen} name={searchText} />
-
-          <TimeInput name="时间" dateRef={dateInputRef} defaultValue={selectedDate} onDateChange={onDateChange} />
-
-          <PersonInput
-            label="male|female"
-            name="人数"
-            placeholder="男|女"
-            multi="2"
-            refs={[maleInputRef, femaleInputRef]}
-          />
-          <div
-            className="fixed bg-gray-lightest border-gray-300 border-t"
-            style={{ bottom: 0, left: 0, right: 0, height: '76px' }}
-          >
-            <div className="flex justify-between px-8 pt-4">
-              <p className="underline underline-offset-0 leading-9 cursor-pointer" onClick={onClearInput}>
-                清空
-              </p>
-              <button className="rounded-md bg-red-600 hover:bg-red-500 px-4 py-2 text-white" onClick={onSearch.bind(this, props)}>
-                <BiSearchAlt2 className="inline pr-2" size="26" />
-                <span ref={actionButtonRef}>Search</span>
-              </button>
-            </div>
+          <div className="flex justify-between px-8 pt-4">
+            <p
+              className="underline underline-offset-0 leading-9 cursor-pointer"
+              onClick={onClearInput}
+            >
+              清空
+            </p>
+            <button
+              className="rounded-md bg-red-600 hover:bg-red-500 px-4 py-2 text-white"
+              onClick={onSearch.bind(this, props)}
+            >
+              <BiSearchAlt2 className="inline pr-2" size="26" />
+              <span ref={actionButtonRef}>Search</span>
+            </button>
           </div>
         </div>
-      </Modal>
+      </div>
+    </Modal>
   )
 }
 
 export default SearchWindow
-
 
 const JubenSelectionPopup = (props) => (
   <div
@@ -246,11 +259,14 @@ const TimeInput = (props) => {
       <input
         name="date"
         className="outline-none text-black bg-transparent text-md border-none placeholder:text-gray-600"
-        placeholder='添加时间'
+        placeholder="添加时间"
         defaultValue={props.defaultValue}
         ref={props.dateRef}
       />
-      <DatePicker onChange={props.onDateChange} className="mx-auto"></DatePicker>
+      <DatePicker
+        onChange={props.onDateChange}
+        className="mx-auto"
+      ></DatePicker>
     </div>
   )
 }
@@ -266,7 +282,7 @@ const JubenInput = (props) => {
         <input
           name="juben"
           className="block outline-none text-black bg-transparent text-md border-none placeholder:text-gray-600"
-          placeholder='选择剧本'
+          placeholder="选择剧本"
           ref={props.inputRef}
           onChange={props.onSearch}
           defaultValue={props.defaultValue}

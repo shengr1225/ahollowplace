@@ -8,8 +8,8 @@ import { routes, navigate } from '@redwoodjs/router'
 import SearchInput from 'src/components/UI/SearchInput'
 import { on, off, trigger } from 'src/utility/event'
 
-import JubenSearchCell from '../Juben/JubenSearchCell/JubenSearchCell'
-import JubenThumbnailsCell from '../Juben/JubenThumbnailsCell/JubenThumbnailsCell'
+import JubenSearchCell from '../../cells/juben/SearchListCell/SearchListCell'
+import JubenThumbnailsCell from '../../cells/juben/SearchThumbnailCell/SearchThumbnailCell'
 
 const windowCustomStyle = {
   height: '345px',

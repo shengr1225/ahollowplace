@@ -1,4 +1,4 @@
-import TimeSlotsCell from 'src/components/TimeSlot/TimeSlotsCell'
+import TimeSlotsCell from 'src/cells/timeslot/admin/TimeSlotsCell'
 
 const TimeSlotsPage = () => {
   return <TimeSlotsCell />

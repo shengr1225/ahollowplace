@@ -1,4 +1,4 @@
-import EditBookingCell from 'src/components/Booking/EditBookingCell'
+import EditBookingCell from 'src/cells/booking/admin/EditBookingCell'
 
 const EditBookingPage = ({ id }) => {
   return <EditBookingCell id={id} />

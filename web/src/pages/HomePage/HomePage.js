@@ -2,8 +2,8 @@ import Modal from 'react-modal'
 
 import { MetaTags } from '@redwoodjs/web'
 
-import Hero from 'src/components/hero/HomeBase'
-import JubensHighlightCell from 'src/components/Juben/JubensHighlightCell'
+import JubensHighlightCell from 'src/cells/juben/HighlightCell/HighlightCell'
+import Hero from 'src/components/lib/hero/HomeBase'
 
 const HomePage = () => {
   Modal.setAppElement('#redwood-app')

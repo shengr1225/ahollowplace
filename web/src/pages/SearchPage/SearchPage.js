@@ -2,8 +2,8 @@ import { useLocation } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { Toaster } from '@redwoodjs/web/dist/toast'
 
-import SearchJubensCell from 'src/components/SearchJubensCell/SearchJubensCell'
-import StyleHeader from 'src/components/StyleHeader/StyleHeader'
+import SearchJubensCell from 'src/cells/juben/SearchJubensCell/SearchJubensCell'
+import StyleHeader from 'src/components/header/header'
 
 const SearchPage = () => {
   const getUrlParam = () => {

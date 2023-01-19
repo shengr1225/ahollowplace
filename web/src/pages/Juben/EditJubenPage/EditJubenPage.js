@@ -1,4 +1,4 @@
-import EditJubenCell from 'src/components/Juben/EditJubenCell'
+import EditJubenCell from 'src/cells/juben/admin/EditJubenCell'
 
 const EditJubenPage = ({ id }) => {
   return <EditJubenCell id={id} />

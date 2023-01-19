@@ -1,6 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
 
-import StyleHeader from 'src/components/StyleHeader/StyleHeader'
+import StyleHeader from 'src/components/header/header'
 import dongwu from 'src/images/dongwu.jpeg'
 import emotion1 from 'src/images/emotion1.jpeg'
 import food1 from 'src/images/food1.jpeg'
@@ -47,7 +47,7 @@ const AboutPage = () => {
     <>
       <MetaTags title="About" description="About page" />
       <div className="p-4 -mt-8">
-        <StyleHeader dark={false} />
+        <StyleHeader dark={false} isHome={true} />
       </div>
 
       <div className="flex flex-row flex-wrap lg:flex-nowrap text-center text-gray-900">

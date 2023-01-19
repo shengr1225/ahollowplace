@@ -1,4 +1,4 @@
-import BookingCell from 'src/components/Booking/BookingCell'
+import BookingCell from 'src/cells/booking/admin/BookingCell'
 
 const BookingPage = ({ id }) => {
   return <BookingCell id={id} />
