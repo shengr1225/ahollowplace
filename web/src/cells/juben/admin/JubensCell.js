@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 
-import Jubens from 'src/components/Juben/Jubens'
+import Jubens from 'src/components/juben/Jubens'
 
 export const QUERY = gql`
   query FindJubens {

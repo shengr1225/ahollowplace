@@ -2,7 +2,7 @@ import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import BookingForm from 'src/components/Booking/BookingForm'
+import BookingForm from 'src/components/booking/BookingForm'
 
 export const QUERY = gql`
   query EditBookingById($id: Int!) {
