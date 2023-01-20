@@ -1,8 +1,8 @@
 import React from 'react'
 
 import StyleHeader from 'src/components/header/header'
-import DesktopSearchBar from 'src/components/searchBar/SearchBarDesktop.js'
-import MobileSearchBar from 'src/components/searchBar/SearchBarMobile.js'
+import DesktopSearchBar from 'src/components/SearchBar/SearchBarDesktop.'
+import MobileSearchBar from 'src/components/SearchBar/SearchBarMobile'
 import { trigger } from 'src/utility/event'
 
 const backgroundImage = {
