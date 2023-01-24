@@ -10,4 +10,8 @@
   <!-- Include the script that builds the page and powers Netlify CMS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 </body>
+<script>
+  import { ImageDimensionsControl, ImageDimensionsPreview, ImageDimensionsSchema } from 'netlify-cms-widget-image-dimensions'
+  CMS.registerWidget('image_dimensions', ImageDimensionsControl, ImageDimensionsPreview, ImageDimensionsSchema)
+</script>
 </html>

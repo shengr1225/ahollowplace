@@ -27,6 +27,7 @@
     "humanize-string": "2.1.0",
     "markdown-to-jsx": "^7.1.8",
     "moment-range": "^4.0.2",
+    "netlify-cms-widget-image-dimensions": "^1.0.0",
     "prop-types": "15.8.1",
     "raw-loader": "^4.0.2",
     "react": "17.0.2",

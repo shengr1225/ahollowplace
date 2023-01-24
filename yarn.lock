@@ -12028,7 +12028,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"common-tags@npm:1.8.2":
+"common-tags@npm:1.8.2, common-tags@npm:^1.8.0":
   version: 1.8.2
   resolution: "common-tags@npm:1.8.2"
   checksum: 23efe47ff0a1a7c91489271b3a1e1d2a171c12ec7f9b35b29b2fce51270124aff0ec890087e2bc2182c1cb746e232ab7561aaafe05f1e7452aea733d2bfe3f63
@@ -16142,6 +16142,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"focus-group@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "focus-group@npm:0.3.1"
+  checksum: 27659b03a487a7456d49c910a856198269eaaed39c447da62675a566d6050e73b50f4f34ed592449680c81ef1a2b6c4c4d43e609bccdabf43511fed6fe44332f
+  languageName: node
+  linkType: hard
+
 "folder-walker@npm:^3.2.0":
   version: 3.2.0
   resolution: "folder-walker@npm:3.2.0"
@@ -18080,6 +18087,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immediate@npm:~3.0.5":
+  version: 3.0.6
+  resolution: "immediate@npm:3.0.6"
+  checksum: f8ba7ede69bee9260241ad078d2d535848745ff5f6995c7c7cb41cfdc9ccc213f66e10fa5afb881f90298b24a3f7344b637b592beb4f54e582770cdce3f1f039
+  languageName: node
+  linkType: hard
+
 "immutable@npm:~3.7.6":
   version: 3.7.6
   resolution: "immutable@npm:3.7.6"
@@ -19961,6 +19975,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-sha256@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "js-sha256@npm:0.9.0"
+  checksum: f20b9245f6ebe666f42ca05536f777301132fb1aa7fbc22f10578fa302717a6cca507344894efdeaf40a011256eb2f7d517b94ac7105bd5cf087fa61551ad634
+  languageName: node
+  linkType: hard
+
 "js-string-escape@npm:^1.0.1":
   version: 1.0.1
   resolution: "js-string-escape@npm:1.0.1"
@@ -20524,6 +20545,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lie@npm:3.1.1":
+  version: 3.1.1
+  resolution: "lie@npm:3.1.1"
+  dependencies:
+    immediate: ~3.0.5
+  checksum: d62685786590351b8e407814acdd89efe1cb136f05cb9236c5a97b2efdca1f631d2997310ad2d565c753db7596799870140e4777c9c9b8c44a0f6bf42d1804a1
+  languageName: node
+  linkType: hard
+
 "light-my-request@npm:^5.6.1":
   version: 5.6.1
   resolution: "light-my-request@npm:5.6.1"
@@ -20726,6 +20756,15 @@ __metadata:
     emojis-list: ^3.0.0
     json5: ^2.1.2
   checksum: 332ae8db3d4d3fac7e5bbed82da9230857d3f85b3ccf6d3f2e286fa2431887aa9e46965928b2c77a93f5f721cec037539c0cfc718164f0287c5c90f5dce07ad9
+  languageName: node
+  linkType: hard
+
+"localforage@npm:^1.7.3":
+  version: 1.10.0
+  resolution: "localforage@npm:1.10.0"
+  dependencies:
+    lie: 3.1.1
+  checksum: 00f19f1f97002e6721587ed5017f502d58faf80dae567d5065d4d1ee0caf0762f40d2e2dba7f0ef7d3f14ee6203242daae9ecad97359bfc10ecff36df11d85a3
   languageName: node
   linkType: hard
 
@@ -22671,6 +22710,51 @@ __metadata:
     netlify: bin/run.mjs
     ntl: bin/run.mjs
   checksum: 16cd341193c52a159e0596a1d92e62c451ef7c55c0fd37a427ecb9f30b6e284f0e51fe53c73fedd08b7b5dc50d66faa0dfb45d76e142df4fdd8023dd8fcc759d
+  languageName: node
+  linkType: hard
+
+"netlify-cms-lib-util@npm:^2.11.1":
+  version: 2.15.1
+  resolution: "netlify-cms-lib-util@npm:2.15.1"
+  dependencies:
+    js-sha256: ^0.9.0
+    localforage: ^1.7.3
+    semaphore: ^1.1.0
+  peerDependencies:
+    immutable: ^3.7.6
+    lodash: ^4.17.11
+  checksum: 025de6b0685a89738792decb0b93c95d9109826e9bfa9f1a2e8ecf28cb22e4a39b342e5d4c1a91fff4038a918aadb85938a5dc9376f4c48f6e9907bc7901cce0
+  languageName: node
+  linkType: hard
+
+"netlify-cms-ui-default@npm:^2.11.2":
+  version: 2.15.5
+  resolution: "netlify-cms-ui-default@npm:2.15.5"
+  dependencies:
+    react-aria-menubutton: ^7.0.0
+    react-toggled: ^1.1.2
+    react-transition-group: ^4.0.0
+  peerDependencies:
+    "@emotion/core": ^10.0.35
+    "@emotion/styled": ^10.0.27
+    lodash: ^4.17.11
+    prop-types: ^15.7.2
+    react: ^16.8.4 || ^17.0.0
+  checksum: 62f57743df1affbe23bcccd177ae46e6bb9207bbcd3e5dbbd764a38e92018a496044bf618f99a30b093385e239a300ecc9d14f1ecd810cab4bac29f59e594ec3
+  languageName: node
+  linkType: hard
+
+"netlify-cms-widget-image-dimensions@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "netlify-cms-widget-image-dimensions@npm:1.0.0"
+  dependencies:
+    common-tags: ^1.8.0
+    netlify-cms-lib-util: ^2.11.1
+    netlify-cms-ui-default: ^2.11.2
+    prop-types: ^15.6.1
+  peerDependencies:
+    react: ^16
+  checksum: f9c370f9af4b87ef7ce9fdac1190d13096dac112b6349bc7996fb08843f1d1946a43dd9883b1b0b4367a644b241f8b1cf575750d15b4bacf824c7d8904658d24
   languageName: node
   linkType: hard
 
@@ -25376,7 +25460,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.8.1, prop-types@npm:^15.0.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:15.8.1, prop-types@npm:^15.0.0, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -25756,6 +25840,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-aria-menubutton@npm:^7.0.0":
+  version: 7.0.3
+  resolution: "react-aria-menubutton@npm:7.0.3"
+  dependencies:
+    focus-group: ^0.3.1
+    prop-types: ^15.6.0
+    teeny-tap: ^0.2.0
+  peerDependencies:
+    react: ^16.3.0 || ^17.0.0
+  checksum: 9874c75bb2b2701ed91ae879409aace5403f1252a0886d207fe0f7533f5b93edc429bf5df2db8c65a60afe90df99c53c7fa828221465e62fbd050f83145d2c03
+  languageName: node
+  linkType: hard
+
 "react-bootstrap@npm:^2.5.0":
   version: 2.6.0
   resolution: "react-bootstrap@npm:2.6.0"
@@ -26086,6 +26183,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-toggled@npm:^1.1.2":
+  version: 1.2.7
+  resolution: "react-toggled@npm:1.2.7"
+  peerDependencies:
+    prop-types: ">=15"
+    react: ">=15"
+  checksum: 24ebf7123a5bf821e338248b9dcbf6e6f0fe8002ff7f89a3c241ccb3f37d6993f7679b122713fdbe7662cc847cfb2573104943f673a581df900eac33db2341e4
+  languageName: node
+  linkType: hard
+
 "react-tooltip@npm:^4.2.21":
   version: 4.5.0
   resolution: "react-tooltip@npm:4.5.0"
@@ -26099,7 +26206,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-transition-group@npm:^4.4.2, react-transition-group@npm:^4.4.5":
+"react-transition-group@npm:^4.0.0, react-transition-group@npm:^4.4.2, react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
   dependencies:
@@ -27329,6 +27436,13 @@ __metadata:
   dependencies:
     node-forge: ^1
   checksum: 4a2509c8a5bd49c3630a799de66b317352b52746bec981133d4f8098365da35d2344f0fbedf14aacf2cd1e88682048e2df11ad9dc59331d3b1c0a5ec3e6e16ad
+  languageName: node
+  linkType: hard
+
+"semaphore@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "semaphore@npm:1.1.0"
+  checksum: 1eeb146c1ffe1283951573c356ba3a9b18a8513b18959ecbc0e3ba3a99e5da46edc509a9a5f0cb9d5d28895dcd828bdd6c29162c8e41a311ee79efaf3456a723
   languageName: node
   linkType: hard
 
@@ -29016,6 +29130,13 @@ __metadata:
     mkdirp: ^1.0.3
     yallist: ^4.0.0
   checksum: 5a016f5330f43815420797b87ade578e2ea60affd47439c988a3fc8f7bb6b36450d627c31ba6a839346fae248b4c8c12bb06bb0716211f37476838c7eff91f05
+  languageName: node
+  linkType: hard
+
+"teeny-tap@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "teeny-tap@npm:0.2.0"
+  checksum: d19d09627ac88cb85106e233a03b1570c525f5693ec71de9abee48bbca9cbb14bad8db6dafc1522551732311386fe0195a8d3ff7ee317ae901de76930937c92c
   languageName: node
   linkType: hard
 
@@ -31013,6 +31134,7 @@ __metadata:
     humanize-string: 2.1.0
     markdown-to-jsx: ^7.1.8
     moment-range: ^4.0.2
+    netlify-cms-widget-image-dimensions: ^1.0.0
     postcss: ^8.4.14
     postcss-cli: ^9.1.0
     postcss-loader: ^7.0.0
