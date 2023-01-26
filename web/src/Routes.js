@@ -20,6 +20,7 @@ import UserProfilePage from './pages/UserProfilePage/UserProfilePage'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/admin" page={AdminPage} name="admin" />
       <Route path="/blog" page={BlogPage} name="blog" />
       <Route path="/user/{id:Int}" page={UserProfilePage} name="userProfile" />
       <Route path="/search" page={SearchPage} name="search" />
