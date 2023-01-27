@@ -2,8 +2,11 @@ backend:
   name: git-gateway
   branch: main # Branch to update (optional; defaults to master)
 publish_mode: editorial_workflow
-media_folder: 'web/public/admin/blog/images/upload'
-publish_folder: 'admin/blog/images/upload'
+media_library:
+  name: uploadcare
+  config:
+    publicKey: 8b2f9aec3a77465adeea
+logo_url: https://www.ahollowplace.com/static/media/logo.9d6de9d2.png
 
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
@@ -15,6 +18,6 @@ collections:
       - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Featured Image", name: "thumbnail", widget: "image_dimensions"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
       - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
       - {label: "Body", name: "body", widget: "markdown"}

@@ -1,9 +1,4 @@
 import CMS from 'netlify-cms-app'
-import {
-  ImageDimensionsControl,
-  ImageDimensionsPreview,
-  ImageDimensionsSchema,
-} from 'netlify-cms-widget-image-dimensions'
 
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
@@ -11,12 +6,6 @@ import { MetaTags } from '@redwoodjs/web'
 const AdminPage = () => {
   CMS.init()
   // CMS.registerPreviewTemplate('my-template', MyTemplate)
-  CMS.registerWidget(
-    'image_dimensions',
-    ImageDimensionsControl,
-    ImageDimensionsPreview,
-    ImageDimensionsSchema
-  )
   return (
     <>
       <MetaTags title="Admin" description="Admin page" />
