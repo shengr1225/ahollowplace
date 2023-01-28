@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-// import ReactMarkDown from 'react-markdown'
-import ReactMarkdown from 'markdown-to-jsx'
+import ReactMarkDown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 
 import { MetaTags } from '@redwoodjs/web'
 
@@ -19,7 +19,7 @@ const BlogPage = () => {
     <>
       <MetaTags title="Blog" description="Blog page" />
       <h1>剧本博客</h1>
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkDown remarkPlugins={[remarkGfm]}>{content}</ReactMarkDown>
     </>
   )
 }
