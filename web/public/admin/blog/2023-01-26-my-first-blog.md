@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: My first Blog
+title: My first Blog2
 date: 2023-01-26T23:43:08.003Z
 thumbnail: https://ucarecdn.com/c98ac820-fcc5-40bd-87ee-427a96e784ef/
 rating: 5
