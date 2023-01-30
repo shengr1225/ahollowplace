@@ -11,9 +11,24 @@ export const newDate = (date) => {
   return dateObj
 }
 
+export const monthYearOnly = (date) => {
+  const dateObj = new Moment(date)
+  return dateObj.format('YYYY MMM')
+}
+
+export const yearMonthDate = (date) => {
+  const dateObj = new Moment(date)
+  return dateObj.utc().format('YYYY-MM-DD')
+}
+
 export const dateOnly = (date) => {
   const dateObj = new Moment(date)
   return dateObj.format('MMM DD YYYY')
+}
+
+export const blogDate = (date) => {
+  const dateObj = new Moment(date)
+  return dateObj.format('dddd, MMM DD YYYY')
 }
 
 export const localDate = (date) => {
