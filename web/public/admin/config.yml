@@ -9,7 +9,7 @@ media_library:
 logo_url: https://www.ahollowplace.com/static/media/logo.9d6de9d2.png
 
 collections:
-  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+  - name: "/api/db/blogs" # Used in routes, e.g., /admin/collections/blog
     label: "Blog" # Used in the UI
     folder: "api/db/blogs" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
