@@ -78,3 +78,11 @@ h6 {
     margin-right: 0;
     font-weight: bold;
 }
+
+.blog{
+    img{
+        width: 600px;
+        border-radius: 10px;
+        margin: auto;
+    }
+}
