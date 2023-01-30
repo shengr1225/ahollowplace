@@ -155,6 +155,10 @@ model JubenDrive {
   timeSlotId Int
 }
 
+model Blog {
+  id Int
+}
+
 // enum JubenSectionType {
 //   //日式
 //   JAPANESE

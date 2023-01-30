@@ -11,7 +11,7 @@ logo_url: https://www.ahollowplace.com/static/media/logo.9d6de9d2.png
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
     label: "Blog" # Used in the UI
-    folder: "web/public/admin/blog" # The path to the folder where the documents are stored
+    folder: "api/db/blogs" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     extension: 'json'
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md

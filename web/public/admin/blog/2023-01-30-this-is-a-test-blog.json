@@ -1,7 +1,0 @@
-{
-  "layout": "blog",
-  "date": "2023-01-30T03:41:11.958Z",
-  "title": "This is a test Blog",
-  "rating": 5,
-  "body": "1﻿23456\n\n# H1 \n#﻿# H2\n#﻿## H3\n\n```json\n{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"age\": 25\n}\n```\n\n\n| Syntax      | Description |\n| ----------- | ----------- |\n| Header      | Title       |\n| Paragraph   | Text        |\n\nMy favorite search engine is [Duck Duck Go](https://duckduckgo.com).\n\n\n*﻿bold\n\n-﻿--\n1﻿23\n-﻿--\n[洞屋剧本杀](Https://ahollowplace.com)\n\nHere's a simple footnote,[^1] and here's a longer one.[^bignote]\n\n[^1]: This is the first footnote.\n\n[^bignote]: Here's one with multiple paragraphs and code.\n\n    Indent paragraphs to include them in the footnote.\n\n    `{ my code }`\n\n    Add as many paragraphs as you like.\n\n**bold text**\n\n\n\n\n\n\n\n"
-}
