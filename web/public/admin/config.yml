@@ -13,10 +13,11 @@ collections:
     label: "Setting" # Used in the UI
     # folder: "web/public/admin/blog" # The path to the folder where the documents are stored
     # create: true # Allow users to create new documents in this collection
+    extension: 'json'
     editor:
       preview: false
     files:
-      - file: "web/public/admin/blog"
+      - file: "web/public/admin/blog.json"
         lable: "Blog"
         name: "Blog"
       slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
