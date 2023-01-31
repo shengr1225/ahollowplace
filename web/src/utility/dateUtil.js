@@ -13,12 +13,12 @@ export const newDate = (date) => {
 
 export const monthYearOnly = (date) => {
   const dateObj = new Moment(date)
-  return dateObj.format('YYYY MMM')
+  return dateObj.utc().format('YYYY MMM')
 }
 
 export const yearMonthDate = (date) => {
   const dateObj = new Moment(date)
-  return dateObj.utc().format('YYYY-MM-DD')
+  return dateObj.format('YYYY-MM-DD')
 }
 
 export const dateOnly = (date) => {

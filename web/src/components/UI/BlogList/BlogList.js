@@ -19,6 +19,9 @@ const BlogList = (props) => {
                 <Link to={routes.blog({ title: d.index })} key={d.index}>
                   <p className=" text-primary-700 text-lg font-bold">
                     {d.title}
+                    <span className="text-gray-500 text-sm ml-2">
+                      {d.author}
+                    </span>
                   </p>
                 </Link>
               ))}

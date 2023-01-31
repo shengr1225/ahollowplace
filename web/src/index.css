@@ -84,6 +84,11 @@ h6 {
         width: 600px;
         border-radius: 10px;
         margin: auto;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    p{
+        margin: 15px 0 15px 0;
     }
     a{
       color: #ddcccc

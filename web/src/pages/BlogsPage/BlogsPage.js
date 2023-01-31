@@ -13,7 +13,7 @@ const BlogsPage = () => {
 
   useEffect(() => {
     const octokit = new Octokit({
-      auth: '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',
+      auth: process.env.GITHUB_GET_CONTENT_TOKEN,
     })
     let loadBlogList = async () => {
       const files = await octokit.request(
