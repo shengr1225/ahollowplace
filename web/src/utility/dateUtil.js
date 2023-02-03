@@ -18,7 +18,7 @@ export const monthYearOnly = (date) => {
 
 export const yearMonthDate = (date) => {
   const dateObj = new Moment(date)
-  return dateObj.format('YYYY-MM-DD')
+  return dateObj.utc().format('YYYY-MM-DD')
 }
 
 export const dateOnly = (date) => {

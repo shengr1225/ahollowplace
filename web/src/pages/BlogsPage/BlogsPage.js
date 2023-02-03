@@ -26,19 +26,17 @@ const BlogsPage = () => {
       )
       const baseUrl = 'admin/blog/'
 
-      let fileNames = files.data.map((f) => f.name)
-
       Promise.all(
-        fileNames.map((fileName) =>
-          fetch(baseUrl + fileName).then((res) => res.json())
+        files.data?.map((file) =>
+          fetch(baseUrl + file.name).then((res) => res.json())
         )
       ).then((res) => {
         res = res.map((r) => {
-          r.index = yearMonthDate(r.date) + '-' + r.title
+          r.index = yearMonthDate(r.date) + '-' + r.title.replace(',', '-')
           r.date = monthYearOnly(r.date)
+          r.tags = r.tags.join(',')
           return r
         })
-        console.log(res)
         setData(res)
       })
     }
@@ -53,10 +51,20 @@ const BlogsPage = () => {
       </div>
       <div className="px-8 py-4 blog">
         <p className="text-3xl font-extrabold">洞屋日志</p>
-        <BlogList
-          data={data}
-          dateFilter={[...new Set(data.map((d) => d.date))]}
-        />
+        {data.length && (
+          <BlogList
+            data={data}
+            dateFilter={[...new Set(data.map((d) => d.date))]}
+            tagFilter={[
+              ...new Set(
+                data
+                  .map((d) => d.tags)
+                  .join(',')
+                  .split(',')
+              ),
+            ]}
+          />
+        )}
       </div>
     </>
   )

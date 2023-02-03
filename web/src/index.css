@@ -80,6 +80,8 @@ h6 {
 }
 
 .blog{
+    max-width: 1000px;
+    margin: auto;
     img{
         width: 600px;
         border-radius: 10px;

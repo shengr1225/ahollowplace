@@ -38,7 +38,7 @@ const InvitePlayersWindow = (props) => {
   const [femaleCount, setFemaleCount] = useState(-1)
   const booking = props.selectBooking?.booking
   const totalBooking = props.selectBooking?.totalBooking
-  console.log(totalBooking)
+
   const onUpdateBooking = () => {
     const _maleCount = maleCount == -1 ? booking.male : maleCount
     const _femaleCount = femaleCount == -1 ? booking.male : femaleCount
