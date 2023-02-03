@@ -32,7 +32,7 @@ const BlogsPage = () => {
         )
       ).then((res) => {
         res = res.map((r) => {
-          r.index = yearMonthDate(r.date) + '-' + r.title.replace(',', '-')
+          r.index = r.title.replace(',', '-')
           r.date = monthYearOnly(r.date)
           r.tags = r.tags.join(',')
           return r
