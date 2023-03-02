@@ -20,7 +20,7 @@ const BlogList = (props) => {
     setSelectedTags(selectedTags)
     if (selectedTags.length) {
       setBlogs(
-        blogs.filter((b) => {
+        props.data.filter((b) => {
           return selectedTags.every((t) => {
             return b.tags?.split(',').indexOf(t) > -1
           })

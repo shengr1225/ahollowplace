@@ -1,3 +1,5 @@
+import { CurrencyDefinition, CurrencyResolver } from 'graphql-scalars'
+
 import { createGraphQLHandler } from '@redwoodjs/graphql-server'
 
 import directives from 'src/directives/**/*.{js,ts}'
@@ -14,6 +16,10 @@ export const handler = createGraphQLHandler({
   directives,
   sdls,
   services,
+  schemaOptions: {
+    typeDefs: [CurrencyDefinition],
+    resolvers: { Currency: CurrencyResolver },
+  },
 
   onException: () => {
     // Disconnect from your database with an unhandled exception.

@@ -20,6 +20,12 @@ import UserProfilePage from './pages/UserProfilePage/UserProfilePage'
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={ScaffoldLayout} title="Reviews" titleTo="reviews" buttonLabel="New Review" buttonTo="newReview">
+        <Route path="/reviews/new" page={ReviewNewReviewPage} name="newReview" />
+        <Route path="/reviews/{id:Int}/edit" page={ReviewEditReviewPage} name="editReview" />
+        <Route path="/reviews/{id:Int}" page={ReviewReviewPage} name="review" />
+        <Route path="/reviews" page={ReviewReviewsPage} name="reviews" />
+      </Set>
       <Route path="/admin" page={AdminPage} name="admin" />
       <Route path="/blogs" page={BlogsPage} name="blogs" />
       <Route path="/blog/{title:String}" page={BlogPage} name="blog" />

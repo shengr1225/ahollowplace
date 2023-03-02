@@ -17,7 +17,6 @@ const BlogPage = ({ title }) => {
       .then((res) => res.json())
       .then((result) => {
         result.date = blogDate(result.date)
-        console.log(result)
         setBlog(result)
       })
   }, [title])

@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 
 import { Octokit } from 'octokit'
+import { MagnifyingGlass } from 'react-loader-spinner'
 
 import { MetaTags } from '@redwoodjs/web'
 
 import StyleHeader from 'src/components/header/header'
 import BlogList from 'src/components/UI/BlogList/BlogList'
-import { monthYearOnly, yearMonthDate } from 'src/utility/dateUtil'
+import { monthYearOnly } from 'src/utility/dateUtil'
 
 const BlogsPage = () => {
   const [data, setData] = useState([])
@@ -26,17 +27,25 @@ const BlogsPage = () => {
       )
       const baseUrl = 'admin/blog/'
 
-      Promise.all(
+      Promise.allSettled(
         files.data?.map((file) =>
           fetch(baseUrl + file.name).then((res) => res.json())
         )
       ).then((res) => {
         res = res.map((r) => {
-          r.index = r.title.replace(',', '-')
-          r.date = monthYearOnly(r.date)
-          r.tags = r.tags.join(',')
-          return r
+          if (r.status == 'rejected') {
+            return
+          }
+          return {
+            title: r.value.title,
+            author: r.value.author,
+            index: r.value.title.replace(',', '-'),
+            date: monthYearOnly(r.value.date),
+            tags: r.value.tags.join(','),
+          }
         })
+        res = res.filter((r) => !!r)
+        console.log(res)
         setData(res)
       })
     }
@@ -49,16 +58,25 @@ const BlogsPage = () => {
       <div className="p-4 -mt-8">
         <StyleHeader dark={false} isHome={true} />
       </div>
-      <div className="px-8 py-4 blog">
+      <div className="px-8 py-4">
         <p className="text-3xl font-extrabold">洞屋日志</p>
-        {data.length && (
+        {data.length == 0 && (
+          <div>
+            <MagnifyingGlass
+              width="200"
+              ariaLabel="loading"
+              wrapperClass="mx-auto mt-5"
+            />
+          </div>
+        )}
+        {data.length > 0 && (
           <BlogList
             data={data}
-            dateFilter={[...new Set(data.map((d) => d.date))]}
+            dateFilter={[...new Set(data.map((d) => d?.date))]}
             tagFilter={[
               ...new Set(
                 data
-                  .map((d) => d.tags)
+                  .map((d) => d?.tags)
                   .join(',')
                   .split(',')
               ),
