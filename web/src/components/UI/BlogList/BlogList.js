@@ -36,7 +36,7 @@ const BlogList = (props) => {
       {props.tagFilter.map((tag) => (
         <button
           className={
-            `bg-primary-100 p-2 mr-2 text-gray-100 text-sm rounded-md cursor-pointer hover:bg-primary-300 ` +
+            `bg-primary-100 p-2 mr-2 text-gray-100 text-sm rounded-md cursor-pointer hover:bg-primary-300 mb-8 ` +
             (selectedTags.indexOf(tag) > -1 ? 'bg-green-500' : '')
           }
           key={tag}
@@ -48,15 +48,17 @@ const BlogList = (props) => {
       {props.dateFilter.map((date) => {
         const blogsOfDate = blogs.filter((d) => d.date === date)
         return (
-          <div key={date}>
+          <div key={date} className="py-2">
             <p className="text-gray-600 mt-4">
               {date} {blogsOfDate.length}篇
             </p>
             <div className="flex-row mt-2">
               {blogsOfDate.map((d) => (
                 <Link to={routes.blog({ title: d.index })} key={d.index}>
-                  <p className=" text-primary-700 text-lg font-bold">
-                    {d.title}
+                  <p className=" text-gray-700 text-lg font-bold">
+                    <span className="underline underline-offset-2">
+                      {d.title}
+                    </span>
                     <span className="text-gray-500 text-sm ml-2">
                       {d.author}
                     </span>

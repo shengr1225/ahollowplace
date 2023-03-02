@@ -58,8 +58,8 @@ const BlogsPage = () => {
       <div className="p-4 -mt-8">
         <StyleHeader dark={false} isHome={true} />
       </div>
-      <div className="px-8 py-4">
-        <p className="text-3xl font-extrabold">洞屋日志</p>
+      <div className="px-8 py-4 mx-auto" style={{ 'max-width': '600px' }}>
+        <p className="text-3xl font-extrabold mb-2">洞屋日志</p>
         {data.length == 0 && (
           <div>
             <MagnifyingGlass
