@@ -20,7 +20,7 @@ import UserProfilePage from './pages/UserProfilePage/UserProfilePage'
 const Routes = () => {
   return (
     <Router>
-      <Route path="/review/{juben:String}/{dm:String}" page={LeaveReviewPage} name="leaveReview" />
+      <Route path="/review/{jubenId:Int}/{dm:String}" page={LeaveReviewPage} name="leaveReview" />
       <Route path="/admin" page={AdminPage} name="admin" />
       <Route path="/blogs" page={BlogsPage} name="blogs" />
       <Route path="/blog/{title:String}" page={BlogPage} name="blog" />

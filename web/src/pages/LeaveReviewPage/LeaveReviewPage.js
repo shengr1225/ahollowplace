@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   FormError,
@@ -10,14 +11,43 @@ import {
   Submit,
   TextAreaField,
 } from '@redwoodjs/forms'
+import { routes, Link, navigate } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/dist/toast'
+import { Toaster } from '@redwoodjs/web/dist/toast'
 
+import JubenLabelCell from 'src/cells/juben/JubenLabelCell'
 import useReviewDimensions from 'src/hooks/useReviewDimensions'
 import reviewBGMin from 'src/images/reviewBG-min.png'
 import reviewBG from 'src/images/reviewBG.png'
 
-const LeaveReviewPage = ({ juben, dm }) => {
+const CREATE_REVIEW_MUTATION = gql`
+  mutation CreateReviewMutation($input: CreateReviewInput!) {
+    createReview(input: $input) {
+      id
+    }
+  }
+`
+
+const LeaveReviewPage = ({ jubenId, dm }) => {
+  const { currentUser, isAuthenticated } = useAuth()
   const [bgUrl, setBgUrl] = useState(reviewBGMin)
+
+  const [createReview, { loading, error }] = useMutation(
+    CREATE_REVIEW_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('感谢你的评价, 谢谢你对洞屋剧本杀的支持')
+        setTimeout(() => {
+          navigate(routes.home())
+        }, 2000)
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   useEffect(() => {
     const img = new Image()
@@ -27,8 +57,9 @@ const LeaveReviewPage = ({ juben, dm }) => {
     }
   }, [])
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = (input) => {
+    input.createdAt = new Date()
+    createReview({ variables: { input } })
   }
 
   const container = useRef(null)
@@ -38,6 +69,7 @@ const LeaveReviewPage = ({ juben, dm }) => {
   return (
     <>
       <MetaTags title="Leave a review" description="LeaveReview page" />
+      <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
       <div
         className="h-full"
         style={{
@@ -65,28 +97,16 @@ const LeaveReviewPage = ({ juben, dm }) => {
               height: `${containerHeight}`,
             }}
           >
-            <FormError
-              wrapperClassName="rw-form-error-wrapper"
-              titleClassName="rw-form-error-title"
-              listClassName="rw-form-error-list"
-            />
-
             <div className="flex justify-center  md:mt-16 mt-12">
-              <Label
-                name="jubenId"
-                className="text-xl font-extrabold mr-1"
-                errorClassName="rw-label rw-label-error"
-              >
-                {decodeURIComponent(juben)}
-              </Label>
+              <JubenLabelCell id={jubenId} />
 
               <NumberField
                 type="hidden"
                 name="jubenId"
-                value={12}
+                value={jubenId}
                 className="rw-input"
                 errorClassName="rw-input rw-input-error"
-                validation={{ required: true }}
+                validation={{ required: true, valueAsNumber: true }}
               />
               <FieldError name="jubenId" className="rw-field-error" />
 
@@ -111,14 +131,16 @@ const LeaveReviewPage = ({ juben, dm }) => {
             <div className="flex justify-end lg:mt-16 md:mt-10 mt-10">
               <NumberField
                 name="rateOfJuben"
-                className=" w-8 bg-transparent mr-20 text-lg outline-none"
-                errorClassName="rw-input rw-input-error"
+                className="w-8 bg-transparent mr-20 text-lg outline-none"
+                errorClassName="w-8 bg-transparent mr-20 text-lg outline-none"
                 defaultValue={5}
                 validation={{ required: true, max: 5, min: 1 }}
               />
-
+            </div>
+            <div className="flex justify-end">
               <FieldError name="rateOfJuben" className="rw-field-error" />
             </div>
+
             <div className="flex justify-start mt-6 md:mt-8 w-100 px-4">
               <TextAreaField
                 name="reviewOfJuben"
@@ -134,12 +156,13 @@ const LeaveReviewPage = ({ juben, dm }) => {
               <NumberField
                 name="rateOfDM"
                 className=" w-8 bg-transparent mr-20 text-lg outline-none"
-                errorClassName="rw-input rw-input-error"
+                errorClassName="w-8 bg-transparent mr-20 text-lg outline-none"
                 step={1}
                 defaultValue={5}
                 validation={{ required: true, max: 5, min: 1 }}
               />
-
+            </div>
+            <div className="flex justify-end">
               <FieldError name="rateOfDM" className="rw-field-error" />
             </div>
             <div className="flex justify-start mt-6 lg:mt-10 md:mt-8 w-100 px-4">
@@ -157,11 +180,12 @@ const LeaveReviewPage = ({ juben, dm }) => {
               <NumberField
                 name="rateOfFood"
                 className=" w-8 bg-transparent mr-20  text-lg outline-none"
-                errorClassName="rw-input rw-input-error"
+                errorClassName="w-8 bg-transparent mr-20  text-lg outline-none"
                 defaultValue={5}
                 validation={{ required: true, max: 5, min: 1 }}
               />
-
+            </div>
+            <div className="flex justify-end">
               <FieldError name="rateOfFood" className="rw-field-error" />
             </div>
             <div className="flex justify-start mt-6 md:mt-10 w-100 px-4">
@@ -172,11 +196,36 @@ const LeaveReviewPage = ({ juben, dm }) => {
                 defaultValue="..."
               />
 
+              {isAuthenticated && (
+                <NumberField
+                  name="userId"
+                  value={parseInt(currentUser.id)}
+                  type="hidden"
+                  validation={{ valueAsNumber: true }}
+                />
+              )}
+
               <FieldError name="reviewOfFood" className="rw-field-error" />
             </div>
-            <Submit className="rw-button bg-yellow-600 text-white mx-auto">
-              提交
-            </Submit>
+
+            <div className="flex justify-center">
+              {!isAuthenticated && (
+                <Link
+                  className="rw-button inline-block w-[56.6px] bg-blue-600 text-white transition duration-300"
+                  to={routes.login({ redirectTo: `/review/${jubenId}/${dm}` })}
+                  key="4"
+                >
+                  登录
+                </Link>
+              )}
+
+              <Submit
+                disabled={loading}
+                className="rw-button inline-block bg-yellow-600 text-white ml-2"
+              >
+                提交
+              </Submit>
+            </div>
           </Form>
         </div>
       </div>

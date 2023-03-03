@@ -105,7 +105,7 @@ model JubenDrive {
 model Review {
   id            Int      @id @default(autoincrement())
   createdAt     DateTime
-  dm            String
+  dm            String   @default("小满")
   jubenId       Int
   juben         Juben    @relation(fields: [jubenId], references: [id])
   rateOfJuben   Int

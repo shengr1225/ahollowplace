@@ -42,6 +42,23 @@ const ReviewForm = (props) => {
         <FieldError name="jubenId" className="rw-field-error" />
 
         <Label
+          name="dm"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          DM
+        </Label>
+
+        <TextField
+          name="dm"
+          defaultValue={props.review?.dm}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="dm" className="rw-field-error" />
+        <Label
           name="rateOfJuben"
           className="rw-label"
           errorClassName="rw-label rw-label-error"

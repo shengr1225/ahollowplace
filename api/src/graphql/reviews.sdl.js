@@ -44,7 +44,7 @@ export const schema = gql`
   }
 
   type Mutation {
-    createReview(input: CreateReviewInput!): Review! @requireAuth
+    createReview(input: CreateReviewInput!): Review! @skipAuth
     updateReview(id: Int!, input: UpdateReviewInput!): Review! @requireAuth
     deleteReview(id: Int!): Review! @requireAuth
   }
