@@ -25,7 +25,6 @@ export const Success = ({ id, jubens }) => {
       errorClassName="rw-input rw-input-error"
     >
       <option value="-1">选择剧本</option>
-      <option value="">选择剧本</option>
       {jubens
         .filter((juben) => {
           return juben.available

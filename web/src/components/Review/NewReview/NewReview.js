@@ -27,6 +27,7 @@ const NewReview = () => {
   )
 
   const onSave = (input) => {
+    input.createdAt = new Date()
     createReview({ variables: { input } })
   }
 

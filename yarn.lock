@@ -28439,6 +28439,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-lazy-load-image-component@npm:^1.5.6":
+  version: 1.5.6
+  resolution: "react-lazy-load-image-component@npm:1.5.6"
+  dependencies:
+    lodash.debounce: ^4.0.8
+    lodash.throttle: ^4.1.1
+  peerDependencies:
+    react: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+    react-dom: ^15.x.x || ^16.x.x || ^17.x.x || ^18.x.x
+  checksum: 677d39165cf60759c96c36169720ee16cd08a35e5a973ed023f95778501574218d0e87e746b5f9d89f4cb19ea96f5b4a0fa80db4728b4620c376dadf9f494f53
+  languageName: node
+  linkType: hard
+
 "react-lifecycles-compat@npm:^3.0.0, react-lifecycles-compat@npm:^3.0.4":
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
@@ -34523,6 +34536,7 @@ __metadata:
     react-dom: 17.0.2
     react-icons: ^4.4.0
     react-image-lightbox: ^5.1.4
+    react-lazy-load-image-component: ^1.5.6
     react-markdown: ^8.0.5
     react-modal: ^3.15.1
     react-tooltip: ^4.2.21

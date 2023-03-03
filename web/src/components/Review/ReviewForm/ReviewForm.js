@@ -1,3 +1,4 @@
+import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   FormError,
@@ -8,8 +9,13 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
+import JubenSelectionCell from 'src/cells/juben/admin/SelectFieldCell/SelectFieldCell'
+
 const ReviewForm = (props) => {
+  const { currentUser, isAuthenticated } = useAuth()
+
   const onSubmit = (data) => {
+    data.jubenId = parseInt(data.jubenId)
     props.onSave(data, props?.review?.id)
   }
 
@@ -31,13 +37,7 @@ const ReviewForm = (props) => {
           Juben id
         </Label>
 
-        <NumberField
-          name="jubenId"
-          defaultValue={props.review?.jubenId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
+        <JubenSelectionCell id={props.review?.jubenId} name="jubenId" />
 
         <FieldError name="jubenId" className="rw-field-error" />
 
@@ -46,7 +46,7 @@ const ReviewForm = (props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Rate of juben
+          Rate of juben (1-5分)
         </Label>
 
         <NumberField
@@ -64,7 +64,7 @@ const ReviewForm = (props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Review of juben
+          Review of juben(关于剧本的评价)
         </Label>
 
         <TextField
@@ -72,7 +72,6 @@ const ReviewForm = (props) => {
           defaultValue={props.review?.reviewOfJuben}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
         />
 
         <FieldError name="reviewOfJuben" className="rw-field-error" />
@@ -82,7 +81,7 @@ const ReviewForm = (props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Rate of dm
+          Rate of dm(1-5分)
         </Label>
 
         <NumberField
@@ -100,7 +99,7 @@ const ReviewForm = (props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Review of dm
+          Review of dm(关于DM的评价)
         </Label>
 
         <TextField
@@ -108,7 +107,6 @@ const ReviewForm = (props) => {
           defaultValue={props.review?.reviewOfDM}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
         />
 
         <FieldError name="reviewOfDM" className="rw-field-error" />
@@ -118,7 +116,7 @@ const ReviewForm = (props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Rate of food
+          Rate of food(1-5)
         </Label>
 
         <NumberField
@@ -126,7 +124,6 @@ const ReviewForm = (props) => {
           defaultValue={props.review?.rateOfFood}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
         />
 
         <FieldError name="rateOfFood" className="rw-field-error" />
@@ -136,7 +133,7 @@ const ReviewForm = (props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Review of food
+          Review of food(关于剧本搭配食物的评价)
         </Label>
 
         <TextField
@@ -144,10 +141,29 @@ const ReviewForm = (props) => {
           defaultValue={props.review?.reviewOfFood}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
         />
 
         <FieldError name="reviewOfFood" className="rw-field-error" />
+
+        <Label
+          name="userId"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          UserId
+        </Label>
+
+        {isAuthenticated && (
+          <NumberField
+            name="userId"
+            defaultValue={currentUser.id}
+            className="rw-input"
+            readOnly
+            errorClassName="rw-input rw-input-error"
+          />
+        )}
+
+        <FieldError name="userId" className="rw-field-error" />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

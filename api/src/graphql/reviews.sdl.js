@@ -2,14 +2,15 @@ export const schema = gql`
   type Review {
     id: Int!
     createdAt: DateTime!
+    dm: String
     jubenId: Int!
     juben: Juben!
     rateOfJuben: Int!
-    reviewOfJuben: String!
+    reviewOfJuben: String
     rateOfDM: Int!
-    reviewOfDM: String!
-    rateOfFood: Int!
-    reviewOfFood: String!
+    reviewOfDM: String
+    rateOfFood: Int
+    reviewOfFood: String
   }
 
   type Query {
@@ -20,11 +21,14 @@ export const schema = gql`
   input CreateReviewInput {
     jubenId: Int!
     rateOfJuben: Int!
-    reviewOfJuben: String!
+    reviewOfJuben: String
     rateOfDM: Int!
-    reviewOfDM: String!
-    rateOfFood: Int!
-    reviewOfFood: String!
+    reviewOfDM: String
+    rateOfFood: Int
+    reviewOfFood: String
+    createdAt: DateTime
+    dm: String
+    userId: Int
   }
 
   input UpdateReviewInput {
@@ -35,6 +39,8 @@ export const schema = gql`
     reviewOfDM: String
     rateOfFood: Int
     reviewOfFood: String
+    dm: String
+    userId: Int
   }
 
   type Mutation {

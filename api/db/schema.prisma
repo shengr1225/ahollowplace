@@ -35,6 +35,7 @@ model User {
   JubenDrive          JubenDrive? @relation(fields: [jubenDriveId], references: [id])
   bookings            Booking[]
   mvpJubens           Juben[]
+  Review              Review[]
 }
 
 model Juben {
@@ -55,7 +56,7 @@ model Juben {
   drives         JubenDrive[]
   timeSlots      TimeSlot[]
   mvps           User[]
-  Review         Review[]
+  reviews        Review[]
 }
 
 model Booking {
@@ -104,12 +105,15 @@ model JubenDrive {
 model Review {
   id            Int      @id @default(autoincrement())
   createdAt     DateTime
+  dm            String
   jubenId       Int
   juben         Juben    @relation(fields: [jubenId], references: [id])
   rateOfJuben   Int
-  reviewOfJuben String
+  reviewOfJuben String?
   rateOfDM      Int
-  reviewOfDM    String
-  rateOfFood    Int
-  reviewOfFood  String
+  reviewOfDM    String?
+  rateOfFood    Int?
+  reviewOfFood  String?
+  userId        Int?
+  user          User?    @relation(fields: [userId], references: [id])
 }

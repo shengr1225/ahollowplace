@@ -20,12 +20,7 @@ import UserProfilePage from './pages/UserProfilePage/UserProfilePage'
 const Routes = () => {
   return (
     <Router>
-      <Set wrap={ScaffoldLayout} title="Reviews" titleTo="reviews" buttonLabel="New Review" buttonTo="newReview">
-        <Route path="/reviews/new" page={ReviewNewReviewPage} name="newReview" />
-        <Route path="/reviews/{id:Int}/edit" page={ReviewEditReviewPage} name="editReview" />
-        <Route path="/reviews/{id:Int}" page={ReviewReviewPage} name="review" />
-        <Route path="/reviews" page={ReviewReviewsPage} name="reviews" />
-      </Set>
+      <Route path="/review/{juben:String}/{dm:String}" page={LeaveReviewPage} name="leaveReview" />
       <Route path="/admin" page={AdminPage} name="admin" />
       <Route path="/blogs" page={BlogsPage} name="blogs" />
       <Route path="/blog/{title:String}" page={BlogPage} name="blog" />
@@ -46,6 +41,12 @@ const Routes = () => {
           <Route path="/admin/jubenDrives/{id:Int}/edit" page={JubenDriveEditJubenDrivePage} name="editJubenDrive" />
           <Route path="/admin/jubenDrives/{id:Int}" page={JubenDriveJubenDrivePage} name="jubenDrive" />
           <Route path="/admin/jubenDrives" page={JubenDriveJubenDrivesPage} name="jubenDrives" />
+        </Set>
+        <Set wrap={ScaffoldLayout} title="Reviews" titleTo="reviews" buttonLabel="New Review" buttonTo="newReview">
+          <Route path="/admin/reviews/new" page={ReviewNewReviewPage} name="newReview" />
+          <Route path="/admin/reviews/{id:Int}/edit" page={ReviewEditReviewPage} name="editReview" />
+          <Route path="/admin/reviews/{id:Int}" page={ReviewReviewPage} name="review" />
+          <Route path="/admin/reviews" page={ReviewReviewsPage} name="reviews" />
         </Set>
         <Set wrap={UsersLayout}>
           <Route path="/admin/users/new" page={UserNewUserPage} name="newUser" />
