@@ -2,11 +2,12 @@ import * as Filestack from 'filestack-js'
 
 import { validate } from '@redwoodjs/api'
 
+import { cacheFindMany } from 'src/lib/cache'
 import { newDate, getOneMonthLaterFromNow } from 'src/lib/dateUtil'
 import { db } from 'src/lib/db'
 
 export const jubens = () => {
-  return db.juben.findMany()
+  return cacheFindMany('juben', db.juben)
 }
 
 export const juben = ({ id }) => {

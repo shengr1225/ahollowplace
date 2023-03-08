@@ -1,5 +1,6 @@
 import { CurrencyDefinition, CurrencyResolver } from 'graphql-scalars'
 
+import { authDecoder } from '@redwoodjs/auth-dbauth-api'
 import { createGraphQLHandler } from '@redwoodjs/graphql-server'
 
 import directives from 'src/directives/**/*.{js,ts}'
@@ -11,6 +12,7 @@ import { db } from 'src/lib/db'
 import { logger } from 'src/lib/logger'
 
 export const handler = createGraphQLHandler({
+  authDecoder,
   loggerConfig: { logger, options: {} },
   getCurrentUser,
   directives,

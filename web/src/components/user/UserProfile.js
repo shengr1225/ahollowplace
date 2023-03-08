@@ -11,10 +11,10 @@ import { GiEntangledTyphoon } from 'react-icons/gi'
 import Lightbox from 'react-image-lightbox'
 import ReactTooltip from 'react-tooltip'
 
-import { useAuth } from '@redwoodjs/auth'
 import { useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import InvitePlayersWindow from 'src/components/UI/InvitePlayersWindow/InvitePlayersWindow'
 import RadarChart from 'src/components/UI/RadarChart'
 import UserAbilityUpdateWindow from 'src/components/UI/UserAbilityUpdateWindow/UserAbilityUpdateWindow'

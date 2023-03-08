@@ -6,9 +6,9 @@ import { motion } from 'framer-motion'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import DatePicker from 'sassy-datepicker'
 
-import { useAuth } from '@redwoodjs/auth'
 import { Link, navigate, routes } from '@redwoodjs/router'
 
+import { useAuth } from 'src/auth'
 import useAnimatedNavToggler from 'src/components/lib/helpers/useAnimatedNavToggler'
 import SearchInput from 'src/components/UI/SearchInput'
 import logo from 'src/images/logo.png'

@@ -7,7 +7,9 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/core": "^3.0.1",
+    "@redwoodjs/auth-auth0-setup": "4.2.2",
+    "@redwoodjs/auth-dbauth-setup": "4.2.2",
+    "@redwoodjs/core": "^4.2.2",
     "autoprefixer": "^10.4.7",
     "babel-plugin-macros": "^3.1.0",
     "postcss-cli": "^9.1.0",
@@ -18,7 +20,7 @@
     "extends": "@redwoodjs/eslint-config"
   },
   "engines": {
-    "node": ">=14.17 <=16.x",
+    "node": ">=16.x <=18.x",
     "yarn": ">=1.15"
   },
   "prisma": {

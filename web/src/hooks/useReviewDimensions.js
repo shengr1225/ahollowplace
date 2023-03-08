@@ -1,23 +1,24 @@
 import { useState, useEffect } from 'react'
 
-import { off } from 'src/utility/event'
-
 import useWindowDimensions from './useWindowDimensions'
 
-const getDimensions = ({ width, height }) => {
+const xl = 1024
+const sm = 768
+
+const getDimensions = ({ width }) => {
   let containerWidth, containerHeight, marginTop, bgSize
 
-  if (width > 1024) {
+  if (width > xl) {
     containerWidth = 1024 / 2.6 + 'px'
     containerHeight = 1024 / 1.68 + 'px'
     bgSize = '1024px'
   }
-  if (width < 1024) {
+  if (width < xl) {
     bgSize = '900px'
     containerWidth = 900 / 2.6 + 'px'
     containerHeight = 900 / 1.68 + 'px'
   }
-  if (width < 768) {
+  if (width < sm) {
     bgSize = '768px'
     containerWidth = 768 / 2.6 + 'px'
     containerHeight = 768 / 1.68 + 'px'
@@ -44,15 +45,15 @@ export default function useReviewDimensions(element) {
       let offSetX
       let offSetY
 
-      if (width > 1024) {
+      if (width > xl) {
         offSetX = 18
         offSetY = 52
       }
-      if (width < 1024) {
+      if (width < xl) {
         offSetX = 18
         offSetY = 46
       }
-      if (width < 768) {
+      if (width < sm) {
         offSetX = 14
         offSetY = 34
       }

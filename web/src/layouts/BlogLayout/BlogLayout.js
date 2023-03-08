@@ -1,14 +1,14 @@
-import { Link, routes } from '@redwoodjs/router'
-import { useAuth } from '@redwoodjs/auth'
-import useAnimatedNavToggler from 'src/helpers/useAnimatedNavToggler'
-import { motion } from 'framer-motion'
-import logo from '../../images/google-icon.png'
 import { ReactComponent as MenuIcon } from 'feather-icons/dist/icons/menu.svg'
 import { ReactComponent as CloseIcon } from 'feather-icons/dist/icons/x.svg'
+import { motion } from 'framer-motion'
+
+import { Link, routes } from '@redwoodjs/router'
+
+import useAnimatedNavToggler from 'src/helpers/useAnimatedNavToggler'
+
+import logo from '../../images/google-icon.png'
 
 const BlogLayout = ({ children }) => {
-  const { logOut, isAuthenticated, currentUser } = useAuth()
-
   const links = [
     <div className="inline-block" key={1}>
       <Link to={routes.home}>洞屋最新</Link>

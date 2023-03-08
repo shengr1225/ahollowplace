@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { confirmAlert } from 'react-confirm-alert'
 
-import { useAuth } from '@redwoodjs/auth'
+import { useAuth } from 'src/auth'
 import { useLocation } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'

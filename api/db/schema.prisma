@@ -9,10 +9,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model UserCredential {
+  id         String  @id
+  userId     Int
+  user       User    @relation(fields: [userId], references: [id])
+  publicKey  Bytes
+  transports String?
+  counter    BigInt
+}
+
 model User {
-  id                  Int         @id @default(autoincrement())
+  id                  Int              @id @default(autoincrement())
   name                String?
-  email               String      @unique
+  email               String           @unique
   hashedPassword      String
   salt                String
   resetToken          String?
@@ -21,21 +30,23 @@ model User {
   thumbnail           String?
   desc                String?
   label               String?
-  ability             Int?        @default(10)
+  ability             Int?             @default(10)
   tuili               Float?
   yanji               Float?
   xiezuo              Float?
   gaoxiao             Float?
   qinggan             Float?
   knot                String?
-  roles               String      @default("player")
-  currentExp          Int?        @default(0)
+  roles               String           @default("player")
+  currentExp          Int?             @default(0)
   MVPUntil            DateTime?
-  isMVP               Boolean?    @default(false)
-  JubenDrive          JubenDrive? @relation(fields: [jubenDriveId], references: [id])
+  isMVP               Boolean?         @default(false)
+  JubenDrive          JubenDrive?      @relation(fields: [jubenDriveId], references: [id])
   bookings            Booking[]
   mvpJubens           Juben[]
   Review              Review[]
+  webAuthnChallenge   String?          @unique
+  UserCredential      UserCredential[]
 }
 
 model Juben {

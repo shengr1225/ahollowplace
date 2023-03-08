@@ -1,4 +1,3 @@
-import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   FormError,
@@ -9,6 +8,7 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
+import { useAuth } from 'src/auth'
 import JubenSelectionCell from 'src/cells/juben/admin/SelectFieldCell/SelectFieldCell'
 
 const ReviewForm = (props) => {

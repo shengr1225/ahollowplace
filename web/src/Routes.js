@@ -15,11 +15,12 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 import TimeSlotsLayout from 'src/layouts/TimeSlotsLayout'
 import UsersLayout from 'src/layouts/UsersLayout'
 
+import { useAuth } from './auth'
 import UserProfilePage from './pages/UserProfilePage/UserProfilePage'
 
 const Routes = () => {
   return (
-    <Router>
+    <Router useAuth={useAuth}>
       <Route path="/review/{jubenId:Int}/{dm:String}" page={LeaveReviewPage} name="leaveReview" />
       <Route path="/admin" page={AdminPage} name="admin" />
       <Route path="/blogs" page={BlogsPage} name="blogs" />
