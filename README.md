@@ -35,8 +35,8 @@
 
 6. 更多功能
 
-     会员评论功能 Todo
+     会员评论功能 User review feature 
 
-     洞屋剧本杀博客 Todo
+     洞屋剧本杀博客 Blog with CMS that allows individules signup to become a content creator.
 
 This repo builds with redwoodjs - A React Graphql opensource framework [Redwoodjs] (https://redwoodjs.com/).
