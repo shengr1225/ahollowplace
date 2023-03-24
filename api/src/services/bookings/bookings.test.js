@@ -1,5 +1,3 @@
-import { juben } from '../jubens/jubens'
-
 import {
   bookings,
   booking,
@@ -15,86 +13,86 @@ import {
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('bookings', () => {
-  // scenario('returns all bookings', async (scenario) => {
-  //   const result = await bookings()
-  //   expect(result.length).toEqual(Object.keys(scenario.booking).length)
-  // })
-  // scenario('returns a single booking', async (scenario) => {
-  //   const result = await booking({ id: scenario.booking.one.id })
-  //   expect(result).toMatchObject(scenario.booking.one)
-  // })
-  // scenario('creates a booking', async (scenario) => {
-  //   const result = await createBooking({
-  //     input: {
-  //       date: new Date('2023-10-16T20:08:11.000Z'),
-  //       total: 1,
-  //       male: 0,
-  //       female: 1,
-  //       users: [{ id: scenario.user.bob.id }],
-  //       jubenId: scenario.booking.one.jubenId,
-  //       timeSlotId: scenario.booking.one.timeSlotId,
-  //     },
-  //   })
-  //   expect(result.date).toEqual(new Date('2023-10-16T20:08:11.000Z'))
-  //   expect(result.total).toEqual(1)
-  //   expect(result.status).toEqual('Carpooling')
-  //   expect(result.jubenId).toEqual(scenario.booking.one.jubenId)
-  //   expect(result.timeSlotId).toEqual(scenario.booking.one.timeSlotId)
-  // })
+  scenario('returns all bookings', async (scenario) => {
+    const result = await bookings()
+    expect(result.length).toEqual(Object.keys(scenario.booking).length)
+  })
+  scenario('returns a single booking', async (scenario) => {
+    const result = await booking({ id: scenario.booking.one.id })
+    expect(result).toMatchObject(scenario.booking.one)
+  })
+  scenario('creates a booking', async (scenario) => {
+    const result = await createBooking({
+      input: {
+        date: new Date('2023-10-16T20:08:11.000Z'),
+        total: 1,
+        male: 0,
+        female: 1,
+        users: [{ id: scenario.user.bob.id }],
+        jubenId: scenario.booking.one.jubenId,
+        timeSlotId: scenario.booking.one.timeSlotId,
+      },
+    })
+    expect(result.date).toEqual(new Date('2023-10-16T20:08:11.000Z'))
+    expect(result.total).toEqual(1)
+    expect(result.status).toEqual('Carpooling')
+    expect(result.jubenId).toEqual(scenario.booking.one.jubenId)
+    expect(result.timeSlotId).toEqual(scenario.booking.one.timeSlotId)
+  })
 
-  // scenario('creates a booking but full', async (scenario) => {
-  //   await createBooking({
-  //     input: {
-  //       date: new Date('2023-10-18T20:08:11.000Z'),
-  //       total: 4,
-  //       male: 4,
-  //       female: 0,
-  //       users: [
-  //         { id: scenario.user.bob.id },
-  //         { id: scenario.user.bob.id },
-  //         { id: scenario.user.bob.id },
-  //         { id: scenario.user.bob.id },
-  //       ],
-  //       jubenId: scenario.booking.one.jubenId,
-  //       timeSlotId: scenario.booking.one.timeSlotId,
-  //     },
-  //   })
-  //   expect(async () => {
-  //     await createBooking({
-  //       input: {
-  //         date: new Date('2023-10-18T20:08:11.000Z'),
-  //         total: 2,
-  //         male: 0,
-  //         female: 2,
-  //         users: [
-  //           { id: scenario.user.alice.id },
-  //           { id: scenario.user.alice.id },
-  //         ],
-  //         jubenId: scenario.booking.one.jubenId,
-  //         timeSlotId: scenario.booking.one.timeSlotId,
-  //       },
-  //     })
-  //   }).rejects.toThrow('本剧本预定已满，请修改时间或者人数。')
-  // })
+  scenario('creates a booking but full', async (scenario) => {
+    await createBooking({
+      input: {
+        date: new Date('2023-10-18T20:08:11.000Z'),
+        total: 4,
+        male: 4,
+        female: 0,
+        users: [
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+          { id: scenario.user.bob.id },
+        ],
+        jubenId: scenario.booking.one.jubenId,
+        timeSlotId: scenario.booking.one.timeSlotId,
+      },
+    })
+    expect(async () => {
+      await createBooking({
+        input: {
+          date: new Date('2023-10-18T20:08:11.000Z'),
+          total: 2,
+          male: 0,
+          female: 2,
+          users: [
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+          ],
+          jubenId: scenario.booking.one.jubenId,
+          timeSlotId: scenario.booking.one.timeSlotId,
+        },
+      })
+    }).rejects.toThrow('本剧本预定已满，请修改时间或者人数。')
+  })
 
-  // scenario('creates a booking but juben not available', async (scenario) => {
-  //   expect(async () => {
-  //     await createBooking({
-  //       input: {
-  //         date: new Date('2023-10-18T20:08:11.000Z'),
-  //         total: 2,
-  //         male: 0,
-  //         female: 2,
-  //         users: [
-  //           { id: scenario.user.alice.id },
-  //           { id: scenario.user.alice.id },
-  //         ],
-  //         jubenId: scenario.booking.two.jubenId,
-  //         timeSlotId: scenario.booking.one.timeSlotId,
-  //       },
-  //     })
-  //   }).rejects.toThrow('剧本还在内测中，敬请期待。')
-  // })
+  scenario('creates a booking but juben not available', async (scenario) => {
+    expect(async () => {
+      await createBooking({
+        input: {
+          date: new Date('2023-10-18T20:08:11.000Z'),
+          total: 2,
+          male: 0,
+          female: 2,
+          users: [
+            { id: scenario.user.alice.id },
+            { id: scenario.user.alice.id },
+          ],
+          jubenId: scenario.booking.two.jubenId,
+          timeSlotId: scenario.booking.one.timeSlotId,
+        },
+      })
+    }).rejects.toThrow('剧本还在内测中，敬请期待。')
+  })
 
   scenario('creates a booking that already booked', async (scenario) => {
     await createBooking({

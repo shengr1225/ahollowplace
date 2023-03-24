@@ -24,11 +24,13 @@ export const booking = ({ id }) => {
 }
 
 export const createBooking = async ({ input }) => {
-  validate(new Date(input.date).getTime(), 'date', {
-    numericality: {
-      greaterThan: new Date().getTime(),
-      message: '预定时间不能是过去',
-    },
+  validateWith(() => {
+    if (
+      context.currentUser?.roles != 'admin' &&
+      new Date(input.date).getTime() < new Date().getTime()
+    ) {
+      throw new ServiceValidationError('预定时间不能是过去')
+    }
   })
   validateWith(() => {
     if (
@@ -79,11 +81,13 @@ export const createBooking = async ({ input }) => {
 }
 
 export const updateBooking = async ({ id, input }) => {
-  validate(new Date(input.date).getTime(), 'date', {
-    numericality: {
-      greaterThan: new Date().getTime(),
-      message: '预定时间不能是过去',
-    },
+  validateWith(() => {
+    if (
+      context.currentUser?.roles != 'admin' &&
+      new Date(input.date).getTime() < new Date().getTime()
+    ) {
+      throw new ServiceValidationError('预定时间不能是过去')
+    }
   })
   validateWith(() => {
     if (

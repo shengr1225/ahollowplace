@@ -25,6 +25,7 @@ export const schema = gql`
     isMVP: Boolean
     MVPUntil: DateTime
     webAuthnChallenge: String
+    reviews: [Review]!
   }
 
   type Query {

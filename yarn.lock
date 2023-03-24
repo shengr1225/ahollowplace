@@ -6286,17 +6286,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redwoodjs/auth-auth0-setup@npm:4.2.2":
-  version: 4.2.2
-  resolution: "@redwoodjs/auth-auth0-setup@npm:4.2.2"
-  dependencies:
-    "@babel/runtime-corejs3": 7.20.13
-    "@redwoodjs/cli-helpers": 4.2.2
-    core-js: 3.28.0
-  checksum: baa1d5c51604658b8c835d03ebb82660ed41a0a29f423546c39f871b7e6fdb8de89325a2758b7409a7577ae4ca5ed1e0224da051b6d6076f814ee5dc5c035ddf
-  languageName: node
-  linkType: hard
-
 "@redwoodjs/auth-auth0-web@npm:4.2.2":
   version: 4.2.2
   resolution: "@redwoodjs/auth-auth0-web@npm:4.2.2"
@@ -30374,7 +30363,6 @@ __metadata:
   dependencies:
     "@graphql-yoga/node": ^2.13.13
     "@react-three/fiber": ^8.9.1
-    "@redwoodjs/auth-auth0-setup": 4.2.2
     "@redwoodjs/auth-dbauth-setup": 4.2.2
     "@redwoodjs/core": ^4.2.2
     autoprefixer: ^10.4.7

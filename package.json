@@ -7,7 +7,6 @@
     ]
   },
   "devDependencies": {
-    "@redwoodjs/auth-auth0-setup": "4.2.2",
     "@redwoodjs/auth-dbauth-setup": "4.2.2",
     "@redwoodjs/core": "^4.2.2",
     "autoprefixer": "^10.4.7",

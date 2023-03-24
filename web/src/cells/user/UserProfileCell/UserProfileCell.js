@@ -25,6 +25,19 @@ export const QUERY = gql`
       mvpJubens {
         id
       }
+      reviews {
+        rateOfJuben
+        reviewOfJuben
+        rateOfDM
+        reviewOfDM
+        rateOfFood
+        reviewOfFood
+        dm
+        juben {
+          id
+          name
+        }
+      }
       bookings {
         id
         date

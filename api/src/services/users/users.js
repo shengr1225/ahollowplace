@@ -75,4 +75,6 @@ export const User = {
     db.user.findUnique({ where: { id: root.id } }).JubenDrive(),
   mvpJubens: (_obj, { root }) =>
     db.user.findUnique({ where: { id: root.id } }).mvpJubens(),
+  reviews: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).reviews(),
 }

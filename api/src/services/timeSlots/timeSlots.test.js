@@ -41,7 +41,6 @@ describe('timeSlots', () => {
       id: original.id,
       input: { start: 'String2' },
     })
-
     expect(result.start).toEqual('String2')
   })
 

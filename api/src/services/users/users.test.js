@@ -27,7 +27,6 @@ describe('users', () => {
         salt: 'String',
       },
     })
-
     expect(result.email).toEqual('String4517386')
     expect(result.hashedPassword).toEqual('String')
     expect(result.salt).toEqual('String')

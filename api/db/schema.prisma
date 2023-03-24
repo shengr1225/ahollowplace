@@ -7,15 +7,17 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // provider = "sqlite"
+  // url      = "file:./.redwood/test.db"
 }
 
 model UserCredential {
   id         String  @id
   userId     Int
-  user       User    @relation(fields: [userId], references: [id])
   publicKey  Bytes
   transports String?
   counter    BigInt
+  user       User    @relation(fields: [userId], references: [id])
 }
 
 model User {
@@ -41,12 +43,12 @@ model User {
   currentExp          Int?             @default(0)
   MVPUntil            DateTime?
   isMVP               Boolean?         @default(false)
-  JubenDrive          JubenDrive?      @relation(fields: [jubenDriveId], references: [id])
-  bookings            Booking[]
-  mvpJubens           Juben[]
-  Review              Review[]
   webAuthnChallenge   String?          @unique
+  reviews             Review[]
+  JubenDrive          JubenDrive?      @relation(fields: [jubenDriveId], references: [id])
   UserCredential      UserCredential[]
+  bookings            Booking[]        @relation("BookingToUser")
+  mvpJubens           Juben[]          @relation("JubenToUser")
 }
 
 model Juben {
@@ -65,9 +67,9 @@ model Juben {
   available      Boolean      @default(true)
   bookingRecords Booking[]
   drives         JubenDrive[]
-  timeSlots      TimeSlot[]
-  mvps           User[]
   reviews        Review[]
+  timeSlots      TimeSlot[]   @relation("JubenToTimeSlot")
+  mvps           User[]       @relation("JubenToUser")
 }
 
 model Booking {
@@ -84,7 +86,7 @@ model Booking {
   JubenDrive   JubenDrive? @relation(fields: [jubenDriveId], references: [id])
   juben        Juben       @relation(fields: [jubenId], references: [id])
   timeSlot     TimeSlot    @relation(fields: [timeSlotId], references: [id])
-  users        User[]
+  users        User[]      @relation("BookingToUser")
 }
 
 model TimeSlot {
@@ -95,7 +97,7 @@ model TimeSlot {
   onlyInWeekend Boolean      @default(false)
   bookings      Booking[]
   jubenDrives   JubenDrive[]
-  jubens        Juben[]
+  jubens        Juben[]      @relation("JubenToTimeSlot")
 }
 
 model JubenDrive {
@@ -107,18 +109,16 @@ model JubenDrive {
   status     String    @default("Carpooling")
   jubenId    Int
   timeSlotId Int
+  bookings   Booking[]
   juben      Juben     @relation(fields: [jubenId], references: [id])
   timeSlot   TimeSlot  @relation(fields: [timeSlotId], references: [id])
-  bookings   Booking[]
   users      User[]
 }
 
 model Review {
   id            Int      @id @default(autoincrement())
   createdAt     DateTime
-  dm            String   @default("小满")
   jubenId       Int
-  juben         Juben    @relation(fields: [jubenId], references: [id])
   rateOfJuben   Int
   reviewOfJuben String?
   rateOfDM      Int
@@ -126,5 +126,7 @@ model Review {
   rateOfFood    Int?
   reviewOfFood  String?
   userId        Int?
+  dm            String   @default("小满")
+  juben         Juben    @relation(fields: [jubenId], references: [id])
   user          User?    @relation(fields: [userId], references: [id])
 }
