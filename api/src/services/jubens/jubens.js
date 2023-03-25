@@ -18,7 +18,30 @@ export const juben = ({ id }) => {
 
 export const createJuben = ({ input }) => {
   return db.juben.create({
-    data: input,
+    data: {
+      name: input.name,
+      score: input.score,
+      image: input.image,
+      desc: input.desc,
+      section: input.section,
+      sections: input.sections,
+      players: input.players,
+      canSwitchSex: input.canSwitchSex,
+      duration: input.duration,
+      price: input.price,
+      mvps: {
+        connect: input.mvps,
+      },
+      timeSlots: {
+        connect: input.timeSlots,
+      },
+      photos: input.photos,
+      available: input.available,
+    },
+    include: {
+      timeSlots: true,
+      mvps: true,
+    },
   })
 }
 
@@ -54,10 +77,17 @@ export const updateJuben = async ({ id, input }) => {
       mvps: {
         connect: input.mvps,
       },
+      timeSlots: {
+        set: input.timeSlots,
+      },
       photos: input.photos,
       available: input.available,
     },
     where: { id },
+    include: {
+      mvps: true,
+      timeSlots: true,
+    },
   })
 }
 
@@ -88,8 +118,6 @@ export const deletePhotoOfJuben = async ({ id, index }) => {
     },
     process.env.REDWOOD_ENV_FILESTACK_SECRET
   )
-
-  console.log(security, url)
 
   await client.remove(handle, security)
 

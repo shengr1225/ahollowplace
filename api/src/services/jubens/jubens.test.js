@@ -18,11 +18,10 @@ describe('jubens', () => {
 
   scenario('returns a single juben', async (scenario) => {
     const result = await juben({ id: scenario.juben.one.id })
-
     expect(result).toEqual(scenario.juben.one)
   })
 
-  scenario('creates a juben', async () => {
+  scenario('creates a juben', async (scenario) => {
     const result = await createJuben({
       input: {
         name: 'String',
@@ -31,6 +30,7 @@ describe('jubens', () => {
         section: 'String',
         sections: 'String',
         players: 'String',
+        timeSlots: [{ id: scenario.timeSlot.one.id }],
       },
     })
 
@@ -40,13 +40,21 @@ describe('jubens', () => {
     expect(result.section).toEqual('String')
     expect(result.sections).toEqual('String')
     expect(result.players).toEqual('String')
+    expect(result.timeSlots.length).toBe(1)
   })
 
   scenario('updates a juben', async (scenario) => {
     const original = await juben({ id: scenario.juben.one.id })
     const result = await updateJuben({
       id: original.id,
-      input: { name: 'String2', mvps: [{ id: scenario.user.bob.id }] },
+      input: {
+        name: 'String2',
+        mvps: [{ id: scenario.user.bob.id }],
+        timeSlots: [
+          { id: scenario.timeSlot.one.id },
+          { id: scenario.timeSlot.two.id },
+        ],
+      },
     })
 
     const u = await user({ id: scenario.user.bob.id })
@@ -57,6 +65,8 @@ describe('jubens', () => {
     expect(new Date(u.MVPUntil).getMonth()).toEqual(
       getOneMonthLaterFromNow().getMonth()
     )
+    expect(result.timeSlots.length).toBe(2)
+    expect(result.mvps.length).toBe(1)
     expect(result.name).toEqual('String2')
   })
 

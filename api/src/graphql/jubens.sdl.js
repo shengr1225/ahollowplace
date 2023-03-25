@@ -45,6 +45,7 @@ export const schema = gql`
     photos: String
     available: Boolean!
     mvps: [UserInput]
+    timeSlots: [UserInput]
   }
 
   input UpdateJubenInput {
@@ -61,6 +62,7 @@ export const schema = gql`
     mvps: [UserInput]
     photos: String
     available: Boolean
+    timeSlots: [UserInput]
   }
 
   input UserInput {

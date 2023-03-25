@@ -10,6 +10,22 @@ export const standard = defineScenario({
       },
     },
   },
+  timeSlot: {
+    one: {
+      data: {
+        start: '5pm',
+        end: '11pm',
+        last: 6,
+      },
+    },
+    two: {
+      data: {
+        start: '11am',
+        end: '5pm',
+        last: 6,
+      },
+    },
+  },
   juben: {
     one: {
       data: {

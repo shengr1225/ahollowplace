@@ -3,28 +3,6 @@ import { toast } from '@redwoodjs/web/toast'
 
 import JubenForm from '../../../components/juben/JubenForm'
 
-export const QUERY = gql`
-  query EditJubenById($id: Int!) {
-    juben: juben(id: $id) {
-      id
-      name
-      score
-      image
-      desc
-      section
-      sections
-      players
-      canSwitchSex
-      duration
-      price
-      mvps {
-        id
-      }
-      photos
-      available
-    }
-  }
-`
 const UPDATE_JUBEN_MUTATION = gql`
   mutation UpdateJubenMutation($id: Int!, $input: UpdateJubenInput!) {
     updateJuben(id: $id, input: $input) {
@@ -40,6 +18,9 @@ const UPDATE_JUBEN_MUTATION = gql`
       duration
       price
       mvps {
+        id
+      }
+      timeSlots {
         id
       }
       photos

@@ -58,7 +58,9 @@ const JubenSection = ({ section, jubens }) => {
 
       <motion.div>
         {jubens.map((juben, i) => (
-          <JubenHighlight juben={juben} reversed={i % 2 === 1} key={i} />
+          <>
+            <JubenHighlight juben={juben} reversed={i % 2 === 1} key={i} />
+          </>
         ))}
       </motion.div>
     </div>

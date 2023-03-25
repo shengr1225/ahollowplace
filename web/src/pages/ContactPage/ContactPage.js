@@ -63,7 +63,10 @@ const ContactPage = () => {
 
   return (
     <>
-      <MetaTags title="Contact" description="Contact page" />
+      <MetaTags
+        title="联系我们"
+        description="洞屋剧本杀联系方式, 新手入门和常见问题"
+      />
 
       <Toaster />
 
@@ -88,6 +91,15 @@ const ContactPage = () => {
                   </p>
                   <p className="text-sm mt-8 underline cursor-pointer">
                     有任何问题想问我们的?
+                  </p>
+                  <p className="mt-8 font-thin text-sm">
+                    洞屋剧本杀<br></br>
+                    <br></br>
+                    221 Woodrow St, Daly City, CA 94014
+                  </p>
+                  <p className="text-sm font-thin mt-2">
+                    营业时间: 周日-周日 <br></br> 预约电话: 4158023853 <br></br>
+                    微信: thehollowplace
                   </p>
                 </span>
               </h1>

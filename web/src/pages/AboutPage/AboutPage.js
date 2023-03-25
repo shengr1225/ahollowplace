@@ -45,7 +45,7 @@ const emotion1BGStyle = {
 const AboutPage = () => {
   return (
     <>
-      <MetaTags title="About" description="About page" />
+      <MetaTags title="关于洞屋" description="洞屋剧本杀的前世今生" />
       <div className="p-4 -mt-8">
         <StyleHeader dark={false} isHome={true} />
       </div>
@@ -57,11 +57,11 @@ const AboutPage = () => {
             className="rounded-full w-32 h-32 mx-auto mt-4"
             style={meBGStyle}
           />
-          <p className="pt-4 leading-8 px-12">
+          <div className="pt-4 leading-8 px-12">
             <span className="underline underline-offset-8">
               一切都是最好的安排
             </span>
-            <p className="pt-8 text-left">
+            <div className="pt-8 text-left">
               2011年毕业于上海海事大学计算机专业, 毕业后从事网页游戏前段开发,
               参与开发了一款月流水千万级别的游戏,
               在页游市场井喷的第一时间上了车,
@@ -113,13 +113,13 @@ const AboutPage = () => {
                 再一次原地出发, 只是离月光更近了
               </p>
               <p className="pt-4 pb-12">下面就是洞屋剧本杀的前世今生了...</p>
-            </p>
-          </p>
+            </div>
+          </div>
         </div>
         <div className="basis-full lg:basis-1/3">
           <p className="text-lg font-light pt-8 lg:pt-0">Short Story</p>
           <p className="pt-4 underline underline-offset-8">最长的电影</p>
-          <p className="pt-4 px-8 leading-8 text-left">
+          <div className="pt-4 px-8 leading-8 text-left">
             我们的开始, 是最长的电影。放映了三年, 我票都还留着。
             这句歌词用来形容选对本的体验再好不过了。
             <br />
@@ -159,7 +159,7 @@ const AboutPage = () => {
               className="rounded-md w-80 h-56 mx-auto my-4"
               style={food2BGStyle}
             />
-          </p>
+          </div>
         </div>
         <div className="basis-full lg:basis-1/3">
           <p className="text-lg font-light">Long Story</p>
@@ -178,7 +178,7 @@ const AboutPage = () => {
             一切都是最好的安排, 我想让你拿到这个本看完背景, 有这样一种感觉: “哇,
             这个人好像是专门为我而设的” 或者 ”我们明明活在两个千差万别的世界,
             可是感觉好熟悉啊“
-            <div
+            <span
               className="rounded w-48 h-64 mx-auto my-4"
               style={emotion1BGStyle}
             />

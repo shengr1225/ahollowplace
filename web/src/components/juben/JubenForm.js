@@ -15,6 +15,7 @@ import {
 } from '@redwoodjs/forms'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import TimeSlotsSelectionCell from 'src/cells/timeslot/admin/SelectFieldCell/SelectFieldCell'
 import UserSelectionCell from 'src/cells/user/admin/SelectField/SelectFieldCell'
 import { normalSize, listSize } from 'src/utility/helper'
 
@@ -51,6 +52,11 @@ const JubenForm = (props) => {
         return {
           id: parseInt(id),
         }
+      })
+    }
+    if (dataWithUrl.timeSlots) {
+      dataWithUrl.timeSlots = dataWithUrl.timeSlots?.map((id) => {
+        return { id: parseInt(id) }
       })
     }
     props.onSave(dataWithUrl, props?.juben?.id)
@@ -99,6 +105,22 @@ const JubenForm = (props) => {
         />
 
         <FieldError name="name" className="rw-field-error" />
+
+        <Label
+          name="timeSlots"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Timeslots
+        </Label>
+
+        <TimeSlotsSelectionCell
+          name="timeSlots"
+          selectTimeSlots={props.juben?.timeSlots}
+          multiple={true}
+        ></TimeSlotsSelectionCell>
+
+        <FieldError name="timeSlots" className="rw-field-error" />
 
         <Label
           name="score"

@@ -156,7 +156,10 @@ const BookingForm = (props) => {
           Time slot id
         </Label>
 
-        <TimeSlotSelectionCell selectTimeSlotId={props.booking?.timeSlotId} />
+        <TimeSlotSelectionCell
+          name="timeSlotId"
+          selectTimeSlotId={[{ id: props.booking?.timeSlotId }]}
+        />
 
         <FieldError name="timeSlotId" className="rw-field-error" />
 

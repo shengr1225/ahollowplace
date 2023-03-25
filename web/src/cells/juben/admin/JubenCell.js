@@ -17,6 +17,9 @@ export const QUERY = gql`
       mvps {
         id
       }
+      timeSlots {
+        id
+      }
       photos
     }
   }

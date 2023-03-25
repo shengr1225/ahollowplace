@@ -1,6 +1,8 @@
 // Define your own mock data here:
 export const standard = () => ({
-  selectTimeSlotId: 4,
+  multiple: true,
+  name: 'timeSlots',
+  selectTimeSlots: [4],
   timeSlots: [
     {
       id: 1,

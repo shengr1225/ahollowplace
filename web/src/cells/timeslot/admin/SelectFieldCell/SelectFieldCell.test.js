@@ -1,3 +1,4 @@
+import { Form } from '@redwoodjs/forms'
 import { render } from '@redwoodjs/testing/web'
 
 import { Loading, Empty, Failure, Success } from './SelectFieldCell'
@@ -36,7 +37,11 @@ describe('TimeSlotSelectionCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success timeSlotSelection={standard().timeSlotSelection} />)
+      render(
+        <Form>
+          <Success {...standard()} />
+        </Form>
+      )
     }).not.toThrow()
   })
 })
