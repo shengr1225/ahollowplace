@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { Heading, HStack, Text } from '@chakra-ui/react'
+
 import { Link, routes } from '@redwoodjs/router'
 
 const BlogList = (props) => {
@@ -49,20 +51,18 @@ const BlogList = (props) => {
         const blogsOfDate = blogs.filter((d) => d.date === date)
         return (
           <div key={date} className="py-2">
-            <p className="text-gray-600 mt-4">
+            <Heading fontSize="lg" className="mt-4">
               {date} {blogsOfDate.length}篇
-            </p>
+            </Heading>
             <div className="flex-row mt-2">
               {blogsOfDate.map((d) => (
                 <Link to={routes.blog({ title: d.index })} key={d.index}>
-                  <p className=" text-gray-700 text-lg font-bold">
-                    <span className="underline underline-offset-2">
+                  <HStack className="text-lg font-bold">
+                    <Text className="underline underline-offset-4">
                       {d.title}
-                    </span>
-                    <span className="text-gray-500 text-sm ml-2">
-                      {d.author}
-                    </span>
-                  </p>
+                    </Text>
+                    <Text className="text-sm ml-2">{d.author}</Text>
+                  </HStack>
                 </Link>
               ))}
             </div>

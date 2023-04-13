@@ -69,13 +69,13 @@ const caption = () => (col) =>
       x={(polarToX(col.angle, chartSize / 2 + 15) + captionOffsetX).toFixed(4)}
       y={polarToY(col.angle, (chartSize / 2 + 15) * 0.95).toFixed(4)}
       dy={10 / 2}
-      fill="#444"
+      fill="#ff7777"
       fontWeight="bold"
-      textshadow="1px 1px 0 #fff"
     >
       {col.key}
     </text>
   )
+
 const RadarChart = (props) => {
   chartSize = props.size
   const data = props.data

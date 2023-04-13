@@ -22,6 +22,9 @@ export const yearMonthDate = (date) => {
 }
 
 export const dateOnly = (date) => {
+  if (!date) {
+    return ''
+  }
   const dateObj = new Moment(date)
   return dateObj.format('MMM DD YYYY')
 }

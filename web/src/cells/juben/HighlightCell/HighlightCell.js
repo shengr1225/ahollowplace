@@ -1,4 +1,4 @@
-import { motion, useScroll } from 'framer-motion'
+import { Box } from '@chakra-ui/react'
 import { MagnifyingGlass } from 'react-loader-spinner'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -48,12 +48,11 @@ export const Failure = ({ error }) => (
   <div className="rw-cell-error">{error.message}</div>
 )
 
-export const Success = ({ jubens }) => {
+export const Success = ({ jubens, ref2 }) => {
   const sectionList = ['scary', 'fun', 'emotion', 'mechanism', 'mystery']
-  const { scrollYProgress } = useScroll()
 
   return (
-    <div className="relative">
+    <Box style={{ scrollSnapAlign: 'start' }} py="8" ref={ref2}>
       {sectionList.map((section, i) => (
         <JubenSection
           key={i}
@@ -65,6 +64,6 @@ export const Success = ({ jubens }) => {
       <SvgDotPatternIcon className="absolute top-0 right-0 transform translate-x-20 rotate-45 translate-y-24 -z-10 opacity-25 text-primary-500 fill-current w-24" />
       <SvgDotPatternIcon className="absolute bottom-0 left-0 transform -translate-x-20 rotate-45 -translate-y-8 -z-10 opacity-25 text-primary-500 fill-current w-24" />
       <SvgDotPatternIcon className="absolute bottom-0 right-0 transform translate-x-20 rotate-90 -translate-y-24 -z-10 opacity-25 text-primary-500 fill-current w-24" /> */}
-    </div>
+    </Box>
   )
 }

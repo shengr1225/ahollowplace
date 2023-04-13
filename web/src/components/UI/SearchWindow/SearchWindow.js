@@ -1,7 +1,24 @@
 import { useState, useEffect, useRef } from 'react'
 
-import { BiSearchAlt2, BiXCircle } from 'react-icons/bi'
-import Modal from 'react-modal'
+import {
+  Button,
+  Heading,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalFooter,
+  ModalBody,
+  ModalHeader,
+  ModalCloseButton,
+  VStack,
+  Stack,
+  Box,
+  Input,
+  Text,
+  HStack,
+  useColorMode,
+} from '@chakra-ui/react'
+import { BiSearchAlt2 } from 'react-icons/bi'
 import DatePicker from 'sassy-datepicker'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -20,6 +37,7 @@ const SearchWindow = (props) => {
   const [isJubenOpen, setIsJubenOpen] = useState(false)
   const [isJubenSearchingOpen, setIsJubenSearchingOpen] = useState(false)
   const [searchText, setSearchText] = useState('')
+  const { colorMode } = useColorMode()
 
   useEffect(() => {
     on('jubenSearchingWindow:open', openJubenSearchingWindow)
@@ -128,82 +146,77 @@ const SearchWindow = (props) => {
     femaleInputRef.current.value = ''
   }
 
-  const customStyles = {
-    content: {
-      top: '0',
-      left: '0',
-      right: '0',
-      bottom: '0',
-      margin: '0',
-      padding: '0',
-    },
-  }
   return (
-    <Modal
-      isOpen={props.isOpen}
-      onRequestClose={props.closeModal}
-      style={customStyles}
-      className="transition-all absolute border-solid"
-    >
-      <div
-        className={
-          'flex-row bg-gray-100 relativeshadow-sm z-20 relative p-4 h-full'
-        }
-      >
-        <BiXCircle
-          className="hover:drop-shadow-md cursor-pointer"
-          size="28"
-          onClick={props.closeModal}
-        />
+    <Modal isOpen={props.isOpen} onClose={props.closeModal} size="full">
+      <ModalOverlay />
 
-        <JubenInput
-          label="juben"
-          name="剧本"
-          placeholder="搜索剧本"
-          inputRef={jubenInputRef}
-          defaultValue={selectedJuben}
-          onClick={triggerJubenWindow}
-          onSearch={onSearchJuben}
-        />
+      <ModalContent>
+        <ModalHeader />
+        <ModalCloseButton />
+        <ModalBody>
+          <JubenInput
+            label="juben"
+            name="剧本"
+            placeholder="搜索剧本"
+            inputRef={jubenInputRef}
+            defaultValue={selectedJuben}
+            onClickHandler={triggerJubenWindow}
+            onSearch={onSearchJuben}
+          />
 
-        <JubenSelectionPopup isOpen={isJubenOpen} />
-        <JubenSearchingPopup isOpen={isJubenSearchingOpen} name={searchText} />
+          <JubenSelectionPopup isOpen={isJubenOpen} />
+          <JubenSearchingPopup
+            isOpen={isJubenSearchingOpen}
+            name={searchText}
+          />
 
-        <TimeInput
-          name="时间"
-          dateRef={dateInputRef}
-          defaultValue={selectedDate}
-          onDateChange={onDateChange}
-        />
+          <TimeInput
+            name="时间"
+            dateRef={dateInputRef}
+            defaultValue={selectedDate}
+            onDateChange={onDateChange}
+            colorMode={colorMode}
+          />
 
-        <PersonInput
-          label="male|female"
-          name="人数"
-          placeholder="男|女"
-          multi="2"
-          refs={[maleInputRef, femaleInputRef]}
-        />
-        <div
-          className="fixed bg-gray-lightest border-gray-300 border-t"
-          style={{ bottom: 0, left: 0, right: 0, height: '76px' }}
+          <PersonInput
+            label="male|female"
+            name="人数"
+            placeholder="男|女"
+            multi="2"
+            refs={[maleInputRef, femaleInputRef]}
+          />
+        </ModalBody>
+        <ModalFooter
+          pos="fixed"
+          bottom={0}
+          backgroundColor="orange.200"
+          py="2"
+          w="full"
         >
-          <div className="flex justify-between px-8 pt-4">
-            <p
-              className="underline underline-offset-0 leading-9 cursor-pointer"
-              onClick={onClearInput}
-            >
-              清空
-            </p>
-            <button
-              className="rounded-md bg-red-600 hover:bg-red-500 px-4 py-2 text-white"
-              onClick={onSearch.bind(this, props)}
-            >
-              <BiSearchAlt2 className="inline pr-2" size="26" />
-              <span ref={actionButtonRef}>Search</span>
-            </button>
-          </div>
-        </div>
-      </div>
+          <Box w="full" zIndex={2}>
+            <HStack justifyContent="space-between">
+              <Button
+                cursor="pointer"
+                variant="link"
+                color="blackAlpha.900"
+                className="underline underline-offset-0 leading-9"
+                onClick={onClearInput}
+              >
+                清空
+              </Button>
+              <Button
+                variant="solid"
+                backgroundColor="white"
+                color="gray.900"
+                onClick={onSearch.bind(this, props)}
+              >
+                <BiSearchAlt2 size="26" />
+                <span ref={actionButtonRef}>Search</span>
+              </Button>
+            </HStack>
+          </Box>
+        </ModalFooter>
+      </ModalContent>
     </Modal>
   )
 }
@@ -211,26 +224,26 @@ const SearchWindow = (props) => {
 export default SearchWindow
 
 const JubenSelectionPopup = (props) => (
-  <div
+  <Box
+    p="4"
+    borderRadius="2xl"
     style={windowCustomStyle}
-    className={
-      'rounded-xl bg-white drop-shadow-md transition-all ease-out duration-150 p-4 z-50 ' +
-      (props.isOpen ? '' : 'hidden')
-    }
+    backgroundColor="whiteAlpha.100"
+    className={props.isOpen ? '' : 'hidden'}
     onClick={(event) => {
       event.stopPropagation()
     }}
   >
-    <div className="flex flex-row h-full">
-      <div className="w-1/5 h-full px-3">
-        <p className="text-gray-800">最近搜索</p>
-      </div>
-      <div className="w-4/5 border-l-2 border-gray-100 h-full px-8 overflow-auto">
-        <p className="text-gray-800">热门剧本</p>
-        <JubenThumbnailsCell />
-      </div>
-    </div>
-  </div>
+    <HStack w="full" spacing="2" h="full">
+      <Text display={{ base: 'none', md: 'block' }}>最近搜索</Text>
+      <Box overflow="scroll" h="full">
+        <VStack w="full">
+          <Text>热门剧本</Text>
+          <JubenThumbnailsCell />
+        </VStack>
+      </Box>
+    </HStack>
+  </Box>
 )
 
 const windowCustomStyle = {
@@ -238,80 +251,75 @@ const windowCustomStyle = {
 }
 
 const JubenSearchingPopup = (props) => (
-  <button
-    style={windowCustomStyle}
-    className={
-      'rounded-xl bg-white drop-shadow-md transition-all duration-150 p-4 w-2/3 overflow-scroll ' +
-      (props.isOpen ? '' : 'hidden')
-    }
+  <Box
+    className={props.isOpen ? '' : 'hidden'}
     onClick={(event) => {
       event.stopPropagation()
     }}
   >
-    <JubenSearchCell name={props.name} />
-  </button>
+    <Stack>
+      <JubenSearchCell name={props.name} />
+    </Stack>
+  </Box>
 )
 
 const TimeInput = (props) => {
   return (
-    <div className="flex flex-col rounded-lg px-8 py-4 cursor-pointer bg-gray-lightest my-2 drop-shadow-md">
-      <span className="font-bold">{props.name}</span>
-      <input
-        name="date"
-        className="outline-none text-black bg-transparent text-md border-none placeholder:text-gray-600"
-        placeholder="添加时间"
-        defaultValue={props.defaultValue}
-        ref={props.dateRef}
-      />
-      <DatePicker
-        onChange={props.onDateChange}
-        className="mx-auto"
-      ></DatePicker>
-    </div>
+    <Box p="4" borderRadius="lg">
+      <VStack spacing="4" justifyContent="flex-start" alignItems="start">
+        <VStack spacing="2" justifyContent="flex-start" alignItems="start">
+          <Heading fontSize="xl">{props.name}</Heading>
+          <Input
+            name="date"
+            variant="unstyled"
+            placeholder="添加时间"
+            defaultValue={props.defaultValue}
+            ref={props.dateRef}
+          />
+        </VStack>
+        <DatePicker
+          onChange={props.onDateChange}
+          className={
+            'mx-auto w-full' +
+            (props.colorMode == 'dark' ? ' bg-gray-700' : ' bg-gray-200')
+          }
+        ></DatePicker>
+      </VStack>
+    </Box>
   )
 }
 
 const JubenInput = (props) => {
   return (
-    <button
-      className="w-full rounded-lg px-8 py-4 cursor-pointer bg-gray-lightest my-4 drop-shadow-md text-left"
-      onClick={props.onClick}
-    >
-      <p className="font-bold">{props.name}</p>
-      <div key={props.defaultValue}>
-        <input
+    <Box borderRadius="lg" p="4">
+      <VStack spacing="2" justifyContent="flex-start" alignItems="start">
+        <Heading fontSize="xl">{props.name}</Heading>
+        <Input
+          cursor="pointer"
           name="juben"
-          className="block outline-none text-black bg-transparent text-md border-none placeholder:text-gray-600"
           placeholder="选择剧本"
           ref={props.inputRef}
           onChange={props.onSearch}
           defaultValue={props.defaultValue}
+          key={props.defaultValue}
+          onClick={props.onClickHandler}
+          variant="unstyled"
         />
-      </div>
-    </button>
+      </VStack>
+    </Box>
   )
 }
 
 const PersonInput = (props) => {
   return (
-    <div className="rounded-lg px-8 py-4 cursor-pointer bg-gray-lightest my-4 drop-shadow-md mb-24">
-      <p className="font-bold">{props.name}</p>
-      <input
-        name="male"
-        className={
-          'w-1/2 outline-none bg-transparent border-none hover:bg-transparent hover:border-none focus:border-none placeholder:text-gray-600'
-        }
-        placeholder="男"
-        ref={props.refs[0]}
-      />
-      <input
-        name="female"
-        className={
-          'w-1/2 outline-none bg-transparent border-none hover:bg-transparent hover:border-none focus:border-none placeholder:text-gray-600'
-        }
-        placeholder="女"
-        ref={props.refs[1]}
-      />
-    </div>
+    <Box p="4" mb="16">
+      <VStack spacing="2" alignItems="start">
+        <Heading fontSize="lg">{props.name}</Heading>
+        <HStack spacing="2">
+          <Input name="male" placeholder="男" ref={props.refs[0]} />
+          <Input name="female" placeholder="女" ref={props.refs[1]} />
+        </HStack>
+      </VStack>
+    </Box>
   )
 }

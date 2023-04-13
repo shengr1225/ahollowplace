@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { Heading, Text, Button, useColorModeValue } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import Lightbox from 'react-image-lightbox'
 
@@ -7,6 +8,11 @@ import { JubenSectionAnimation } from 'src/components/lib/helpers/Animation'
 import { highlightSize } from 'src/utility/helper'
 
 const JubenHighlight = ({ juben, reversed }) => {
+  const headingColor = useColorModeValue(
+    'linear(to-l, #7928CA, #FF0080)',
+    'linear(to-tr, teal.300, yellow.400)'
+  )
+  const textColor = useColorModeValue('gray.600', 'gray.300')
   const Image = () => (
     <div
       className="rounded md:w-1/2 flex-shrink-0 h-80 md:h-144 bg-cover bg-center mx-4 sm:mx-8 md:mx-4"
@@ -15,18 +21,26 @@ const JubenHighlight = ({ juben, reversed }) => {
   )
 
   const Subtitle = () => (
-    <div className="font-bold tracking-wide text-secondary-100">
+    <Heading bgGradient={headingColor} bgClip="text" fontSize="md">
       {juben.players + '人 ' + juben.sections}
-    </div>
+    </Heading>
   )
 
   const Title = () => (
-    <h4 className="text-3xl font-bold text-gray-900">{juben.name}</h4>
+    <Heading fontSize="3xl" mt="2">
+      {juben.name}
+    </Heading>
   )
+
   const Description = () => (
-    <p className="mt-2 text-sm leading-loose whitespace-pre-line md:whitespace-normal lg:whitespace-pre">
+    <Text
+      color={textColor}
+      fontSize="sm"
+      mt="8"
+      className="leading-loose whitespace-pre-line md:whitespace-normal lg:whitespace-pre"
+    >
       {juben.desc.replace(/\\n/g, '\n')}
-    </p>
+    </Text>
   )
 
   const photos = juben.photos?.split(',')
@@ -40,7 +54,7 @@ const JubenHighlight = ({ juben, reversed }) => {
       whileInView={'end'}
       viewport={JubenSectionAnimation.viewport}
       className={
-        'mt-24 md:flex justify-center items-center ' +
+        'lg:mt-24 mt-8 md:flex justify-center items-center ' +
         (reversed ? 'flex-row-reverse' : 'flex-row')
       }
     >
@@ -63,14 +77,16 @@ const JubenHighlight = ({ juben, reversed }) => {
             }
           />
         )}
-        <button
+        <Button
+          mt="4"
+          colorScheme="teal"
+          variant="link"
           onClick={() => {
             setIsOpen(true)
           }}
-          className="inline-block mt-4 text-sm text-primary-500 font-bold cursor-pointer transition duration-300 border-b-2 border-transparent hover:border-primary-500"
         >
           查看详情
-        </button>
+        </Button>
       </div>
     </motion.div>
   )

@@ -16,6 +16,7 @@ export const schema = gql`
 
   type Query {
     bookings: [Booking!]! @skipAuth
+    activeBookings: [Booking!]! @skipAuth
     booking(id: Int!): Booking @skipAuth
   }
 

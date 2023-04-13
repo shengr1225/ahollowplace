@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-import Box from '@mui/material/Box'
+import { Flex, Text, Box, HStack, VStack } from '@chakra-ui/react'
 import LinearProgress from '@mui/material/LinearProgress'
 import Typography from '@mui/material/Typography'
 import { client } from 'filestack-react'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai'
 import { BsFillPeopleFill } from 'react-icons/bs'
 import { FaRegAddressBook, FaCrown } from 'react-icons/fa'
 import { GiEntangledTyphoon } from 'react-icons/gi'
@@ -192,14 +193,14 @@ const UserExpInfo = (props) => {
   const nextExp = levelMap[currentLv]
   return (
     <div>
-      <div>
+      <Text>
         Lv.{currentLv} {roleName(props.user)}
-      </div>
+      </Text>
       <div>
-        <LinearProgressWithLabel
+        {/* <LinearProgressWithLabel
           value={(currentExp / nextExp) * 100}
           label={currentExp + '/' + nextExp}
-        />
+        /> */}
       </div>
     </div>
   )
@@ -338,7 +339,7 @@ const UserProfile = (props) => {
         {props.juben?.name}
       </div>
       <p
-        className="absolute bottom-0 text-sm px-2 text-gray-300 text-ellipsis overflow-hidden bg-gray-900 w-full"
+        className="absolute bottom-0 text-sm px-2 text-white text-ellipsis overflow-hidden bg-gray-900 w-full"
         style={{
           textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
         }}
@@ -352,14 +353,19 @@ const UserProfile = (props) => {
     return (
       <div
         key={props.booking?.id}
-        className="flex-1 flex-col py-3 min-w-[10rem]"
+        className="flex-1 flex-col p-3 min-w-[10rem]"
       >
         <Image
           image={props.booking?.juben?.image}
           juben={props.booking?.juben}
         />
-        <div className="flex justify-between p-2 text-sm text-gray-900">
-          <div className="flex-col">
+        <HStack justifyContent="space-around" alignItems="end" mt="2">
+          <VStack
+            alignItems="flex-start"
+            fontSize="sm"
+            justifyContent="space-evenly"
+            spacing="0"
+          >
             <div>
               {dateOnly(props.booking?.date) +
                 ' | ' +
@@ -367,15 +373,15 @@ const UserProfile = (props) => {
                 '-' +
                 props.booking?.timeSlot?.end}
             </div>
-            <div className="flex align-middle leading-5 pt-1">
-              <BsFillPeopleFill className="text-lg mr-1" />
+            <HStack>
+              <BsFillPeopleFill className="text-lg" />
               <PeopleInfo
                 male={props.totalBooking?.male}
                 female={props.totalBooking?.female}
                 needed={props.booking?.juben?.players}
               />
-            </div>
-          </div>
+            </HStack>
+          </VStack>
           <button
             className="bg-primary-200 p-4 text-white rounded-lg hover:bg-primary-100 self-center leading-[0.5rem] max-h-[3rem]"
             onClick={onClickInvite.bind(this, {
@@ -388,7 +394,7 @@ const UserProfile = (props) => {
           >
             <span className="text-lg">+</span>
           </button>
-        </div>
+        </HStack>
       </div>
     )
   }
@@ -399,193 +405,196 @@ const UserProfile = (props) => {
   }
 
   return (
-    <div className="text-gray-800 py-8 px-4 md:flex md:flex-row columns-1">
+    <>
       <ReactTooltip />
       <Toaster />
-      <div className="rounded-xl border-gray-400 border max-w-xs px-4 lg:ml-auto lg:mr-0 ml-auto mr-auto text-center w-full md:w-2/5">
-        <div className="p-8 border-b border-gray-400">
-          <div
-            className="bg-center w-32 h-32 rounded-full mx-auto"
-            style={thumbnailBg}
-          ></div>
-          <UserExpInfo user={props.user} />
+      <Flex
+        p="8"
+        direction={{ base: 'column', md: 'row' }}
+        justifyContent="center"
+      >
+        <Box p="4" borderWidth="1px" borderRadius="xl" bg="whiteAlpha.200">
+          <div className="p-8 border-b border-gray-400">
+            <div
+              className="bg-center w-32 h-32 rounded-full mx-auto"
+              style={thumbnailBg}
+            ></div>
+            <UserExpInfo user={props.user} />
 
-          {isAuthenticated && currentUser.id == props.user?.id ? (
-            <button
-              onClick={onOpenThumbnail}
-              className="underline text-sm mt-4  cursor-pointer"
-            >
-              更新头像
-            </button>
-          ) : (
-            <></>
-          )}
+            {isAuthenticated && currentUser.id == props.user?.id ? (
+              <button
+                onClick={onOpenThumbnail}
+                className="underline text-sm mt-4  cursor-pointer"
+              >
+                更新头像
+              </button>
+            ) : (
+              <></>
+            )}
 
-          {/* <div className="flex leading-5 pt-6 align-middle hover:underline cursor-pointer font-semibold">
-            <AiOutlineStar className="text-xl" />
-            <span className="ml-2">6 次评论</span>
-          </div> */}
-          <div className="flex leading-5 pt-4 align-middle hover:underline cursor-pointer font-semibold">
-            <FaRegAddressBook className="text-xl" />
-            <span className="ml-2">
-              {
-                props.user?.bookings?.filter((b) => {
-                  return b.status == 'Complete'
-                }).length
-              }{' '}
-              次打本{' '}
-              <span className="text-sm">
-                (MVP {props.user?.mvpJubens?.length}次)
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <div className="p-8 md:p-4 border-b border-gray-400">
-          <div className="flex pb-8 justify-around">
-            <div className="flex leading-5 ">
-              <span>综合战力: {averagePoint}</span>
-              <AiOutlineQuestionCircle
-                className="text-xl ml-2 cursor-pointer"
-                data-tip="综合战力是通过五项指数的平均分计算出来的（一至五分）"
-              />
+            <div className="flex leading-5 pt-6 align-middle hover:underline cursor-pointer font-semibold">
+              <AiOutlineStar className="text-xl" />
+              <span className="ml-2">6 次评论</span>
             </div>
-
-            {isAuthenticated && currentUser.id == props.user?.id ? (
-              <button
-                onClick={() => {
-                  setIsAbilityWindowOpen(true)
-                }}
-                className="underline text-sm text-gray-500 ml-8 cursor-pointer"
-              >
-                调整
-              </button>
-            ) : (
-              <></>
-            )}
+            <div className="flex leading-5 pt-4 align-middle hover:underline cursor-pointer font-semibold">
+              <FaRegAddressBook className="text-xl" />
+              <span className="ml-2">
+                {
+                  props.user?.bookings?.filter((b) => {
+                    return b.status == 'Complete'
+                  }).length
+                }{' '}
+                次打本{' '}
+                <span className="text-sm">
+                  (MVP {props.user?.mvpJubens?.length}次)
+                </span>
+              </span>
+            </div>
           </div>
-          <RadarChart data={pointsData(props.user)} size={250} />
-        </div>
-      </div>
 
-      <div className="px-8 pt-5 md:pt-0 w-full md:w-3/5">
-        <div>
-          <h1 className="text-4xl font-bold pb-2">
-            你好，我叫{props.user?.name}
-            {isAuthenticated && currentUser.id == props.user?.id ? (
-              <button
-                onClick={() => {
-                  setIsUserProfileUpdateWindowOpen(true)
-                }}
-                className="underline text-sm text-gray-500 ml-8 cursor-pointer"
-              >
-                更新
-              </button>
-            ) : (
-              <></>
-            )}
-          </h1>
-          {props.user?.isMVP && (
-            <div className="flex">
-              <FaCrown className="text-lg text-red-500"></FaCrown>
-              <p className="text-xs text-red-500 ml-2">
-                {' '}
-                你获得了MVP，{localDate(props.user?.MVPUntil)}
-                前可享受MVP特权！
-                <button
-                  className="underline underline-offset-1"
-                  onClick={() => {
-                    setBenefitIsOpen(true)
-                  }}
-                >
-                  详情
-                </button>
-              </p>
-              {benefitIsOpen && (
-                <Lightbox
-                  mainSrc={MVPBenefit}
-                  onCloseRequest={() => setBenefitIsOpen(false)}
+          <Box p={[4, 4, 8]} className="border-b border-gray-400">
+            <div className="flex pb-8 justify-around">
+              <div className="flex leading-5 ">
+                <span>综合战力: {averagePoint}</span>
+                <AiOutlineQuestionCircle
+                  className="text-xl ml-2 cursor-pointer"
+                  data-tip="综合战力是通过五项指数的平均分计算出来的（一至五分）"
                 />
+              </div>
+
+              {isAuthenticated && currentUser.id == props.user?.id ? (
+                <button
+                  onClick={() => {
+                    setIsAbilityWindowOpen(true)
+                  }}
+                  className="underline text-sm ml-8 cursor-pointer"
+                >
+                  调整
+                </button>
+              ) : (
+                <></>
               )}
             </div>
-          )}
-          {props.user?.label?.split(',').map((label) => (
-            <p
-              className="text-sm font-light text-gray-600"
-              key={props.user?.id + label}
-            >
-              {label}
-            </p>
-          ))}
-          <h1 className="text-2xl pt-8 pb-4">简介</h1>
-          <p className="text-sm font-light text-gray-600">{props.user?.desc}</p>
-          <div className="flex leading-5 py-8 align-middle font-semibold border-b border-gray-400">
-            <GiEntangledTyphoon className="text-xl" />
-            <span className="ml-2 text-sm">
-              羁绊：<span>{props.user?.knot}</span>
-            </span>
+            <RadarChart data={pointsData(props.user)} size={250} />
+          </Box>
+        </Box>
+        <Box py="8" px={[0, 4, 8]}>
+          <div>
+            <h1 className="text-4xl font-bold pb-2">
+              你好，我叫{props.user?.name}
+              {isAuthenticated && currentUser.id == props.user?.id ? (
+                <button
+                  onClick={() => {
+                    setIsUserProfileUpdateWindowOpen(true)
+                  }}
+                  className="underline text-sm ml-8 cursor-pointer"
+                >
+                  更新
+                </button>
+              ) : (
+                <></>
+              )}
+            </h1>
+            {props.user?.isMVP && (
+              <div className="flex">
+                <FaCrown className="text-lg text-red-500"></FaCrown>
+                <p className="text-xs text-red-500 ml-2">
+                  {' '}
+                  你获得了MVP，{localDate(props.user?.MVPUntil)}
+                  前可享受MVP特权！
+                  <button
+                    className="underline underline-offset-1"
+                    onClick={() => {
+                      setBenefitIsOpen(true)
+                    }}
+                  >
+                    详情
+                  </button>
+                </p>
+                {benefitIsOpen && (
+                  <Lightbox
+                    mainSrc={MVPBenefit}
+                    onCloseRequest={() => setBenefitIsOpen(false)}
+                  />
+                )}
+              </div>
+            )}
+            {props.user?.label?.split(',').map((label) => (
+              <p className="text-sm font-light" key={props.user?.id + label}>
+                {label}
+              </p>
+            ))}
+            <h1 className="text-2xl pt-8 pb-4">简介</h1>
+            <p className="text-sm font-light ">{props.user?.desc}</p>
+            <div className="flex leading-5 py-8 align-middle font-semibold border-b border-gray-400">
+              <GiEntangledTyphoon className="text-xl" />
+              <span className="ml-2 text-sm">
+                羁绊：<span>{props.user?.knot}</span>
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div>
-          <h1 className="text-2xl pt-8 pb-4">{props.user?.name} 玩过的剧本</h1>
-          <div className="flex justify-start overflow-x-auto">
-            {props.user?.bookings
-              ?.filter((b) => {
-                return b.status === 'Complete'
-              })
-              ?.map((booking) => (
-                <Image
-                  image={booking?.juben?.image}
-                  juben={booking?.juben}
-                  key={booking?.id}
-                />
-              ))}
+          <div>
+            <h1 className="text-2xl pt-8 pb-4">
+              {props.user?.name} 玩过的剧本
+            </h1>
+            <div className="flex justify-start overflow-x-auto">
+              {props.user?.bookings
+                ?.filter((b) => {
+                  return b.status === 'Complete'
+                })
+                ?.map((booking) => (
+                  <Image
+                    image={booking?.juben?.image}
+                    juben={booking?.juben}
+                    key={booking?.id}
+                  />
+                ))}
+            </div>
           </div>
-        </div>
 
-        <div>
-          <h1 className="text-2xl pt-8 pb-4">{props.user?.name} 的预约</h1>
-          <div className="flex overflow-x-auto">
-            {props.user?.bookings
-              ?.filter((b) => {
-                return b.status === 'Carpooling' || b.status == 'Locked'
-              })
-              .map((booking) => (
-                <BookingJuben
-                  booking={booking}
-                  totalBooking={
-                    booking?.juben?.drives.filter((b) => {
-                      return (
-                        new Date(b.date).getTime() ==
-                          new Date(booking?.date).getTime() &&
-                        b.timeSlotId == booking?.timeSlotId
-                      )
-                    })[0]
-                  }
-                  key={booking.id}
-                />
-              ))}
+          <div>
+            <h1 className="text-2xl pt-8 pb-4">{props.user?.name} 的预约</h1>
+            <div className="flex overflow-x-auto">
+              {props.user?.bookings
+                ?.filter((b) => {
+                  return b.status === 'Carpooling' || b.status == 'Locked'
+                })
+                .map((booking) => (
+                  <BookingJuben
+                    booking={booking}
+                    totalBooking={
+                      booking?.juben?.drives.filter((b) => {
+                        return (
+                          new Date(b.date).getTime() ==
+                            new Date(booking?.date).getTime() &&
+                          b.timeSlotId == booking?.timeSlotId
+                        )
+                      })[0]
+                    }
+                    key={booking.id}
+                  />
+                ))}
+            </div>
+            <UserProfileUpdateWindow
+              user={props.user}
+              isOpen={isUserProfileUpdateWindowOpen}
+              onClose={closeWindow}
+            />
+            <InvitePlayersWindow
+              selectBooking={selectBooking}
+              isOpen={isInviteWindowOpen}
+              onClose={closeWindow}
+            />
+            <UserAbilityUpdateWindow
+              user={props.user}
+              isOpen={isAbilibtyWindowOpen}
+              onClose={closeWindow}
+            />
           </div>
-          <UserProfileUpdateWindow
-            user={props.user}
-            isOpen={isUserProfileUpdateWindowOpen}
-            onClose={closeWindow}
-          />
-          <InvitePlayersWindow
-            selectBooking={selectBooking}
-            isOpen={isInviteWindowOpen}
-            onClose={closeWindow}
-          />
-          <UserAbilityUpdateWindow
-            user={props.user}
-            isOpen={isAbilibtyWindowOpen}
-            onClose={closeWindow}
-          />
-        </div>
-      </div>
-      <div></div>
-    </div>
+        </Box>
+      </Flex>
+    </>
   )
 }
 

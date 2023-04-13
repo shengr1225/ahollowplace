@@ -16,6 +16,7 @@ export const schema = gql`
 
   type Query {
     jubenDrives: [JubenDrive!]! @requireAuth
+    activeDrives: [JubenDrive!]! @requireAuth
     jubenDrive(id: Int!): JubenDrive @requireAuth
   }
 

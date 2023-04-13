@@ -2,11 +2,11 @@ import { useState } from 'react'
 
 import { confirmAlert } from 'react-confirm-alert'
 
-import { useAuth } from 'src/auth'
 import { useLocation } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import { useAuth } from 'src/auth'
 import BookingButton from 'src/components/UI/BookingButton/BookingButton'
 import StarRating from 'src/components/UI/StarRating'
 import { dateOnly, timeSlotConflit, getLocalTime } from 'src/utility/dateUtil'

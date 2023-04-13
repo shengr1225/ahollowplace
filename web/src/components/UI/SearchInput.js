@@ -1,44 +1,59 @@
+import { HStack, Input, Heading, VStack, Box, Button } from '@chakra-ui/react'
+
 const SearchInput = (props) => {
   return (
-    <label
-      name={props.label}
-      htmlFor={props.label}
-      className={`px-4 lg:px-12 py-4 cursor-pointer text-sm text-gray-600 ${props.className}`}
-      onClick={props.onClick}
-    >
-      <div>
-        <div className="font-bold">{props.name}</div>
+    <Box py="4" px="6">
+      <VStack alignItems="start" justifyContent="flex-start">
+        <Heading fontSize="lg" color="gray.600">
+          {props.name}
+        </Heading>
+
         {props.multi && props.multi > 1 ? (
-          Array.from(Array(parseInt(props.multi)), (_, i) => (
-            <input
-              key={i}
-              name={props.label.split('|')[i]}
-              ref={props.refs[i]}
-              className={
-                'w-1' +
-                props.multi +
-                ' text-black outline-none border-none bg-transparent placeholder:text-gray-600'
-              }
-              placeholder={props.placeholder.split('|')[i]}
-              defaultValue={props.defaultValues?.split('|')[i]}
-            />
-          ))
+          <HStack>
+            {Array.from(Array(parseInt(props.multi)), (_, i) => (
+              <Input
+                variant="unstyled"
+                key={i}
+                name={props.label.split('|')[i]}
+                ref={props.refs[i]}
+                placeholder={props.placeholder.split('|')[i]}
+                defaultValue={props.defaultValues?.split('|')[i]}
+                onClick={props.onClick}
+                maxW="10"
+                color={props.textColor}
+                _placeholder={{ color: 'gray.400' }}
+              />
+            ))}
+          </HStack>
         ) : (
-          <div key={props.defaultValue}>
-            <input
+          <HStack key={props.defaultValue}>
+            <Input
+              variant="unstyled"
               id={props.label}
               name={props.label}
               type={props.type}
-              className="block outline-none text-black bg-transparent text-md border-none placeholder:text-gray-600"
               placeholder={props.placeholder}
               defaultValue={props.defaultValue}
               ref={props.inputRef}
               onChange={props?.onSearch}
+              onClick={props.onClick}
+              color={props.textColor}
+              _placeholder={{ color: 'gray.400' }}
             />
-          </div>
+            {props.label == 'time' && (
+              <Button
+                color={props.textColor}
+                display={props.isOpen ? 'block' : 'none'}
+                variant="link"
+                onClick={props.onClose}
+              >
+                x
+              </Button>
+            )}
+          </HStack>
         )}
-      </div>
-    </label>
+      </VStack>
+    </Box>
   )
 }
 

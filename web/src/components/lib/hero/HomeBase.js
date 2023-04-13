@@ -1,8 +1,13 @@
 import React from 'react'
 
+import { Box } from '@chakra-ui/react'
+import Lottie from 'react-lottie'
+
 import StyleHeader from 'src/components/header/header'
 import DesktopSearchBar from 'src/components/SearchBar/SearchBarDesktop'
 import MobileSearchBar from 'src/components/SearchBar/SearchBarMobile'
+import eyesAnimation from 'src/lottie/eyes_animation.json'
+import { getRefToScrollByIndex } from 'src/reducer/GlobalData'
 import { trigger } from 'src/utility/event'
 
 const backgroundImage = {
@@ -10,6 +15,7 @@ const backgroundImage = {
     'url(' +
     'https://images.unsplash.com/photo-1536300007881-7e482242baa5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=80' +
     ')',
+  scrollSnapAlign: 'start',
 }
 
 const SearchBar = () => (
@@ -25,6 +31,14 @@ const onClickHandler = () => {
 }
 
 export default () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: eyesAnimation,
+    rendererSettings: {
+      // preserveAspectRatio: "xMidYMid slice"
+    },
+  }
   return (
     <div
       className="relative -mx-8 -mt-8 bg-center bg-cover h-screen min-h-144"
@@ -44,6 +58,17 @@ export default () => {
           </h1>
           <SearchBar></SearchBar>
         </div>
+        <Box
+          b="0"
+          mx="auto"
+          w="80px"
+          onClick={() => {
+            const ref = getRefToScrollByIndex(0)
+            ref?.current.scrollIntoView()
+          }}
+        >
+          <Lottie options={defaultOptions} height={80} width={80} />
+        </Box>
       </div>
     </div>
   )

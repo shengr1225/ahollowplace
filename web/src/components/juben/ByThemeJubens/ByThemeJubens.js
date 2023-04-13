@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 
 import { JubenSectionAnimation } from 'src/components/lib/helpers/Animation'
@@ -45,7 +46,7 @@ const JubenSection = ({ section, jubens }) => {
     </motion.p>
   )
   return (
-    <div className="flex flex-col items-center mt-16">
+    <Box className="flex flex-col items-center" mt={['4', '8', '16']}>
       <motion.div
         viewport={JubenSectionAnimation.viewport}
         transition={{ staggerChildren: 1 }}
@@ -58,12 +59,14 @@ const JubenSection = ({ section, jubens }) => {
 
       <motion.div>
         {jubens.map((juben, i) => (
-          <>
-            <JubenHighlight juben={juben} reversed={i % 2 === 1} key={i} />
-          </>
+          <JubenHighlight
+            juben={juben}
+            reversed={i % 2 === 1}
+            key={juben.name + i}
+          />
         ))}
       </motion.div>
-    </div>
+    </Box>
   )
 }
 export default JubenSection

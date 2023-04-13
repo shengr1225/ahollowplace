@@ -11,6 +11,25 @@ export const jubenDrives = () => {
   })
 }
 
+export const activeDrives = () => {
+  return db.jubenDrive.findMany({
+    orderBy: {
+      date: 'desc',
+    },
+    include: {
+      bookings: true,
+      timeSlot: true,
+      users: true,
+      juben: true,
+    },
+    where: {
+      NOT: {
+        OR: [{ status: 'Cancel' }],
+      },
+    },
+  })
+}
+
 export const jubenDrive = ({ id }) => {
   return db.jubenDrive.findUnique({
     where: { id },

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 
+import { Box, useColorModeValue } from '@chakra-ui/react'
 import { BiSearchAlt2 } from 'react-icons/bi'
 import DatePicker from 'sassy-datepicker'
 
@@ -59,21 +60,27 @@ const JubenSelectionPopup = (props) => (
 )
 
 const DateSelectionPopup = (props) => (
-  <div
-    style={windowCustomStyle}
-    className={
-      'rounded-xl bg-white drop-shadow-md transition-all ease-out duration-150 p-4 ' +
-      (props.isOpen ? '' : 'hidden')
-    }
+  <Box
     onClick={(event) => {
       event.stopPropagation()
     }}
+    borderRadius="xl"
+    dropShadow="md"
+    display={props.isOpen ? '' : 'none'}
   >
-    <DatePicker onChange={props.onDateChange} minDate={new Date()} />
-  </div>
+    <DatePicker
+      onChange={props.onDateChange}
+      minDate={new Date()}
+      className={
+        'mx-auto' +
+        (props.colorMode == 'dark' ? ' bg-gray-700' : ' bg-gray-300')
+      }
+    />
+  </Box>
 )
 
 const DesktopSearchBar = () => {
+  const colorMode = useColorModeValue()
   const [isJubenOpen, setIsJubenOpen] = useState(false)
   const [isDateOpen, setIsDateOpen] = useState(false)
 
@@ -201,6 +208,7 @@ const DesktopSearchBar = () => {
           onClick={openJubenWindow}
           inputRef={jubenInputRef}
           onSearch={onSearchJuben}
+          textColor="gray.600"
         />
         <SearchInput
           label="time"
@@ -208,7 +216,10 @@ const DesktopSearchBar = () => {
           placeholder="添加时间"
           onClick={openDateWindow}
           defaultValue={selectedDate}
+          isOpen={isDateOpen}
+          onClose={closeDateWindow}
           inputRef={dateInputRef}
+          textColor="gray.600"
         />
         <SearchInput
           label="male|female"
@@ -216,18 +227,23 @@ const DesktopSearchBar = () => {
           placeholder="男|女"
           multi="2"
           refs={[maleInputRef, femaleInputRef]}
+          textColor="gray.600"
         />
         <button
           className="rw-button text-lg bg-red md:rounded-full md:bg-clip-padding hover:bg-red-500 bg-red-600 py-5 px-5 text-white"
           onClick={onSearch}
         >
-          <BiSearchAlt2 size="36" />
+          <BiSearchAlt2 size="36" className="my-auto" />
         </button>
       </div>
       <div className="relative mt-5">
         <JubenSearchingPopup isOpen={isJubenSearchingOpen} name={searchText} />
         <JubenSelectionPopup isOpen={isJubenOpen} />
-        <DateSelectionPopup isOpen={isDateOpen} onDateChange={onDateChange} />
+        <DateSelectionPopup
+          isOpen={isDateOpen}
+          onDateChange={onDateChange}
+          colorMode={colorMode}
+        />
       </div>
     </div>
   )

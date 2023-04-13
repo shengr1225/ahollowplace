@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { Heading, Box } from '@chakra-ui/react'
 import { Octokit } from 'octokit'
 import { MagnifyingGlass } from 'react-loader-spinner'
 
@@ -55,11 +56,14 @@ const BlogsPage = () => {
   return (
     <>
       <MetaTags title="洞屋最新" description="洞屋动态|博客|随想|打本心得" />
-      <div className="p-4 -mt-8">
+      <Box
+        className="p-4 -mt-8"
+        bgGradient="linear(to-r, pink.200, gray.300, gray.400, green.300)"
+      >
         <StyleHeader dark={false} isHome={true} />
-      </div>
-      <div className="px-8 py-4 mx-auto" style={{ 'max-width': '600px' }}>
-        <p className="text-3xl font-extrabold mb-2">洞屋日志</p>
+      </Box>
+      <div className="px-8 py-4 mx-auto mt-16" style={{ 'max-width': '600px' }}>
+        <Heading className="text-3xl font-extrabold mb-2">洞屋日志</Heading>
         {data.length == 0 && (
           <div>
             <MagnifyingGlass
