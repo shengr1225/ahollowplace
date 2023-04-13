@@ -279,10 +279,7 @@ const TimeInput = (props) => {
         </VStack>
         <DatePicker
           onChange={props.onDateChange}
-          className={
-            'mx-auto w-full' +
-            (props.colorMode == 'dark' ? ' bg-gray-700' : ' bg-gray-200')
-          }
+          className={'mx-auto w-full'}
         ></DatePicker>
       </VStack>
     </Box>

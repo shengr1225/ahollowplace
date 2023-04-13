@@ -142,7 +142,7 @@ const DateSelectionPopup = (props) => (
     <DatePicker
       onChange={props.onDateChange}
       minDate={new Date()}
-      className={'mx-auto' + (props.colorMode == 'dark' ? ' bg-gray-700' : '')}
+      className={'mx-auto'}
     />
   </Box>
 )

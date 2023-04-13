@@ -105,3 +105,36 @@
       color: #ddcccc
     }
 }
+
+.chakra-ui-dark .sdp,
+.chakra-ui-dark .stp {
+  background-color: #222222;
+  --disabled-color: #555555;
+  --outline: 1px solid #555555;
+  color: #e1e1e1;
+}
+
+.chakra-ui-dark .sdp button,
+.chakra-ui-dark .stp button,
+.chakra-ui-dark .sassy--select__dropdown {
+  background-color: #222222;
+}
+
+.chakra-ui-dark .sdp .sassy--option__active,
+.chakra-ui-dark .sdp .sassy--option:hover,
+.chakra-ui-dark .stp .sassy--option__active,
+.chakra-ui-dark .stp .sassy--option:hover {
+  background-color: var(--theme-color);
+}
+
+.chakra-ui-dark .sdp button.sdp--date-btn__selected {
+  background-color: var(--theme-color);
+}
+
+.chakra-ui-light {
+  --code-bg-color: hsla(212deg, 100%, 39%, 5%);
+}
+
+.chakra-ui-dark {
+  --code-bg-color: hsla(212deg, 100%, 77%, 10%);
+}

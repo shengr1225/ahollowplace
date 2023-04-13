@@ -26,7 +26,7 @@ const NavBar = (props) => {
 
         <NavLinks isHome={props.isHome} />
 
-        <HStack alignItems="revert">
+        <HStack alignItems="revert" h="72px">
           {isAuthenticated && currentUser ? <UserProfileLink /> : <LoginLink />}
         </HStack>
       </HStack>

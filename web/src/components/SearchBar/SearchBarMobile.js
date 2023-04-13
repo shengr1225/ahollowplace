@@ -1,8 +1,8 @@
-import SearchWindow from "../UI/SearchWindow/SearchWindow"
-import { useState } from "react"
+import { useState } from 'react'
+
+import SearchWindow from '../UI/SearchWindow/SearchWindow'
 
 const MobileSearchBar = () => {
-
   const [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
     setIsOpen(true)

@@ -71,16 +71,12 @@ const DateSelectionPopup = (props) => (
     <DatePicker
       onChange={props.onDateChange}
       minDate={new Date()}
-      className={
-        'mx-auto' +
-        (props.colorMode == 'dark' ? ' bg-gray-700' : ' bg-gray-300')
-      }
+      className={'mx-auto'}
     />
   </Box>
 )
 
 const DesktopSearchBar = () => {
-  const colorMode = useColorModeValue()
   const [isJubenOpen, setIsJubenOpen] = useState(false)
   const [isDateOpen, setIsDateOpen] = useState(false)
 
@@ -239,11 +235,7 @@ const DesktopSearchBar = () => {
       <div className="relative mt-5">
         <JubenSearchingPopup isOpen={isJubenSearchingOpen} name={searchText} />
         <JubenSelectionPopup isOpen={isJubenOpen} />
-        <DateSelectionPopup
-          isOpen={isDateOpen}
-          onDateChange={onDateChange}
-          colorMode={colorMode}
-        />
+        <DateSelectionPopup isOpen={isDateOpen} onDateChange={onDateChange} />
       </div>
     </div>
   )
