@@ -37,7 +37,7 @@ const JubenHighlight = ({ juben, reversed }) => {
       color={textColor}
       fontSize="sm"
       mt="8"
-      className="leading-loose whitespace-pre-line md:whitespace-normal lg:whitespace-pre"
+      className="leading-loose whitespace-pre-line md:whitespace-normal"
     >
       {juben.desc.replace(/\\n/g, '\n')}
     </Text>
@@ -54,12 +54,12 @@ const JubenHighlight = ({ juben, reversed }) => {
       whileInView={'end'}
       viewport={JubenSectionAnimation.viewport}
       className={
-        'lg:mt-24 mt-8 md:flex justify-center items-center ' +
+        'mt-24 mt-8 md:flex justify-center items-center ' +
         (reversed ? 'flex-row-reverse' : 'flex-row')
       }
     >
       <Image />
-      <div className="mt-4 md:mt-0 mx-4 sm:mx-8 md:mx-4 lg:mx-8">
+      <div className="mt-4 md:mt-0 mx-4 sm:mx-8 md:mx-4 mx-8">
         <Subtitle></Subtitle>
         <Title></Title>
         <Description></Description>
